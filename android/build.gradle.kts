@@ -36,11 +36,11 @@ if (acraPropertiesFile.exists())
 	acraProperties.load(FileInputStream(acraPropertiesFile))
 
 android {
-	compileSdk = 32
+	compileSdk = 33
 	defaultConfig {
 		applicationId = "app.shosetsu.android"
 		minSdk = 22
-		targetSdk = 31
+		targetSdk = 33
 		versionCode = 26
 		versionName = "2.0.0"
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -94,7 +94,7 @@ android {
 			isDebuggable = true
 		}
 	}
-	flavorDimensions.add("default")
+	flavorDimensions += listOf("default")
 	productFlavors {
 		create("playstore") {
 			// play store will be in this
@@ -160,9 +160,9 @@ dependencies {
 	// Androidx
 	implementation("androidx.work:work-runtime:2.7.1")
 	implementation("androidx.work:work-runtime-ktx:2.7.1")
-	implementation("androidx.appcompat:appcompat:1.5.0")
+	implementation("androidx.appcompat:appcompat:1.5.1")
 	implementation("androidx.annotation:annotation:1.4.0")
-	implementation("androidx.core:core-ktx:1.8.0")
+	implementation("androidx.core:core-ktx:1.9.0")
 	implementation("androidx.collection:collection-ktx:1.2.0")
 	implementation("androidx.core:core-splashscreen:1.0.0")
 	implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
@@ -187,13 +187,13 @@ dependencies {
 	// Core libraries
 	implementation("org.luaj:luaj-jse:3.0.1")
 	implementation("com.github.shosetsuorg:kotlin-lib:1.0.0")
-	implementation("org.jsoup:jsoup:1.15.2")
+	implementation("org.jsoup:jsoup:1.15.3")
 
 	// Image loading
-	implementation("io.coil-kt:coil-compose:2.2.0")
+	implementation("io.coil-kt:coil-compose:2.2.1")
 
 	// Time control
-	implementation("joda-time:joda-time:2.11.0")
+	implementation("joda-time:joda-time:2.11.1")
 
 	// Cloud flare calculator
 	//implementation("com.zhkrb.cloudflare-scrape-android:scrape-webview:0.0.3")
@@ -258,7 +258,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
 
 	// KTX - Serialization
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
 	// Roomigrant
 	val enableRoomigrant = false
@@ -308,7 +308,7 @@ dependencies {
 	implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
 
 	// MDC Adapter
-	implementation("com.google.android.material:compose-theme-adapter:1.1.16")
+	implementation("com.google.android.material:compose-theme-adapter:1.1.18")
 
 	val androidxActivity = "1.5.1"
 	fun androidxActivity(module: String, version: String = androidxActivity) =
