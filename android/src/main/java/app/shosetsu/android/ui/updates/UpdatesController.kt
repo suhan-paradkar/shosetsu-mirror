@@ -82,10 +82,8 @@ class ComposeUpdatesController : ShosetsuController(), HomeFragment {
 		setViewTitle()
 		setContent {
 			ShosetsuCompose {
-				val items: Map<DateTime, List<UpdatesUI>> by viewModel.liveData.collectAsState(
-					emptyMap()
-				)
-				val isRefreshing by viewModel.isRefreshing.collectAsState(false)
+				val items: Map<DateTime, List<UpdatesUI>> by viewModel.liveData.collectAsState()
+				val isRefreshing by viewModel.isRefreshing.collectAsState()
 
 				UpdatesContent(
 					items = items,

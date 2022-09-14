@@ -2,7 +2,6 @@ package app.shosetsu.android.domain.usecases.load
 
 import app.shosetsu.android.common.enums.DownloadStatus
 import app.shosetsu.android.common.utils.uifactory.mapLatestToResultFlowWithFactory
-import app.shosetsu.android.domain.model.local.BrowseExtensionEntity
 import app.shosetsu.android.domain.repository.base.IExtensionDownloadRepository
 import app.shosetsu.android.domain.repository.base.IExtensionsRepository
 import app.shosetsu.android.dto.convertList
@@ -38,26 +37,18 @@ class LoadBrowseExtensionsUseCase(
 	@OptIn(ExperimentalCoroutinesApi::class)
 	operator fun invoke(): Flow<List<BrowseExtensionUI>> =
 		extensionsRepository.loadBrowseExtensions()
-			.transformLatest { extensionList -> // Merge with downloadStatus
-				val listOfFlows: List<Flow<BrowseExtensionEntity?>> =
-					extensionList.map { it to extensionDownloadRepository.getStatusFlow(it.id) }
-						.map { (extensionUI, statusFlow) ->
-							statusFlow.transform { status ->
-								emit(null) // I am smart
-								emit(
-									extensionUI.copy(
-										isInstalling = status == DownloadStatus.PENDING || status == DownloadStatus.DOWNLOADING
-									)
-								)
-							}
+			.flatMapLatest { extensionList -> // Merge with downloadStatus
+				val listOfFlows = extensionList.map { it to extensionDownloadRepository.getStatusFlow(it.id) }
+					.map { (extensionUI, statusFlow) ->
+						statusFlow.map { status ->
+							extensionUI.copy(
+								isInstalling = status == DownloadStatus.PENDING || status == DownloadStatus.DOWNLOADING,
+							)
 						}
+					}
 
 				// Merge the flows
-				val b: Flow<List<BrowseExtensionEntity>> =
-					combine(*listOfFlows.toTypedArray()) { it.filterNotNull().toList() }
-
-				// Emit as a success
-				emitAll(b)
+				combine(*listOfFlows.toTypedArray()) { it.toList() }
 			}
 			.mapLatestToResultFlowWithFactory()
 			.mapLatest { it.convertList() }

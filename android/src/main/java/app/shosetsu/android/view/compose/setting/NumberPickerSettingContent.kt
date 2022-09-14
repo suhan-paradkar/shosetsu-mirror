@@ -26,7 +26,7 @@ fun NumberPickerSettingContent(
 	key: SettingKey<Int>,
 	modifier: Modifier = Modifier,
 ) {
-	val selection by repo.getIntFlow(key).collectAsState(key.default)
+	val selection by repo.getIntFlow(key).collectAsState()
 
 	NumberPickerSettingContent(
 		title, description, selection, range, modifier
