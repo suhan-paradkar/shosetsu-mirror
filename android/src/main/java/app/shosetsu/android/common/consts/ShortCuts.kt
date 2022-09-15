@@ -36,8 +36,8 @@ object ShortCuts {
 			context, listOf(
 				Builder(context, "Library")
 					.setIcon(createWithResource(context, R.drawable.library))
-					.setLongLabel(context.getString(R.string.my_library))
-					.setShortLabel(context.getString(R.string.my_library))
+					.setLongLabel(context.getString(R.string.library))
+					.setShortLabel(context.getString(R.string.library))
 					.setIntent(Intent(context, MainActivity::class.java).apply {
 						action = ACTION_OPEN_LIBRARY
 					})
