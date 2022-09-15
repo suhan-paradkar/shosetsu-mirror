@@ -13,16 +13,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScrollableTabRow
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,7 +34,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.R
 import app.shosetsu.android.activity.MainActivity
-import app.shosetsu.android.common.SettingKey
 import app.shosetsu.android.common.consts.BundleKeys
 import app.shosetsu.android.common.enums.NovelCardType
 import app.shosetsu.android.common.enums.NovelCardType.*
@@ -62,6 +58,8 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -126,12 +124,12 @@ class LibraryController
 					}
 
 					LibraryContent(
-						items,
+						items = items,
 						isEmpty = isEmpty,
 						setActiveCategory = viewModel::setActiveCategory,
-						type,
-						columnsInV,
-						columnsInH,
+						cardType = type,
+						columnsInV = columnsInV,
+						columnsInH = columnsInH,
 						hasSelected = hasSelected,
 						onRefresh = {
 							onRefresh(it)
@@ -165,13 +163,13 @@ class LibraryController
 								}
 							}
 						} else null,
-						fab
+						fab = fab
 					)
 					if (categoriesDialogOpen) {
 						CategoriesDialog(
 							onDismissRequest = { categoriesDialogOpen = false },
-							categories = items?.categories.orEmpty(),
-							novelCategories = emptyList(),
+							categories = remember(items?.categories) { items?.categories ?: persistentListOf() },
+							novelCategories = remember { persistentListOf() },
 							setCategories = viewModel::setCategories
 						)
 					}
@@ -451,9 +449,9 @@ fun LibraryPager(
 			val id by derivedStateOf {
 				library.categories[it].id
 			}
-			val items by produceState(emptyList(), library, it, id) {
+			val items by produceState(persistentListOf(), library, it, id) {
 				value = onIO {
-					library.novels[id].orEmpty()
+					library.novels[id] ?: persistentListOf()
 				}
 			}
 			LibraryCategory(
@@ -474,7 +472,7 @@ fun LibraryPager(
 
 @Composable
 fun LibraryCategory(
-	items: List<LibraryNovelUI>,
+	items: ImmutableList<LibraryNovelUI>,
 	cardType: NovelCardType,
 	columnsInV: Int,
 	columnsInH: Int,

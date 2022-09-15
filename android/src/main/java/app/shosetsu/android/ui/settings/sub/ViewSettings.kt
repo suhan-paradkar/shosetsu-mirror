@@ -34,6 +34,7 @@ import app.shosetsu.android.view.compose.setting.NumberPickerSettingContent
 import app.shosetsu.android.view.compose.setting.SwitchSettingContent
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.viewmodel.abstracted.settings.AViewSettingsViewModel
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.map
 
 /*
@@ -127,7 +128,9 @@ fun ViewSettingsContent(viewModel: AViewSettingsViewModel, finishActivity: () ->
 			DropdownSettingContent(
 				title = stringResource(R.string.novel_card_type_selector_title),
 				description = stringResource(R.string.novel_card_type_selector_desc),
-				choices = stringArrayResource(R.array.novel_card_types),
+				choices = stringArrayResource(R.array.novel_card_types)
+					.toList()
+					.toImmutableList(),
 				repo = viewModel.settingsRepo,
 				key = SelectedNovelCardType,
 				modifier = Modifier
