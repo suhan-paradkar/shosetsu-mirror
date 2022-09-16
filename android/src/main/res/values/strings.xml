@@ -4,15 +4,15 @@
 
     <string name="website">Website</string>
 
-    <string name="github" translatable="false">Github</string>
+    <string name="github" translatable="false">Gitlab</string>
 
     <string name="matrix" translatable="false">Matrix</string>
     <string name="discord" translatable="false">Discord</string>
 
     <string name="patreon" translatable="false">Support the dev on Patreon</string>
 
-    <string name="report_bug_link" translatable="false">https://github.com/Doomsdayrs/shosetsu/issues</string>
-    <string name="author_github" translatable="false">https://github.com/Doomsdayrs</string>
+    <string name="report_bug_link" translatable="false">https://gitlab.com/shosetsuorg/shosetsu/issues</string>
+    <string name="author_github" translatable="false">https://gitlab.com/shosetsuorg</string>
 
 
     <string name="header_text">Novel reading right on your phone!</string>

@@ -207,10 +207,10 @@
     <string name="catalogue_default_load_desc">يُحمَّل الدليل الذي قمت باختياره عند التشغيل</string>
     <string name="invalid_selection">اختيار غير صالح</string>
     <string name="set_to">عين إلى:</string>
-    <string name="suggest_token">في الإعدادات المتقدمة، أدخل رمز المميز لgithub لتطبيق العرض الرائع</string>
+    <string name="suggest_token">في الإعدادات المتقدمة، أدخل رمز المميز لgitlab لتطبيق العرض الرائع</string>
     <string name="no_empty_key">لا يمكن التقاط مفتاح فارغ!</string>
-    <string name="github_token_input_desc">مكن Shosetsu من الوصول إلى Github باستخدام الرمز المميز</string>
-    <string name="github_token_input_title">GitHub Oauth</string>
+    <string name="github_token_input_desc">مكن Shosetsu من الوصول إلى Gitlab باستخدام الرمز المميز</string>
+    <string name="github_token_input_title">Gitlab Oauth</string>
     <string name="apply">طبّق</string>
     <string name="reset">أعد التعيين</string>
     <string name="listings">يعرض</string>
