@@ -68,6 +68,7 @@ android {
 		kotlinCompilerExtensionVersion = "1.3.0"
 	}
 
+	/*
 	splits {
 		abi {
 			isEnable = true
@@ -75,6 +76,7 @@ android {
 			isUniversalApk = true
 		}
 	}
+	 */
 
 
 	buildTypes {
