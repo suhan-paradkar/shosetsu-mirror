@@ -320,8 +320,6 @@ dependencies {
 	implementation("com.chargemap.compose:numberpicker:1.0.3")
 
 	// QR Code
-	implementation("io.github.g00fy2.quickie:quickie-bundled:1.5.1")
-
 	implementation("com.github.doomsdayrs:qrcode-kotlin:513d290b")
 
 	// - paging

@@ -46,13 +46,16 @@ abstract class AAddShareViewModel : ShosetsuViewModel(), Destroyable {
 
 	abstract val isProcessing: Flow<Boolean>
 
-	abstract val isQRCodeValid: Flow<Boolean>
+	abstract val isURLValid: Flow<Boolean>
 
 	abstract val novelLink: Flow<NovelLink?>
 	abstract val extLink: Flow<ExtensionLink?>
 	abstract val repoLink: Flow<RepositoryLink?>
 
-	abstract val openQRScanner: Flow<Boolean>
+	abstract val showURLInput: Flow<Boolean>
+	abstract val url: Flow<String>
+	abstract fun setURL(url: String)
+	abstract fun applyURL()
 
 	abstract val exception: Flow<Exception?>
 
@@ -64,7 +67,7 @@ abstract class AAddShareViewModel : ShosetsuViewModel(), Destroyable {
 	/**
 	 * Set that the QR code scanned is invalid
 	 */
-	abstract fun setInvalidQRCode()
+	abstract fun setInvalidURL()
 
 	abstract fun setUserCancelled()
 

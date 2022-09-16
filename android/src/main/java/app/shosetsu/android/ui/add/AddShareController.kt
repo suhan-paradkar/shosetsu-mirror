@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -20,12 +18,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.R
 import app.shosetsu.android.common.consts.BundleKeys
-import app.shosetsu.android.common.ext.*
+import app.shosetsu.android.common.ext.logE
+import app.shosetsu.android.common.ext.navigateSafely
+import app.shosetsu.android.common.ext.setShosetsuTransition
+import app.shosetsu.android.common.ext.viewModel
 import app.shosetsu.android.view.compose.*
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.controller.base.CollapsedToolBarController
@@ -37,9 +37,6 @@ import app.shosetsu.lib.share.StyleLink
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.google.accompanist.placeholder.material.placeholder
-import io.github.g00fy2.quickie.QRResult
-import io.github.g00fy2.quickie.ScanQRCode
-import io.github.g00fy2.quickie.content.QRContent
 import org.acra.ACRA
 import javax.security.auth.DestroyFailedException
 
@@ -73,13 +70,10 @@ import javax.security.auth.DestroyFailedException
 class AddShareController : ShosetsuController(), CollapsedToolBarController {
 
 	override val viewTitleRes: Int = R.string.qr_code_scan
-	lateinit var scanQrCode: ActivityResultLauncher<Nothing?>
 
 	private val viewModel: AAddShareViewModel by viewModel()
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		viewModel.openQRScanner.collectLA(this, catch = {}) {
-			if (it) scanQrCode.launch(null)
-		}
 	}
 
 	override fun onCreateView(
@@ -90,8 +84,10 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 		setViewTitle()
 		setContent {
 			ShosetsuCompose {
+				val url by viewModel.url.collectAsState("")
+				val showURLInput by viewModel.showURLInput.collectAsState(true)
 				val isProcessing by viewModel.isProcessing.collectAsState(true)
-				val isQRCodeValid by viewModel.isQRCodeValid.collectAsState(true)
+				val isQRCodeValid by viewModel.isURLValid.collectAsState(true)
 				val isAdding by viewModel.isAdding.collectAsState(false)
 				val isComplete by viewModel.isComplete.collectAsState(false)
 				val isNovelOpenable by viewModel.isNovelOpenable.collectAsState(false)
@@ -106,8 +102,12 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 				val repoLink by viewModel.repoLink.collectAsState(null)
 
 				AddShareContent(
+					showURLInput = showURLInput,
+					url = url,
+					setURL = viewModel::setURL,
+					applyURL = viewModel::applyURL,
 					isProcessing = isProcessing,
-					isQRCodeValid = isQRCodeValid,
+					isUrlValid = isQRCodeValid,
 					isAdding = isAdding,
 					add = viewModel::add,
 					reject = {
@@ -143,39 +143,6 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 		}
 	}
 
-	private fun handleResult(result: QRResult) {
-		when (result) {
-			is QRResult.QRSuccess -> {
-				when (val content = result.content) {
-					is QRContent.Url -> {
-						viewModel.takeData(content.url)
-					}
-					is QRContent.Plain -> {
-						viewModel.takeData(content.rawValue)
-					}
-					else -> {
-						viewModel.setInvalidQRCode()
-					}
-				}
-			}
-			QRResult.QRUserCanceled -> {
-				viewModel.setUserCancelled()
-			}
-			QRResult.QRMissingPermission -> {
-				viewModel.setInvalidQRCode()
-			}
-			is QRResult.QRError -> {
-				logE("Failed to scan qr code", result.exception)
-				viewModel.setInvalidQRCode()
-			}
-		}
-	}
-
-	override fun onLifecycleCreate(owner: LifecycleOwner, registry: ActivityResultRegistry) {
-		super.onLifecycleCreate(owner, registry)
-		scanQrCode = registry.register("controller_more_qr_code", ScanQRCode(), ::handleResult)
-	}
-
 	override fun onDestroy() {
 		try {
 			viewModel.destroy()
@@ -209,6 +176,7 @@ fun PreviewAboutContent() {
 	ShosetsuCompose {
 
 		AddShareContent(
+			showURLInput = true,
 			isProcessing = false,
 			novelLink = novelLink,
 			extensionLink = extLink,
@@ -218,7 +186,7 @@ fun PreviewAboutContent() {
 			reject = {
 			},
 			isAdding = false,
-			isQRCodeValid = true,
+			isUrlValid = true,
 			retry = {
 			},
 			isNovelAlreadyPresent = false,
@@ -232,8 +200,13 @@ fun PreviewAboutContent() {
 
 @Composable
 fun AddShareContent(
+	showURLInput: Boolean,
+	url: String = "",
+	setURL: (String) -> Unit = { },
+	applyURL: () -> Unit = {},
+
 	isProcessing: Boolean,
-	isQRCodeValid: Boolean = false,
+	isUrlValid: Boolean = false,
 	isAdding: Boolean = false,
 	novelLink: NovelLink? = null,
 	styleLink: StyleLink? = null,
@@ -268,7 +241,18 @@ fun AddShareContent(
 		Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 			CircularProgressIndicator()
 		}
-	} else if (!isQRCodeValid) {
+	} else if (showURLInput) {
+		Column(
+			modifier = Modifier.fillMaxSize(),
+			horizontalAlignment = Alignment.CenterHorizontally,
+			verticalArrangement = Arrangement.Center
+		) {
+			TextField(url, setURL, isError = isUrlValid)
+			TextButton(applyURL) {
+				Text(stringResource(R.string.apply))
+			}
+		}
+	} else if (!isUrlValid) {
 		ErrorContent(
 			R.string.controller_add_invalid,
 			ErrorAction(

@@ -73,8 +73,8 @@ class AddShareViewModel(
 	override val isExtAlreadyPresent: MutableStateFlow<Boolean> = MutableStateFlow(false)
 	override val isRepoAlreadyPresent: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-	override val isProcessing: MutableStateFlow<Boolean> = MutableStateFlow(true)
-	override val isQRCodeValid: MutableStateFlow<Boolean> = MutableStateFlow(false)
+	override val isProcessing: MutableStateFlow<Boolean> = MutableStateFlow(false)
+	override val isURLValid: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
 	override val extLink: MutableStateFlow<ExtensionLink?> = MutableStateFlow(null)
 	override val novelLink: MutableStateFlow<NovelLink?> = MutableStateFlow(null)
@@ -84,7 +84,19 @@ class AddShareViewModel(
 
 	override val exception: MutableStateFlow<Exception?> = MutableStateFlow(null)
 
-	override val openQRScanner: MutableStateFlow<Boolean> = MutableStateFlow(true)
+	override val showURLInput: MutableStateFlow<Boolean> = MutableStateFlow(true)
+
+	override val url: MutableStateFlow<String> = MutableStateFlow("")
+
+	override fun setURL(url: String) {
+		this.url.value = url
+		val http = url.toHttpUrlOrNull()
+		isURLValid.value = http != null
+	}
+
+	override fun applyURL() {
+		takeData(url.value)
+	}
 
 	private var repoEntity: RepositoryEntity? = null
 	private var extEntity: InstalledExtensionEntity? = null
@@ -99,7 +111,7 @@ class AddShareViewModel(
 
 				fun invalidate() {
 					isProcessing.value = false
-					isQRCodeValid.value = false
+					isURLValid.value = false
 				}
 
 				val http = url.toHttpUrlOrNull()
@@ -207,7 +219,7 @@ class AddShareViewModel(
 									isNovelAlreadyPresent.value = true
 
 								isProcessing.value = false
-								isQRCodeValid.value = true
+								isURLValid.value = true
 							}
 							"repository" -> {
 								invalidate()
@@ -231,18 +243,17 @@ class AddShareViewModel(
 
 	override fun takeData(url: String) {
 		logV(url)
-		openQRScanner.value = false
+		showURLInput.value = false
 		data.value = url
 	}
 
-
 	override fun setUserCancelled() {
-		openQRScanner.value = false
-		setInvalidQRCode()
+		showURLInput.value = false
+		setInvalidURL()
 	}
 
-	override fun setInvalidQRCode() {
-		isQRCodeValid.value = false
+	override fun setInvalidURL() {
+		isURLValid.value = false
 		isProcessing.value = false
 	}
 
@@ -369,37 +380,34 @@ class AddShareViewModel(
 	}
 
 	override fun destroy() {
-		launchIO {
-			isAdding.value = false
-			isComplete.value = false
-			isNovelOpenable.value = false
+		isAdding.value = false
+		isComplete.value = false
+		isNovelOpenable.value = false
 
-			isNovelAlreadyPresent.value = false
-			isStyleAlreadyPresent.value = false
-			isExtAlreadyPresent.value = false
-			isRepoAlreadyPresent.value = false
+		isNovelAlreadyPresent.value = false
+		isStyleAlreadyPresent.value = false
+		isExtAlreadyPresent.value = false
+		isRepoAlreadyPresent.value = false
+		isProcessing.value = false
+		isURLValid.value = false
 
-			isProcessing.value = true
-			isQRCodeValid.value = false
+		extLink.value = null
+		novelLink.value = null
+		repoLink.value = null
+		data.value = null
+		showURLInput.value = true
 
-			extLink.value = null
-			novelLink.value = null
-			repoLink.value = null
-			data.value = null
-			openQRScanner.value = true
-
-			exception.value = null
-			repoEntity = null
-			extEntity = null
-			novelEntity = null
-		}
+		exception.value = null
+		repoEntity = null
+		extEntity = null
+		novelEntity = null
 	}
 
 	override fun retry() {
 		isAdding.value = false
-		isProcessing.value = true
-		isQRCodeValid.value = false
-		openQRScanner.value = true
+		isProcessing.value = false
+		isURLValid.value = false
+		showURLInput.value = true
 	}
 
 	override fun getNovel(): NovelEntity? =
