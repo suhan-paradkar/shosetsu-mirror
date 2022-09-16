@@ -7,8 +7,7 @@ import android.app.SearchManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.ACTION_MAIN
-import android.content.Intent.ACTION_SEARCH
+import android.content.Intent.*
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.Bundle
@@ -37,6 +36,7 @@ import androidx.window.layout.WindowMetricsCalculator
 import app.shosetsu.android.R
 import app.shosetsu.android.common.consts.*
 import app.shosetsu.android.common.consts.BundleKeys.BUNDLE_QUERY
+import app.shosetsu.android.common.consts.BundleKeys.BUNDLE_URL
 import app.shosetsu.android.common.enums.NavigationStyle.LEGACY
 import app.shosetsu.android.common.enums.NavigationStyle.MATERIAL
 import app.shosetsu.android.common.ext.*
@@ -185,8 +185,8 @@ class MainActivity : AppCompatActivity(), DIAware {
 
 		// Do not let the launcher create a new activity http://stackoverflow.com/questions/16283079
 		if (!isTaskRoot) {
-			logI("Broadcasting intent ${intent.action}")
-			sendBroadcast(Intent(intent.action))
+			logI("Broadcasting intent ${intent.action} ${intent.categories}")
+			sendBroadcast(Intent(intent))
 			finish()
 			return
 		}
@@ -197,6 +197,8 @@ class MainActivity : AppCompatActivity(), DIAware {
 			addAction(ACTION_OPEN_SEARCH)
 			addAction(ACTION_OPEN_APP_UPDATE)
 			addAction(ACTION_DOWNLOAD_COMPLETE)
+			addAction(ACTION_VIEW)
+			addCategory(CATEGORY_BROWSABLE)
 		})
 		registered = true
 
@@ -430,6 +432,36 @@ class MainActivity : AppCompatActivity(), DIAware {
 			}
 			ACTION_OPEN_APP_UPDATE -> {
 				handleAppUpdate()
+			}
+			ACTION_VIEW -> {
+				if (intent.data != null) {
+					if (intent.data!!.scheme != null) {
+						launchIO {
+							delay(100)
+
+							launchUI {
+								navController.navigate(
+									R.id.action_libraryController_to_moreController,
+									null,
+									navOptions { setShosetsuTransition() }
+								)
+							}
+							delay(100)
+							launchUI {
+								navController.navigate(
+									R.id.action_moreController_to_addShareController,
+									bundleOf(
+										BUNDLE_URL to intent.data!!.scheme + "://" + intent.data!!.host
+									)
+								)
+							}
+						}
+					} else {
+						logE("Scheme was null")
+					}
+				} else {
+					logE("View action data null")
+				}
 			}
 			ACTION_MAIN -> {
 			}

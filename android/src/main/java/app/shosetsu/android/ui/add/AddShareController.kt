@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.R
 import app.shosetsu.android.common.consts.BundleKeys
+import app.shosetsu.android.common.consts.BundleKeys.BUNDLE_URL
 import app.shosetsu.android.common.ext.logE
 import app.shosetsu.android.common.ext.navigateSafely
 import app.shosetsu.android.common.ext.setShosetsuTransition
@@ -74,6 +75,9 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 	private val viewModel: AAddShareViewModel by viewModel()
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		arguments?.getString(BUNDLE_URL)?.let {
+			viewModel.setURL(it)
+		}
 	}
 
 	override fun onCreateView(
