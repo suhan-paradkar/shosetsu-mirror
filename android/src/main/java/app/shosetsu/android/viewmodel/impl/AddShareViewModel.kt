@@ -396,6 +396,7 @@ class AddShareViewModel(
 		repoLink.value = null
 		data.value = null
 		showURLInput.value = true
+		url.value = ""
 
 		exception.value = null
 		repoEntity = null
