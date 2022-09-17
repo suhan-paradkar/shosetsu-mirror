@@ -101,7 +101,7 @@ class CSSEditorActivity : AppCompatActivity(), DIAware {
 					cssInvalidReason = cssInvalidReason,
 					onUndo = { viewModel.undo() },
 					onRedo = { viewModel.redo() },
-					onBack = { onBackPressed() },
+					onBack = { onBackPressedDispatcher.onBackPressed() },
 					onHelp = { openInWebView(HELP_WEBSITE) },
 					onExport = {
 						// TODO Add exporting

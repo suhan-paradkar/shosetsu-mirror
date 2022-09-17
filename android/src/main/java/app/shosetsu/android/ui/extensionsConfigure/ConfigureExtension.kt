@@ -83,7 +83,9 @@ class ConfigureExtension : ShosetsuController(),
 		setViewTitle()
 		setContent {
 			ShosetsuCompose {
-				ConfigureExtensionContent(viewModel, onExit = { activity?.onBackPressed() })
+				ConfigureExtensionContent(
+					viewModel,
+					onExit = { activity?.onBackPressedDispatcher?.onBackPressed() })
 			}
 		}
 	}

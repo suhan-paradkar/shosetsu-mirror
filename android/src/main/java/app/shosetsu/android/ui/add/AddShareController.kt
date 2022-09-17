@@ -115,7 +115,7 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 					isAdding = isAdding,
 					add = viewModel::add,
 					reject = {
-						activity?.onBackPressed()
+						activity?.onBackPressedDispatcher?.onBackPressed()
 					},
 					retry = viewModel::retry,
 					novelLink = novelLink,
@@ -129,7 +129,7 @@ class AddShareController : ShosetsuController(), CollapsedToolBarController {
 					openNovel = {
 						val entity = viewModel.getNovel()
 
-						activity?.onBackPressed()
+						activity?.onBackPressedDispatcher?.onBackPressed()
 
 						if (entity != null) {
 							findNavController().navigateSafely(

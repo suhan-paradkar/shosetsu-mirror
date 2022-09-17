@@ -121,7 +121,7 @@ class WebViewApp : AppCompatActivity(), DIAware {
 			launchUI {
 				(parent as? MainActivity)?.makeSnackBar(R.string.activity_webview_null_url)?.show()
 			}
-			onBackPressed()
+			onBackPressedDispatcher.onBackPressed()
 		}
 	}
 }

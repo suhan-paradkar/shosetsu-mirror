@@ -314,8 +314,8 @@ class MainActivity : AppCompatActivity(), DIAware {
 			if (navController.backQueue.size == 2) {
 				if (viewModel.navigationStyle == LEGACY) {
 					binding.drawerLayout.openDrawer(GravityCompat.START)
-				} else onBackPressed()
-			} else onBackPressed()
+				} else onBackPressedDispatcher.onBackPressed()
+			} else onBackPressedDispatcher.onBackPressed()
 		}
 
 		when (viewModel.navigationStyle) {
@@ -347,7 +347,7 @@ class MainActivity : AppCompatActivity(), DIAware {
 		)
 
 		actionBarDrawerToggle?.setToolbarNavigationClickListener {
-			onBackPressed()
+			onBackPressedDispatcher.onBackPressed()
 		}
 
 		@Suppress("ReplaceNotNullAssertionWithElvisReturn")
