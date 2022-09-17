@@ -1,11 +1,13 @@
 package app.shosetsu.android.common.ext
 
+import android.Manifest.permission.POST_NOTIFICATIONS
 import android.Manifest.permission.WAKE_LOCK
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.res.Resources
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
 import androidx.annotation.NonNull
@@ -71,14 +73,22 @@ val Context.notificationManager: NotificationManagerCompat
 
 fun Context.requestPerms() {
 	if (
-		checkActivitySelfPermission(WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED
-		||
+		(SDK_INT >= TIRAMISU && checkActivitySelfPermission(POST_NOTIFICATIONS) != PERMISSION_GRANTED) ||
 		checkActivitySelfPermission(WAKE_LOCK) != PERMISSION_GRANTED
-	) ActivityCompat.requestPermissions(
-		this as Activity,
-		arrayOf(
-			WAKE_LOCK
-		),
-		1
-	)
+	) {
+		ActivityCompat.requestPermissions(
+			this as Activity,
+			if (SDK_INT >= TIRAMISU) {
+				arrayOf(
+					WAKE_LOCK,
+					POST_NOTIFICATIONS,
+				)
+			} else {
+				arrayOf(
+					WAKE_LOCK,
+				)
+			},
+			1
+		)
+	}
 }
