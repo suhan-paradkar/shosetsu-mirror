@@ -1,13 +1,9 @@
 {
-  "latestVersion": "2.1.0",
-  "versionCode": 31,
-  "url": "https://cdn.shosetsu.app/v2.1.0/shosetsu-v2.1.0.apk",
+  "latestVersion": "2.1.1",
+  "versionCode": 32,
+  "url": "https://cdn.shosetsu.app/v2.1.1/shosetsu-v2.1.1.apk",
   "releaseNotes": [
-    "Thanks to @Syer10/@Jobobby04 for implementing Categories!",
-    "New:",
-    " - Categories",
-    "",
-    "Fix:",
-    " - Fix android 13 support"
+    "Fix backup compatibility",
+    "More android 13 fixes"
   ]
 }
