@@ -75,7 +75,6 @@ class ShosetsuApplication : Application(), LifecycleEventObserver, DIAware,
 	private val extensionsRepo: IExtensionsRepository by instance()
 	private val settingsRepo: ISettingsRepository by instance()
 
-
 	override val di: DI by DI.lazy {
 		bind<ViewModelFactory>() with singleton { ViewModelFactory(applicationContext) }
 		import(othersModule)
@@ -91,9 +90,18 @@ class ShosetsuApplication : Application(), LifecycleEventObserver, DIAware,
 
 	override fun attachBaseContext(base: Context?) {
 		super.attachBaseContext(base)
-		setupACRA()
 		Notifications.createChannels(this)
 		ShortCuts.createShortcuts(this)
+
+		runBlocking {
+			// Enable ACRA if allowed or if it is the first run
+			// We want it enabled for first run to catch critical app errors
+			if (settingsRepo.getBoolean(SettingKey.ACRAEnabled) ||
+				settingsRepo.getBoolean(SettingKey.FirstTime)
+			) {
+				setupACRA()
+			}
+		}
 	}
 
 	private fun setupDualOutput() {

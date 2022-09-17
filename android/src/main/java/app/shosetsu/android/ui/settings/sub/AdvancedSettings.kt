@@ -269,5 +269,16 @@ fun AdvancedSettingsContent(
 				key = AutoBookmarkFromQR
 			)
 		}
+
+		item {
+			SwitchSettingContent(
+				title = stringResource(R.string.intro_acra),
+				description = stringResource(R.string.settings_advanced_enable_acra),
+				modifier = Modifier
+					.fillMaxWidth(),
+				repo = viewModel.settingsRepo,
+				key = ACRAEnabled
+			)
+		}
 	}
 }

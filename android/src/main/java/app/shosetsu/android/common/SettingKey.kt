@@ -245,6 +245,8 @@ sealed class SettingKey<T : Any>(val name: String, val default: T) {
 
 
 	// Advanced settings
+	object ACRAEnabled : BooleanKey("is_ACRA_enabled", false)
+
 	/**
 	 * Automatically bookmark a novel when scanned via a QR code
 	 */
