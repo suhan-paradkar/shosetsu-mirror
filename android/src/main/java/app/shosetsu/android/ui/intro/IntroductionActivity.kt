@@ -1,7 +1,5 @@
 package app.shosetsu.android.ui.intro
 
-import android.Manifest.permission
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -94,26 +92,6 @@ class IntroductionActivity : IntroActivity() {
 			FragmentSlide.Builder()
 				.background(R.color.colorPrimary)
 				.fragment(License())
-				.build()
-		)
-
-		addSlide(
-			SimpleSlide.Builder()
-				.title((R.string.intro_perm_title))
-				.description((R.string.intro_perm_desc))
-				.background(R.color.colorPrimary)
-				.permissions(
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-						arrayOf(
-							permission.POST_NOTIFICATIONS,
-							permission.WAKE_LOCK
-						)
-					} else {
-						arrayOf(
-							permission.WAKE_LOCK
-						)
-					}
-				)
 				.build()
 		)
 
