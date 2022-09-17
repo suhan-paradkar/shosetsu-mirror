@@ -262,6 +262,7 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 		}
 	}
 
+	@Throws(Exception::class)
 	private suspend fun restoreNovel(
 		iExt: IExtension,
 		extensionID: Int,

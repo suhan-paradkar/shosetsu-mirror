@@ -1,9 +1,9 @@
 package app.shosetsu.android.viewmodel.impl
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.viewModelScope
 import app.shosetsu.android.common.enums.ReadingStatus
 import app.shosetsu.android.common.ext.trimDate
-import app.shosetsu.android.domain.model.local.UpdateCompleteEntity
 import app.shosetsu.android.domain.usecases.IsOnlineUseCase
 import app.shosetsu.android.domain.usecases.load.LoadUpdatesUseCase
 import app.shosetsu.android.domain.usecases.start.StartUpdateWorkerUseCase
@@ -65,10 +65,12 @@ class UpdatesViewModel(
 
 	override val isRefreshing: MutableStateFlow<Boolean> by lazy { MutableStateFlow(false) }
 
+	@SuppressLint("StopShip")
 	override suspend fun updateChapter(
 		updateUI: UpdatesUI,
 		readingStatus: ReadingStatus
 	) {
+		@Suppress("TodoComment")
 		TODO("Not yet implemented")
 	}
 }

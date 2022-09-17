@@ -166,6 +166,7 @@ class AndroidFileSystemProvider(
 		return file.writeBytes(content)
 	}
 
+	@Throws(FilePermissionException::class, IOException::class)
 	override fun writeFile(internalFileDir: InternalFileDir, path: String, content: InputStream) {
 		val file = File(internalFileDir.path() + path)
 

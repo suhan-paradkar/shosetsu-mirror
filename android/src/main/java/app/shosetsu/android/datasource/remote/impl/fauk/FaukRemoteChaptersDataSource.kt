@@ -33,6 +33,7 @@ import javax.net.ssl.SSLException
  */
 class FaukRemoteChaptersDataSource : IRemoteChaptersDataSource {
 
+	@Throws(IOException::class, NullPointerException::class, Exception::class)
 	override suspend fun loadChapterPassage(formatter: IExtension, chapterURL: String): ByteArray {
 		logV("Fauk")
 		// Change the number below and click apply in Android Studio
