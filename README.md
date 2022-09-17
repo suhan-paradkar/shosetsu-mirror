@@ -5,7 +5,7 @@ The Free & Open Source Android Application for reading (Light) Novels!
 We appreciate any help in improving the app, so let us know by [opening an issue](../../issues/new).
 
 ## Download:
-### [Latest](https://github.com/shosetsuorg/shosetsu-preview/releases/latest)
+### [Latest](https://gitlab.com/shosetsuorg/shosetsu/-/releases/permalink/latest)
 
 ## Capabilities:
 
