@@ -180,7 +180,7 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 			// Checks if the version is compatible
 			logV("Version in backup: $metaVersion")
 
-			if (!Version(metaVersion).isCompatible(Version(VERSION_BACKUP))) {
+			if (!Version(VERSION_BACKUP).isCompatible(Version(metaVersion))) {
 				logE(MESSAGE_LOG_JSON_OUTDATED)
 				notify(R.string.restore_notification_content_text_outdated) { setNotOngoing() }
 				return Result.failure()
@@ -192,14 +192,15 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 
 			notify("Adding categories")
 			val currentCategories = categoriesRepo.getCategories()
-			val categoryOrderToCategoryIds = backup.categories.sortedBy { it.order }.associate { backupCategory ->
-				val currentCategory = currentCategories.find { backupCategory.name == it.name }
-				backupCategory.order to if (currentCategory != null) {
-					currentCategory.id!!
-				} else {
-					addCategoryUseCase(backupCategory.name)
+			val categoryOrderToCategoryIds =
+				backup.categories.sortedBy { it.order }.associate { backupCategory ->
+					val currentCategory = currentCategories.find { backupCategory.name == it.name }
+					backupCategory.order to if (currentCategory != null) {
+						currentCategory.id!!
+					} else {
+						addCategoryUseCase(backupCategory.name)
+					}
 				}
-			}
 
 			notify("Adding repositories")
 			// Adds the repositories
@@ -227,7 +228,14 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 			val repoNovels: List<NovelEntity> = novelsRepo.loadNovels()
 			val extensions = extensionsRepo.loadRepositoryExtensions()
 
-			backup.extensions.forEach { restoreExtension(extensions, repoNovels, it, categoryOrderToCategoryIds) }
+			backup.extensions.forEach {
+				restoreExtension(
+					extensions,
+					repoNovels,
+					it,
+					categoryOrderToCategoryIds
+				)
+			}
 		}
 
 
@@ -509,7 +517,7 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 			setContentTitle(name)
 		}
 		val novelCategories = try {
-		    novelCategoriesRepo.getNovelCategoriesFromNovel(targetNovelID)
+			novelCategoriesRepo.getNovelCategoriesFromNovel(targetNovelID)
 		} catch (e: Exception) {// TODO specify
 			logE("Failed to load novel categories")
 			ACRA.errorReporter.handleSilentException(e)
