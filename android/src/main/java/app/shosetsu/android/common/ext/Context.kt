@@ -1,6 +1,7 @@
 package app.shosetsu.android.common.ext
 
-import android.Manifest.permission.*
+import android.Manifest.permission.WAKE_LOCK
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -76,8 +77,6 @@ fun Context.requestPerms() {
 	) ActivityCompat.requestPermissions(
 		this as Activity,
 		arrayOf(
-			READ_EXTERNAL_STORAGE,
-			WRITE_EXTERNAL_STORAGE,
 			WAKE_LOCK
 		),
 		1

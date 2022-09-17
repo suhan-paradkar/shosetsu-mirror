@@ -103,8 +103,7 @@ class IntroductionActivity : IntroActivity() {
 				.background(R.color.colorPrimary)
 				.permissions(
 					arrayOf(
-						permission.READ_EXTERNAL_STORAGE,
-						permission.WRITE_EXTERNAL_STORAGE
+						permission.WAKE_LOCK
 					)
 				)
 				.build()
