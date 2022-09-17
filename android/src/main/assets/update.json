@@ -1,8 +1,13 @@
 {
-  "latestVersion": "2.0.0",
-  "versionCode": 30,
+  "latestVersion": "2.1.0",
+  "versionCode": 31,
   "url": "https://gitlab.com/shosetsuorg/shosetsu/releases/",
   "releaseNotes": [
-    "Release v2.0.0"
+    "Thanks to @Syer10/@Jobobby04 for implementing Categories!",
+    "New:",
+    " - Categories",
+    "",
+    "Fix:",
+    " - Fix android 13 support"
   ]
 }
