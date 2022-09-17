@@ -10,6 +10,7 @@ import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import app.shosetsu.android.R
 import app.shosetsu.android.activity.MainActivity
@@ -76,12 +77,6 @@ class WebViewApp : AppCompatActivity(), DIAware {
 		return super.onOptionsItemSelected(item)
 	}
 
-	override fun onBackPressed() {
-		if (binding.webview.canGoBack()) {
-			binding.webview.goBack()
-		} else super.onBackPressed()
-	}
-
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		menuInflater.inflate(R.menu.webview_menu, menu)
 		return true
@@ -94,6 +89,12 @@ class WebViewApp : AppCompatActivity(), DIAware {
 		this.setSupportActionBar(binding.toolbar)
 		supportActionBar?.apply {
 			setDisplayHomeAsUpEnabled(true)
+		}
+
+		onBackPressedDispatcher.addCallback {
+			if (binding.webview.canGoBack()) {
+				binding.webview.goBack()
+			} else finish()
 		}
 
 		binding.webview.settings.userAgentString = USER_AGENT
