@@ -229,6 +229,13 @@ class LibraryViewModel(
 	override val liveData: Flow<LibraryUI> by lazy {
 		librarySourceFlow
 			.addDefaultCategory()
+			.map { libraryUI ->
+				libraryUI.copy(
+					novels = libraryUI.novels.mapValues { categoryNovels ->
+						categoryNovels.value.distinctBy { it.id }
+					}
+				)
+			}
 			.combineSelection()
 			.combineArtistFilter()
 			.combineAuthorFilter()
