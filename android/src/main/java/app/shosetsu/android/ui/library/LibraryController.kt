@@ -527,7 +527,7 @@ fun LibraryCategory(
 			}
 			items(
 				items,
-				key = { it.hashCode() }
+				key = { it.id }
 			) { item ->
 				val onClickBadge = if (toastNovel != null) {
 					{ toastNovel(item) }
