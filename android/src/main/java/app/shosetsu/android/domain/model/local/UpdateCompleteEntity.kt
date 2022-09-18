@@ -31,10 +31,10 @@ package app.shosetsu.android.domain.model.local
  * @param novelImageURL imageURL of the novel, loaded via [novelID]
  */
 data class UpdateCompleteEntity(
-		val chapterID: Int,
-		val novelID: Int,
-		val time: Long,
-		val chapterName: String,
-		val novelName: String,
-		val novelImageURL: String,
+	val chapterID: Int,
+	val novelID: Int,
+	val time: Long,
+	val chapterName: String,
+	val novelName: String,
+	val novelImageURL: String,
 )

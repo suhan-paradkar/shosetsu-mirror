@@ -24,7 +24,7 @@ import app.shosetsu.lib.IExtension
  * 05 / 05 / 2020
  */
 interface IMemExtensionsDataSource {
-    /** Load formatter from memory */
+	/** Load formatter from memory */
 	fun loadExtensionFromMemory(extensionID: Int): IExtension?
 
 	/** Put formatter in memory */

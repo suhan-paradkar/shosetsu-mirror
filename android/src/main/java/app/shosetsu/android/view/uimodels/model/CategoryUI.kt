@@ -24,18 +24,18 @@ import app.shosetsu.android.dto.Convertible
 
 @Immutable
 data class CategoryUI(
-    val id: Int,
-    val name: String,
-    val order: Int
+	val id: Int,
+	val name: String,
+	val order: Int
 ) : Convertible<CategoryEntity> {
-    override fun convertTo() = CategoryEntity(
-        id = id,
-        name = name,
-        order = order
-    )
+	override fun convertTo() = CategoryEntity(
+		id = id,
+		name = name,
+		order = order
+	)
 
-    companion object {
-        val default: () -> CategoryUI
-            get() = { CategoryUI(0, "Default", 0) }
-    }
+	companion object {
+		val default: () -> CategoryUI
+			get() = { CategoryUI(0, "Default", 0) }
+	}
 }

@@ -239,8 +239,11 @@ class BackupWorker(appContext: Context, params: WorkerParameters) : CoroutineWor
 											)
 										} ?: BackupNovelSettingEntity()
 
-										val novelCategories = novelCategoriesRepository.getNovelCategoriesFromNovel(novel.id!!)
-											.map { categories[it.categoryID]!!.order }
+										val novelCategories =
+											novelCategoriesRepository.getNovelCategoriesFromNovel(
+												novel.id!!
+											)
+												.map { categories[it.categoryID]!!.order }
 
 										BackupNovelEntity(
 											novel.url,

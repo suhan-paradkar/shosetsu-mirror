@@ -30,35 +30,35 @@ import kotlinx.coroutines.flow.Flow
  */
 interface IDBCategoriesDataSource {
 
-    fun getCategoriesFlow(): Flow<List<CategoryEntity>>
+	fun getCategoriesFlow(): Flow<List<CategoryEntity>>
 
-    @Throws(SQLiteException::class)
-    suspend fun getCategories(): List<CategoryEntity>
+	@Throws(SQLiteException::class)
+	suspend fun getCategories(): List<CategoryEntity>
 
-    @Throws(SQLiteException::class)
-    suspend fun addCategory(categoryEntity: CategoryEntity): Long
+	@Throws(SQLiteException::class)
+	suspend fun addCategory(categoryEntity: CategoryEntity): Long
 
-    /**
-     * If the category already exists
-     */
-    @Throws(SQLiteException::class)
-    suspend fun categoryExists(name: String): Boolean
+	/**
+	 * If the category already exists
+	 */
+	@Throws(SQLiteException::class)
+	suspend fun categoryExists(name: String): Boolean
 
-    /**
-     * Get the next [CategoryEntity.order] variable
-     */
-    @Throws(SQLiteException::class)
-    suspend fun getNextCategoryOrder(): Int
+	/**
+	 * Get the next [CategoryEntity.order] variable
+	 */
+	@Throws(SQLiteException::class)
+	suspend fun getNextCategoryOrder(): Int
 
-    /**
-     * Delete a [CategoryEntity] from the database
-     */
-    @Throws(SQLiteException::class)
-    suspend fun deleteCategory(categoryEntity: CategoryEntity)
+	/**
+	 * Delete a [CategoryEntity] from the database
+	 */
+	@Throws(SQLiteException::class)
+	suspend fun deleteCategory(categoryEntity: CategoryEntity)
 
-    /**
-     * Update a list of [CategoryEntity]s
-     */
-    @Throws(SQLiteException::class)
-    suspend fun updateCategories(categories: List<CategoryEntity>)
+	/**
+	 * Update a list of [CategoryEntity]s
+	 */
+	@Throws(SQLiteException::class)
+	suspend fun updateCategories(categories: List<CategoryEntity>)
 }

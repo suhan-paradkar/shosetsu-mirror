@@ -8,8 +8,8 @@ import android.widget.FrameLayout
 import androidx.annotation.StringRes
 import androidx.core.content.res.getResourceIdOrThrow
 import androidx.core.view.isVisible
-import app.shosetsu.android.common.enums.TriStateState
 import app.shosetsu.android.R
+import app.shosetsu.android.common.enums.TriStateState
 import app.shosetsu.android.databinding.TriStateButtonBinding
 
 /*

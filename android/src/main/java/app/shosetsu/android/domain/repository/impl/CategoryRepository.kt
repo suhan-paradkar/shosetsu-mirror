@@ -25,33 +25,33 @@ import app.shosetsu.android.domain.repository.base.ICategoryRepository
 import kotlinx.coroutines.flow.Flow
 
 class CategoryRepository(
-    private val database: IDBCategoriesDataSource,
+	private val database: IDBCategoriesDataSource,
 ) : ICategoryRepository {
 
-    override fun getCategoriesAsFlow(): Flow<List<CategoryEntity>> =
-        database.getCategoriesFlow()
+	override fun getCategoriesAsFlow(): Flow<List<CategoryEntity>> =
+		database.getCategoriesFlow()
 
-    @Throws(SQLiteException::class)
-    override suspend fun getCategories(): List<CategoryEntity> =
-        database.getCategories()
+	@Throws(SQLiteException::class)
+	override suspend fun getCategories(): List<CategoryEntity> =
+		database.getCategories()
 
-    @Throws(SQLiteException::class)
-    override suspend fun addCategory(categoryEntity: CategoryEntity) =
-        database.addCategory(categoryEntity)
+	@Throws(SQLiteException::class)
+	override suspend fun addCategory(categoryEntity: CategoryEntity) =
+		database.addCategory(categoryEntity)
 
-    @Throws(SQLiteException::class)
-    override suspend fun categoryExists(name: String): Boolean =
-        database.categoryExists(name)
+	@Throws(SQLiteException::class)
+	override suspend fun categoryExists(name: String): Boolean =
+		database.categoryExists(name)
 
-    @Throws(SQLiteException::class)
-    override suspend fun getNextCategoryOrder() =
-        database.getNextCategoryOrder()
+	@Throws(SQLiteException::class)
+	override suspend fun getNextCategoryOrder() =
+		database.getNextCategoryOrder()
 
-    @Throws(SQLiteException::class)
-    override suspend fun deleteCategory(categoryEntity: CategoryEntity) =
-        database.deleteCategory(categoryEntity)
+	@Throws(SQLiteException::class)
+	override suspend fun deleteCategory(categoryEntity: CategoryEntity) =
+		database.deleteCategory(categoryEntity)
 
-    @Throws(SQLiteException::class)
-    override suspend fun updateCategories(categories: List<CategoryEntity>) =
-        database.updateCategories(categories)
+	@Throws(SQLiteException::class)
+	override suspend fun updateCategories(categories: List<CategoryEntity>) =
+		database.updateCategories(categories)
 }

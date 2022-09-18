@@ -28,33 +28,33 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class CategoriesViewModel(
-    private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val addCategoryUseCase: AddCategoryUseCase,
-    private val deleteCategoryUseCase: DeleteCategoryUseCase,
-    private val moveCategoryUseCase: MoveCategoryUseCase
+	private val getCategoriesUseCase: GetCategoriesUseCase,
+	private val addCategoryUseCase: AddCategoryUseCase,
+	private val deleteCategoryUseCase: DeleteCategoryUseCase,
+	private val moveCategoryUseCase: MoveCategoryUseCase
 ) : ACategoriesViewModel() {
 
-    override val liveData: Flow<List<CategoryUI>> by lazy {
-        getCategoriesUseCase()
-    }
+	override val liveData: Flow<List<CategoryUI>> by lazy {
+		getCategoriesUseCase()
+	}
 
-    override fun addCategory(name: String): Flow<Unit> = flow {
-        addCategoryUseCase(name)
-        emit(Unit)
-    }
+	override fun addCategory(name: String): Flow<Unit> = flow {
+		addCategoryUseCase(name)
+		emit(Unit)
+	}
 
-    override fun remove(categoryUI: CategoryUI): Flow<Unit> = flow {
-        deleteCategoryUseCase(categoryUI)
-        emit(Unit)
-    }
+	override fun remove(categoryUI: CategoryUI): Flow<Unit> = flow {
+		deleteCategoryUseCase(categoryUI)
+		emit(Unit)
+	}
 
-    override fun moveUp(categoryUI: CategoryUI) = flow {
-        moveCategoryUseCase(categoryUI, categoryUI.order + 1)
-        emit(Unit)
-    }
+	override fun moveUp(categoryUI: CategoryUI) = flow {
+		moveCategoryUseCase(categoryUI, categoryUI.order + 1)
+		emit(Unit)
+	}
 
-    override fun moveDown(categoryUI: CategoryUI) = flow {
-        moveCategoryUseCase(categoryUI, categoryUI.order - 1)
-        emit(Unit)
-    }
+	override fun moveDown(categoryUI: CategoryUI) = flow {
+		moveCategoryUseCase(categoryUI, categoryUI.order - 1)
+		emit(Unit)
+	}
 }

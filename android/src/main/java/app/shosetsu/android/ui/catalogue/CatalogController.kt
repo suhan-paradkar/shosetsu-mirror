@@ -199,7 +199,10 @@ class CatalogController : ShosetsuController(), ExtendedFABController, MenuProvi
 	/**
 	 * A [ACatalogNovelUI] was long clicked, invoking a background add
 	 */
-	private fun itemLongClicked(item: ACatalogNovelUI, categories: IntArray = intArrayOf()): Boolean {
+	private fun itemLongClicked(
+		item: ACatalogNovelUI,
+		categories: IntArray = intArrayOf()
+	): Boolean {
 		logI("Adding novel to library in background: $item")
 
 		if (item.bookmarked) {

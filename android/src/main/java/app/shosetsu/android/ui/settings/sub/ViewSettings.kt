@@ -23,11 +23,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import app.shosetsu.android.common.SettingKey.ChapterColumnsInLandscape
-import app.shosetsu.android.common.SettingKey.ChapterColumnsInPortait
-import app.shosetsu.android.common.SettingKey.NavStyle
-import app.shosetsu.android.common.SettingKey.NovelBadgeToast
-import app.shosetsu.android.common.SettingKey.SelectedNovelCardType
+import app.shosetsu.android.R
+import app.shosetsu.android.common.SettingKey.*
 import app.shosetsu.android.common.ext.launchIO
 import app.shosetsu.android.common.ext.launchUI
 import app.shosetsu.android.common.ext.viewModel
@@ -37,7 +34,6 @@ import app.shosetsu.android.view.compose.setting.NumberPickerSettingContent
 import app.shosetsu.android.view.compose.setting.SwitchSettingContent
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.viewmodel.abstracted.settings.AViewSettingsViewModel
-import app.shosetsu.android.R
 import kotlinx.coroutines.flow.map
 
 /*

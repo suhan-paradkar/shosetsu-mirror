@@ -7,13 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -35,6 +29,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
+import app.shosetsu.android.BuildConfig
+import app.shosetsu.android.R
 import app.shosetsu.android.common.SettingKey
 import app.shosetsu.android.common.StringSetKey
 import app.shosetsu.android.common.enums.TriStateState
@@ -49,8 +45,6 @@ import app.shosetsu.android.view.compose.setting.SwitchSettingContent
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.uimodels.model.CategoryUI
 import app.shosetsu.android.viewmodel.abstracted.settings.AUpdateSettingsViewModel
-import app.shosetsu.android.BuildConfig
-import app.shosetsu.android.R
 import kotlinx.coroutines.flow.map
 
 /*
@@ -330,7 +324,12 @@ private fun AUpdateSettingsViewModel.LibraryUpdateCategories(
 	ButtonSettingContent(
 		title = title,
 		description = derivedStateOf {
-			getCategorySelectDescription(context, categories, includedCategoryIds, excludedCategoryIds)
+			getCategorySelectDescription(
+				context,
+				categories,
+				includedCategoryIds,
+				excludedCategoryIds
+			)
 		}.value,
 		buttonText = stringResource(R.string.settings_update_novel_categories_open)
 	) {
@@ -456,8 +455,18 @@ fun getCategorySelectDescription(
 		else -> excludedCategories.joinToString { it.name }
 	}
 	return buildString {
-		append(context.getString(R.string.settings_update_novel_include_categories, includedItemsText))
+		append(
+			context.getString(
+				R.string.settings_update_novel_include_categories,
+				includedItemsText
+			)
+		)
 		appendLine()
-		append(context.getString(R.string.settings_update_novel_exclude_categories, excludedItemsText))
+		append(
+			context.getString(
+				R.string.settings_update_novel_exclude_categories,
+				excludedItemsText
+			)
+		)
 	}
 }

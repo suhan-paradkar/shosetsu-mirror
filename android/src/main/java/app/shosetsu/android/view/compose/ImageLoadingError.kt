@@ -32,17 +32,17 @@ import app.shosetsu.android.R
 
 @Composable
 fun ImageLoadingError(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier then Modifier
-            .fillMaxSize()
-            .background(Color(0x1F888888)),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            painterResource(R.drawable.broken_image),
-            contentDescription = null,
-            tint = Color(0x1F888888),
-            modifier = Modifier.size(24.dp)
-        )
-    }
+	Box(
+		modifier = modifier then Modifier
+			.fillMaxSize()
+			.background(Color(0x1F888888)),
+		contentAlignment = Alignment.Center
+	) {
+		Icon(
+			painterResource(R.drawable.broken_image),
+			contentDescription = null,
+			tint = Color(0x1F888888),
+			modifier = Modifier.size(24.dp)
+		)
+	}
 }

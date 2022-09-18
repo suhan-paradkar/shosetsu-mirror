@@ -25,7 +25,7 @@ package app.shosetsu.android.datasource.local.memory.base
  * This caches chapters, to prevent reloading issues
  */
 interface IMemChaptersDataSource {
-    /**
+	/**
 	 * Puts a chapter passage into cache, if cache exists this overwrites
 	 */
 	fun saveChapterInCache(chapterID: Int, chapter: ByteArray)

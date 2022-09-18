@@ -35,5 +35,7 @@ class GetCategoriesUseCase(
 	@OptIn(ExperimentalCoroutinesApi::class)
 	@Throws(SQLiteException::class)
 	operator fun invoke() = repo.getCategoriesAsFlow()
-		.mapLatest { entities -> entities.map { CategoryUI(it.id!!, it.name, it.order) }.sortedBy { it.order } }
+		.mapLatest { entities ->
+			entities.map { CategoryUI(it.id!!, it.name, it.order) }.sortedBy { it.order }
+		}
 }

@@ -6,10 +6,10 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import app.shosetsu.android.R
 import app.shosetsu.android.common.ext.collectLA
 import app.shosetsu.android.common.ext.collectLatestLA
 import app.shosetsu.android.common.ext.logI
-import app.shosetsu.android.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import org.kodein.di.DI

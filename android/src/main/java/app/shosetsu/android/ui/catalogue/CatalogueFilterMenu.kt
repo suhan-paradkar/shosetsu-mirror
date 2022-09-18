@@ -556,8 +556,7 @@ fun CatalogFilterMenuRadioGroupContent(
 	var expanded by remember { mutableStateOf(true) }
 
 	Column(
-		modifier = Modifier.fillMaxWidth()
-			,
+		modifier = Modifier.fillMaxWidth(),
 	) {
 		Row(
 			modifier = Modifier

@@ -22,7 +22,7 @@ package app.shosetsu.android.datasource.local.memory.base
  * 05 / 05 / 2020
  */
 interface IMemExtLibDataSource {
-    /** Load Library from memory */
+	/** Load Library from memory */
 	fun loadLibrary(name: String): String?
 
 

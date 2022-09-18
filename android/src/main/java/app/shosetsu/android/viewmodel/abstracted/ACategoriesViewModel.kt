@@ -24,26 +24,26 @@ import app.shosetsu.android.viewmodel.base.SubscribeViewModel
 import kotlinx.coroutines.flow.Flow
 
 abstract class ACategoriesViewModel : SubscribeViewModel<List<CategoryUI>>,
-    ShosetsuViewModel() {
-    /**
-     * Adds a category via a string the user provides
-     *
-     * @param name The name of the category
-     */
-    abstract fun addCategory(name: String): Flow<Unit>
+	ShosetsuViewModel() {
+	/**
+	 * Adds a category via a string the user provides
+	 *
+	 * @param name The name of the category
+	 */
+	abstract fun addCategory(name: String): Flow<Unit>
 
-    /**
-     * Remove the category from the app
-     */
-    abstract fun remove(categoryUI: CategoryUI): Flow<Unit>
+	/**
+	 * Remove the category from the app
+	 */
+	abstract fun remove(categoryUI: CategoryUI): Flow<Unit>
 
-    /**
-     * Move the category up one
-     */
-    abstract fun moveUp(categoryUI: CategoryUI): Flow<Unit>
+	/**
+	 * Move the category up one
+	 */
+	abstract fun moveUp(categoryUI: CategoryUI): Flow<Unit>
 
-    /**
-     * Move the category down one
-     */
-    abstract fun moveDown(categoryUI: CategoryUI): Flow<Unit>
+	/**
+	 * Move the category down one
+	 */
+	abstract fun moveDown(categoryUI: CategoryUI): Flow<Unit>
 }

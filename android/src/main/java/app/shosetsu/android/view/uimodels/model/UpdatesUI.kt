@@ -2,7 +2,7 @@ package app.shosetsu.android.view.uimodels.model
 
 import android.text.format.DateFormat
 import androidx.compose.runtime.Immutable
-import java.util.Date
+import java.util.*
 
 /*
  * This file is part of shosetsu.
@@ -24,12 +24,12 @@ import java.util.Date
 
 @Immutable
 data class UpdatesUI(
-    val chapterID: Int,
-    val novelID: Int,
-    val time: Long,
-    val chapterName: String,
-    val novelName: String,
-    val novelImageURL: String,
+	val chapterID: Int,
+	val novelID: Int,
+	val time: Long,
+	val chapterName: String,
+	val novelName: String,
+	val novelImageURL: String,
 ) {
-    val displayTime = DateFormat.format("hh:mm", Date(time)).toString()
+	val displayTime = DateFormat.format("hh:mm", Date(time)).toString()
 }

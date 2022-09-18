@@ -105,7 +105,8 @@ fun ExposedSettingsRepoViewModel.enableFullscreen() {
 		stringResource(R.string.settings_reader_fullscreen),
 		stringResource(R.string.settings_reader_fullscreen_desc),
 		settingsRepo,
-		ReaderEnableFullscreen, modifier = Modifier
+		ReaderEnableFullscreen,
+		modifier = Modifier
 			.fillMaxWidth(),
 	)
 }

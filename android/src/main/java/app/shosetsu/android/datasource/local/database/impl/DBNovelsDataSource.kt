@@ -71,5 +71,5 @@ class DBNovelsDataSource(
 		(novelsDao.loadNovels().convertList())
 
 	override fun searchBookmarked(query: String): PagingSource<Int, StrippedBookmarkedNovelEntity> =
-			novelsDao.searchBookmarked(query)
+		novelsDao.searchBookmarked(query)
 }

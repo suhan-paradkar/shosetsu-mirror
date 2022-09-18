@@ -1,7 +1,6 @@
 package app.shosetsu.android.domain.usecases.load
 
 import app.shosetsu.android.common.utils.uifactory.mapLatestToResultFlowWithFactory
-import app.shosetsu.android.domain.model.local.UpdateCompleteEntity
 import app.shosetsu.android.domain.repository.base.IUpdatesRepository
 import app.shosetsu.android.dto.convertList
 import app.shosetsu.android.view.uimodels.model.UpdatesUI

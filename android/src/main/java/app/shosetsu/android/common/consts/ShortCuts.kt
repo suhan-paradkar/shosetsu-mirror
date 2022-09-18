@@ -5,8 +5,8 @@ import android.content.Intent
 import androidx.core.content.pm.ShortcutInfoCompat.Builder
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat.createWithResource
-import app.shosetsu.android.activity.MainActivity
 import app.shosetsu.android.R
+import app.shosetsu.android.activity.MainActivity
 
 /*
  * This file is part of shosetsu.

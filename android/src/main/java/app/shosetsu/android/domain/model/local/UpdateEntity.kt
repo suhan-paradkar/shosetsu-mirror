@@ -26,7 +26,7 @@ package app.shosetsu.android.domain.model.local
  */
 
 data class UpdateEntity(
-		val chapterID: Int,
-		val novelID: Int,
-		val time: Long,
+	val chapterID: Int,
+	val novelID: Int,
+	val time: Long,
 )

@@ -13,12 +13,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -619,9 +614,9 @@ fun Badge(modifier: Modifier, text: String, onClick: (() -> Unit)? = null) {
 			.background(MaterialTheme.colors.secondary, MaterialTheme.shapes.medium)
 			.clip(MaterialTheme.shapes.medium)
 			.let {
-				 if (onClick != null) {
-					 it.clickable(onClick = onClick)
-				 } else it
+				if (onClick != null) {
+					it.clickable(onClick = onClick)
+				} else it
 			},
 		contentAlignment = Alignment.Center
 	) {

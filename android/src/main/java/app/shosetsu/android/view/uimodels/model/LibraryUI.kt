@@ -19,6 +19,6 @@
 package app.shosetsu.android.view.uimodels.model
 
 data class LibraryUI(
-    val categories: List<CategoryUI>,
-    val novels: Map<Int, List<LibraryNovelUI>>
+	val categories: List<CategoryUI>,
+	val novels: Map<Int, List<LibraryNovelUI>>
 )

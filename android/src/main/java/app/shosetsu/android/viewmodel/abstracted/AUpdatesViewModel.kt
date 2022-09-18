@@ -1,7 +1,6 @@
 package app.shosetsu.android.viewmodel.abstracted
 
 import app.shosetsu.android.common.enums.ReadingStatus
-import app.shosetsu.android.domain.model.local.UpdateCompleteEntity
 import app.shosetsu.android.view.uimodels.model.UpdatesUI
 import app.shosetsu.android.viewmodel.base.IsOnlineCheckViewModel
 import app.shosetsu.android.viewmodel.base.ShosetsuViewModel

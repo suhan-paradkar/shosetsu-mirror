@@ -25,7 +25,12 @@ fun SwitchSettingContent(
 	enabled: Boolean = true,
 	onCheckChange: (newValue: Boolean) -> Unit
 ) {
-	GenericRightSettingLayout(title, description, modifier, enabled, onClick = { onCheckChange(!isChecked) }) {
+	GenericRightSettingLayout(
+		title,
+		description,
+		modifier,
+		enabled,
+		onClick = { onCheckChange(!isChecked) }) {
 		Switch(
 			isChecked,
 			null,

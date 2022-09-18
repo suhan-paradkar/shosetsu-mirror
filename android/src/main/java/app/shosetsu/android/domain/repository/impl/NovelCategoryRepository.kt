@@ -24,24 +24,24 @@ import app.shosetsu.android.domain.repository.base.INovelCategoryRepository
 import kotlinx.coroutines.flow.Flow
 
 class NovelCategoryRepository(
-    private val database: IDBNovelCategoriesDataSource,
+	private val database: IDBNovelCategoriesDataSource,
 ) : INovelCategoryRepository {
 
-    override fun getNovelCategoriesFromNovelFlow(novelID: Int): Flow<List<NovelCategoryEntity>> =
-        database.getNovelCategoriesFromNovelFlow(novelID)
+	override fun getNovelCategoriesFromNovelFlow(novelID: Int): Flow<List<NovelCategoryEntity>> =
+		database.getNovelCategoriesFromNovelFlow(novelID)
 
-    override suspend fun getNovelCategoriesFromNovel(novelID: Int): List<NovelCategoryEntity> =
-        database.getNovelCategoriesFromNovel(novelID)
+	override suspend fun getNovelCategoriesFromNovel(novelID: Int): List<NovelCategoryEntity> =
+		database.getNovelCategoriesFromNovel(novelID)
 
-    override fun getNovelCategoriesFromCategoryFlow(categoryID: Int): Flow<List<NovelCategoryEntity>> =
-        database.getNovelCategoriesFromCategoryFlow(categoryID)
+	override fun getNovelCategoriesFromCategoryFlow(categoryID: Int): Flow<List<NovelCategoryEntity>> =
+		database.getNovelCategoriesFromCategoryFlow(categoryID)
 
-    override suspend fun setNovelCategories(entities: List<NovelCategoryEntity>) =
-        database.setNovelCategories(entities)
+	override suspend fun setNovelCategories(entities: List<NovelCategoryEntity>) =
+		database.setNovelCategories(entities)
 
-    override suspend fun deleteNovelCategories(novelID: Int) =
-        database.deleteNovelCategories(novelID)
+	override suspend fun deleteNovelCategories(novelID: Int) =
+		database.deleteNovelCategories(novelID)
 
-    override suspend fun deleteNovelsCategories(novelIDs: List<Int>) =
-        database.deleteNovelsCategories(novelIDs)
+	override suspend fun deleteNovelsCategories(novelIDs: List<Int>) =
+		database.deleteNovelsCategories(novelIDs)
 }

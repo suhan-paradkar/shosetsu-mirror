@@ -91,7 +91,10 @@ abstract class ACatalogViewModel :
 	 * Bookmarks and loads the specific novel in the background
 	 * @param novelID ID of novel to load
 	 */
-	abstract fun backgroundNovelAdd(novelID: Int, categories: IntArray): Flow<BackgroundNovelAddProgress>
+	abstract fun backgroundNovelAdd(
+		novelID: Int,
+		categories: IntArray
+	): Flow<BackgroundNovelAddProgress>
 
 	enum class BackgroundNovelAddProgress { ADDING, ADDED }
 

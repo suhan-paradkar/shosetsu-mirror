@@ -228,7 +228,10 @@ class CatalogViewModel(
 		filterItemsFlow.first().forEach { filter -> resetFilter(filter) }
 	}
 
-	override fun backgroundNovelAdd(novelID: Int, categories: IntArray): Flow<BackgroundNovelAddProgress> =
+	override fun backgroundNovelAdd(
+		novelID: Int,
+		categories: IntArray
+	): Flow<BackgroundNovelAddProgress> =
 		flow {
 			emit(BackgroundNovelAddProgress.ADDING)
 			backgroundAddUseCase(novelID)

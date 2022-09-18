@@ -324,7 +324,8 @@ fun MigrationNovelItemContent(item: MigrationNovelUI, onClick: (MigrationNovelUI
 	) {
 		val blackTrans = colorResource(id = R.color.black_trans)
 		Box {
-			val modifier = Modifier.fillMaxSize()
+			val modifier = Modifier
+				.fillMaxSize()
 				.drawWithContent {
 					drawContent()
 					drawRect(

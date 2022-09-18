@@ -137,7 +137,7 @@ fun NovelCardNormalContent(
 			Box(
 				Modifier
 					.align(Alignment.BottomCenter)
-                    .fillMaxWidth()
+					.fillMaxWidth()
 					.padding(4.dp),
 				contentAlignment = Alignment.Center
 			) {

@@ -112,9 +112,10 @@ class LibraryViewModel(
 			}
 
 			val selectionCategory = selection[category].orEmpty().copy()
-			list.novels[category].orEmpty().subList(firstSelected + 1, lastSelected).forEach { item ->
-				selectionCategory[item.id] = true
-			}
+			list.novels[category].orEmpty().subList(firstSelected + 1, lastSelected)
+				.forEach { item ->
+					selectionCategory[item.id] = true
+				}
 			selection[category] = selectionCategory
 
 			selectedNovels.value = selection

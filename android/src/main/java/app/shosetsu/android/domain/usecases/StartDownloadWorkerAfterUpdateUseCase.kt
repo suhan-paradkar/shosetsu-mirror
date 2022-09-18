@@ -54,9 +54,10 @@ class StartDownloadWorkerAfterUpdateUseCase(
 				val filteredChapters = chapters
 					.groupBy { it.novelID }
 					.filter { (novelID) ->
-						val categories = getNovelCategoriesUseCase(novelID).first().ifEmpty { listOf(0) }
+						val categories =
+							getNovelCategoriesUseCase(novelID).first().ifEmpty { listOf(0) }
 						categories.any { includedToDownload.isEmpty() || it in includedToDownload } &&
-							categories.none { it in excludedToDownload }
+								categories.none { it in excludedToDownload }
 					}
 					.values
 					.flatten()

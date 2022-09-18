@@ -1,7 +1,7 @@
 package app.shosetsu.android.common.utils
 
-import app.shosetsu.android.common.enums.ProductFlavors
 import app.shosetsu.android.BuildConfig
+import app.shosetsu.android.common.enums.ProductFlavors
 import kotlinx.serialization.json.Json
 
 

@@ -6,7 +6,7 @@ import app.shosetsu.android.dto.Convertible
 import app.shosetsu.lib.ExtensionType
 import app.shosetsu.lib.Novel
 import app.shosetsu.lib.Version
-import java.util.Locale
+import java.util.*
 
 /*
  * This file is part of shosetsu.
@@ -28,31 +28,31 @@ import java.util.Locale
 
 @Immutable
 data class InstalledExtensionUI(
-    val id: Int,
-    val repoID: Int,
-    val name: String,
-    val fileName: String,
-    val imageURL: String,
-    val lang: String,
-    val version: Version,
-    val md5: String,
-    val type: ExtensionType,
-    val enabled: Boolean,
-    val chapterType: Novel.ChapterType,
+	val id: Int,
+	val repoID: Int,
+	val name: String,
+	val fileName: String,
+	val imageURL: String,
+	val lang: String,
+	val version: Version,
+	val md5: String,
+	val type: ExtensionType,
+	val enabled: Boolean,
+	val chapterType: Novel.ChapterType,
 ) : Convertible<InstalledExtensionEntity> {
-    val displayLang: String = Locale.forLanguageTag(lang).displayName
+	val displayLang: String = Locale.forLanguageTag(lang).displayName
 
-    override fun convertTo(): InstalledExtensionEntity  = InstalledExtensionEntity(
-        id = id,
-        repoID = repoID,
-        name = name,
-        fileName = fileName,
-        imageURL = imageURL,
-        lang = lang,
-        version = version,
-        md5 = md5,
-        type = type,
-        enabled = enabled,
-        chapterType = chapterType,
-    )
+	override fun convertTo(): InstalledExtensionEntity = InstalledExtensionEntity(
+		id = id,
+		repoID = repoID,
+		name = name,
+		fileName = fileName,
+		imageURL = imageURL,
+		lang = lang,
+		version = version,
+		md5 = md5,
+		type = type,
+		enabled = enabled,
+		chapterType = chapterType,
+	)
 }

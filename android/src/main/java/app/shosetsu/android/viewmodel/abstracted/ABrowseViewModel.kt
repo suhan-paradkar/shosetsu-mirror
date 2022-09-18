@@ -7,7 +7,7 @@ import app.shosetsu.android.viewmodel.base.IsOnlineCheckViewModel
 import app.shosetsu.android.viewmodel.base.ShosetsuViewModel
 import app.shosetsu.android.viewmodel.base.SubscribeViewModel
 import kotlinx.coroutines.flow.Flow
-import java.util.Locale
+import java.util.*
 
 /*
  * This file is part of shosetsu.

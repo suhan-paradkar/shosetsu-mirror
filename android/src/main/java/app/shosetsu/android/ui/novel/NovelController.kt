@@ -1442,8 +1442,14 @@ fun ExpandedText(
 		)
 
 		if (!isExpanded)
-			Icon(painterResource(drawable.expand_more), contentDescription = stringResource(string.more))
-		else Icon(painterResource(drawable.expand_less), contentDescription = stringResource(string.less))
+			Icon(
+				painterResource(drawable.expand_more),
+				contentDescription = stringResource(string.more)
+			)
+		else Icon(
+			painterResource(drawable.expand_less),
+			contentDescription = stringResource(string.less)
+		)
 	}
 }
 
