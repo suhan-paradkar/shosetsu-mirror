@@ -18,10 +18,17 @@ package app.shosetsu.android.common.ext
  */
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
 import org.kodein.di.direct
 import org.kodein.di.instance
 
@@ -52,3 +59,30 @@ inline fun <reified VM : ViewModel, T> T.viewModel()
 			direct.instance()
 		)[VM::class.java]
 	}
+
+/**
+ * Shosetsu compose DI injection for viewModels, it surprisingly works
+ */
+@Suppress("MissingJvmstatic")
+@Composable
+public inline fun <reified VM : ViewModel> viewModelDi(
+	viewModelStoreOwner: ViewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
+		"No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
+	},
+	key: String? = null,
+	extras: CreationExtras = if (viewModelStoreOwner is HasDefaultViewModelProviderFactory) {
+		viewModelStoreOwner.defaultViewModelCreationExtras
+	} else {
+		CreationExtras.Empty
+	}
+): VM {
+	val di by closestDI(LocalContext.current)
+	val factory: ViewModelProvider.Factory? by di.instance()
+	return androidx.lifecycle.viewmodel.compose.viewModel(
+		VM::class.java,
+		viewModelStoreOwner,
+		key,
+		factory,
+		extras
+	)
+}

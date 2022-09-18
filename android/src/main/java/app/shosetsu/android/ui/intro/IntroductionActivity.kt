@@ -1,18 +1,40 @@
 package app.shosetsu.android.ui.intro
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import app.shosetsu.android.R
-import app.shosetsu.android.activity.MainActivity.Companion.INTRO_CODE
 import app.shosetsu.android.common.ext.readAsset
-import app.shosetsu.android.databinding.IntroLicenseBinding
-import com.heinrichreimersoftware.materialintro.app.IntroActivity
-import com.heinrichreimersoftware.materialintro.app.NavigationPolicy
-import com.heinrichreimersoftware.materialintro.slide.FragmentSlide
-import com.heinrichreimersoftware.materialintro.slide.SimpleSlide
+import app.shosetsu.android.common.ext.viewModelDi
+import app.shosetsu.android.view.compose.ShosetsuCompose
+import app.shosetsu.android.viewmodel.abstracted.AIntroViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.launch
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
 
 /*
  * This file is part of shosetsu.
@@ -35,71 +57,358 @@ import com.heinrichreimersoftware.materialintro.slide.SimpleSlide
  * shosetsu
  * 15 / 03 / 2020
  */
-class IntroductionActivity : IntroActivity() {
-	internal class License : Fragment(R.layout.intro_license) {
-		private var message = ""
+class IntroductionActivity : AppCompatActivity(), DIAware {
 
-		private lateinit var introLicenseBinding: IntroLicenseBinding
+	override val di: DI by closestDI()
 
-		override fun onSaveInstanceState(outState: Bundle) {
-			outState.putString("message", message)
-		}
-
-		override fun onCreateView(
-			inflater: LayoutInflater,
-			container: ViewGroup?,
-			savedInstanceState: Bundle?
-		): View? =
-			super.onCreateView(inflater, container, savedInstanceState)?.also {
-				introLicenseBinding = IntroLicenseBinding.bind(it)
-			}
-
-		override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-			if (message.isEmpty() && savedInstanceState == null)
-				message = activity?.readAsset("license-gplv3.txt") ?: ""
-			else if (message.isEmpty() && savedInstanceState != null)
-				message = savedInstanceState.getString("message", "")
-			introLicenseBinding.title.text = message
-		}
-	}
-
+	/***/
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setNavigationPolicy(
-			object : NavigationPolicy {
-				override fun canGoForward(position: Int): Boolean = true
-				override fun canGoBackward(position: Int): Boolean = false
+
+		setContent {
+			ShosetsuCompose {
+				IntroView {
+					finish()
+				}
 			}
-		)
-
-		addSlide(
-			SimpleSlide.Builder()
-				.title(R.string.intro_title_greet)
-				.background(R.color.colorPrimary)
-				.image(R.drawable.shou_icon)
-				.build()
-		)
-
-		addSlide(
-			SimpleSlide.Builder()
-				.title((R.string.intro_what_is_app))
-				.description((R.string.intro_what_is_app_desc))
-				.background(R.color.colorPrimary)
-				.build()
-		)
-
-		addSlide(
-			FragmentSlide.Builder()
-				.background(R.color.colorPrimary)
-				.fragment(License())
-				.build()
-		)
-
-		addSlide(SimpleSlide.Builder()
-			.title((R.string.intro_happy_end))
-			.description((R.string.intro_happy_end_desc))
-			.background(R.color.colorPrimary)
-			.buttonCtaClickListener { finishActivity(INTRO_CODE) }
-			.build())
+		}
 	}
+}
+
+/**
+ * Introduction view in compose
+ */
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun IntroView(
+	exit: () -> Unit
+) {
+	val viewModel: AIntroViewModel = viewModelDi()
+	val state = rememberPagerState()
+	val scope = rememberCoroutineScope()
+	val isLicenseRead by viewModel.isLicenseRead.collectAsState()
+
+	Scaffold(
+		bottomBar = {
+			BottomAppBar {
+				Row(
+					modifier = Modifier.fillMaxWidth(),
+					horizontalArrangement = Arrangement.SpaceBetween,
+					verticalAlignment = Alignment.CenterVertically
+				) {
+					Box {
+						if (state.currentPage > 0) {
+							IconButton(
+								onClick = {
+									scope.launch {
+										state.scrollToPage(state.currentPage - 1)
+									}
+								}
+							) {
+								Icon(
+									Icons.Default.ArrowBack,
+									stringResource(androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description)
+								)
+							}
+						}
+					}
+					Box {
+						if (state.currentPage != IntroPages.License.ordinal || isLicenseRead) {
+							IconButton(
+								onClick = {
+									if (state.currentPage != IntroPages.End.ordinal)
+										scope.launch {
+											state.scrollToPage(state.currentPage + 1)
+										}
+									else {
+										viewModel.setFinished()
+										exit()
+									}
+								}
+							) {
+								Icon(
+									Icons.Default.ArrowForward,
+									stringResource(R.string.intro_page_next)
+								)
+							}
+						}
+
+					}
+				}
+			}
+		}
+	) {
+		HorizontalPager(
+			6,
+			state = state,
+			modifier = Modifier.padding(it)
+		) { page ->
+			when (page) {
+				IntroPages.Title.ordinal -> IntroTitlePage()
+				IntroPages.Explanation.ordinal -> IntroExplanationPage()
+				IntroPages.License.ordinal -> {
+					IntroLicensePage(isLicenseRead) {
+						viewModel.setLicenseRead()
+					}
+				}
+				IntroPages.ACRA.ordinal -> {
+					val isACRA by viewModel.isACRAEnabled.collectAsState()
+					IntroACRAPage(
+						isACRA
+					) {
+						viewModel.setACRAEnabled(it)
+					}
+				}
+				IntroPages.Permissions.ordinal -> IntroPermissionPage()
+				IntroPages.End.ordinal -> IntroEndPage()
+			}
+		}
+	}
+}
+
+enum class IntroPages {
+	Title,
+	Explanation,
+	License,
+	ACRA,
+	Permissions,
+	End
+}
+
+@Preview
+@Composable
+fun PreviewIntroTitlePage() {
+	IntroTitlePage()
+}
+
+@Composable
+fun IntroTitlePage() {
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Icon(painterResource(R.drawable.shou_icon), stringResource(R.string.app_name))
+		Text(
+			stringResource(R.string.intro_title_greet), style = MaterialTheme.typography.h4,
+			textAlign = TextAlign.Center
+		)
+	}
+}
+
+@Preview
+@Composable
+fun PreviewIntroExplanationPage() {
+	IntroExplanationPage()
+}
+
+@Composable
+fun IntroExplanationPage() {
+
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally,
+	) {
+		Text(stringResource(R.string.intro_what_is_app), style = MaterialTheme.typography.h5)
+		Text(
+			stringResource(R.string.intro_what_is_app_desc),
+			style = MaterialTheme.typography.body1,
+			textAlign = TextAlign.Center
+		)
+	}
+
+}
+
+@Preview
+@Composable
+fun PreviewIntroLicensePage() {
+	var isLicenseRead by remember { mutableStateOf(false) }
+	IntroLicensePage(
+		isLicenseRead = isLicenseRead,
+		onLicenseRead = {
+			isLicenseRead = true
+		}
+	)
+}
+
+@Composable
+fun IntroLicensePage(
+	isLicenseRead: Boolean,
+	onLicenseRead: () -> Unit
+) {
+
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(top = 16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Card {
+			Column(
+				modifier = Modifier
+					.fillMaxWidth(),
+				verticalArrangement = Arrangement.Center,
+				horizontalAlignment = Alignment.CenterHorizontally
+			) {
+				Text(stringResource(R.string.license), style = MaterialTheme.typography.h5)
+				Text(
+					stringResource(R.string.intro_license_desc_new),
+					style = MaterialTheme.typography.body1,
+					textAlign = TextAlign.Center
+				)
+			}
+		}
+		val scrollState = rememberScrollState()
+		LaunchedEffect(scrollState.value) {
+			if (!isLicenseRead) // Only run if the license is not read to save on performance
+				if (scrollState.maxValue != 0 && scrollState.value != 0) // prevent db0
+					if (scrollState.value / scrollState.maxValue >= .9) {
+						onLicenseRead()
+					}
+		}
+		Text(
+			LocalContext.current.readAsset("license-gplv3.txt"),
+			style = MaterialTheme.typography.body2,
+			modifier = Modifier
+				.verticalScroll(scrollState)
+				.padding(16.dp)
+		)
+	}
+
+}
+
+@Preview
+@Composable
+fun PreviewIntroACRAPage() {
+	var isACRAEnabled by remember { mutableStateOf(false) }
+	IntroACRAPage(
+		isACRAEnabled
+	) {
+		isACRAEnabled = it
+	}
+}
+
+@Composable
+fun IntroACRAPage(
+	isACRAEnabled: Boolean,
+	setACRAEnabled: (Boolean) -> Unit
+) {
+
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Text(stringResource(R.string.intro_acra), style = MaterialTheme.typography.h5)
+		Text(
+			stringResource(R.string.intro_acra_desc),
+			style = MaterialTheme.typography.body1,
+			textAlign = TextAlign.Center
+		)
+		Checkbox(isACRAEnabled, setACRAEnabled)
+	}
+
+}
+
+@Preview
+@Composable
+fun PreviewIntroAdsPage() {
+	IntroAdsPage()
+}
+
+@Composable
+fun IntroAdsPage() {
+	// TODO("Ask the users if they want to enable ads to make the developer money")
+}
+
+@Preview
+@Composable
+fun PreviewIntroPermissionPage() {
+	IntroPermissionPage()
+}
+
+@Composable
+fun IntroPermissionPage() {
+
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Text(stringResource(R.string.intro_perm_title), style = MaterialTheme.typography.h5)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			IntroPermissionRow(
+				android.Manifest.permission.POST_NOTIFICATIONS,
+				stringResource(R.string.intro_perm_notif_desc)
+			)
+		} else {
+			Text(
+				stringResource(R.string.intro_perm_none),
+				style = MaterialTheme.typography.body1,
+				textAlign = TextAlign.Center
+			)
+		}
+	}
+
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun IntroPermissionRow(
+	permission: String,
+	description: String
+) {
+	val permissionState = rememberPermissionState(permission)
+
+	Row(
+		modifier = Modifier.fillMaxWidth(),
+		verticalAlignment = Alignment.CenterVertically,
+		horizontalArrangement = Arrangement.SpaceBetween
+	) {
+		Text(description, modifier = Modifier.fillMaxWidth(.7f))
+
+		Checkbox(
+			permissionState.status.isGranted,
+			onCheckedChange = {
+				permissionState.launchPermissionRequest()
+			},
+			modifier = Modifier.fillMaxWidth(.2f)
+		)
+	}
+}
+
+@Preview
+@Composable
+fun PreviewIntroEndPage() {
+	IntroEndPage()
+}
+
+@Composable
+fun IntroEndPage() {
+
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.padding(16.dp),
+		verticalArrangement = Arrangement.Center,
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Text(stringResource(R.string.intro_happy_end), style = MaterialTheme.typography.h5)
+		Text(
+			stringResource(R.string.intro_happy_end_desc),
+			style = MaterialTheme.typography.body1,
+			textAlign = TextAlign.Center
+		)
+	}
+
 }

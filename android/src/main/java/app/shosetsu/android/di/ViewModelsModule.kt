@@ -288,4 +288,7 @@ val viewModelsModule: DI.Module = DI.Module("view_models_module") {
 		CSSEditorViewModel(instance(), instance())
 	}
 
+	bind<AIntroViewModel>() with provider {
+		IntroViewModel(instance())
+	}
 }

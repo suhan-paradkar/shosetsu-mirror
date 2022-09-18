@@ -227,8 +227,6 @@ dependencies {
 	implementation(conductor("conductor-androidx-transition"))
 	implementation(conductor("conductor-archlifecycle"))
 	 */
-	// Material Intro https://github.com/heinrichreimer/material-intro#standard-slide-simpleslide
-	implementation("com.github.shosetsuorg:material-intro:0c2f0b2772")
 
 	// Room
 	val roomVersion = "2.4.3"
@@ -306,6 +304,8 @@ dependencies {
 	implementation(accompanist("accompanist-webview"))
 	implementation(accompanist("accompanist-placeholder-material"))
 	implementation(accompanist("accompanist-pager-indicators"))
+	implementation(accompanist("accompanist-permissions"))
+
 	//- Integration with observables
 	implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
 

@@ -736,6 +736,11 @@
     <string name="intro_acra">Enable Error Reporting</string>
     <string name="intro_acra_desc">Enable error reporting to ShosetsuOrg\nIf enabled, ShosetsuOrg will collect crash logs containing device information and state of the app during said crash.</string>
     <string name="settings_advanced_enable_acra">Enable error reporting to ShosetsuOrg\nRequires App Restart</string>
+    <string name="intro_license_desc">Please read the following license.</string>
+    <string name="intro_page_next">Navigate to next page</string>
+    <string name="intro_license_desc_new">For legal purposes, please carefully read all of the following license to understand your rights.</string>
+    <string name="intro_perm_notif_desc">Shosetsu uses notifications for many ongoing tasks such as updates and backups.</string>
+    <string name="intro_perm_none">Good news, Shosetsu needs no permissions!</string>
     <plurals name="controller_novel_toggle_delete_chapters">
         <!-- Ignore zero-->
         <item quantity="one">Delete %d chapter?</item>

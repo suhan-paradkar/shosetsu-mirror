@@ -6,6 +6,7 @@
 
     <dist:module dist:instant="true" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -89,7 +90,7 @@
             android:theme="@style/AppTheme.Main" />
         <activity
             android:name="app.shosetsu.android.ui.intro.IntroductionActivity"
-            android:theme="@style/Theme.Intro" />
+            android:theme="@style/AppTheme.Main" />
     </application>
 
 </manifest>
