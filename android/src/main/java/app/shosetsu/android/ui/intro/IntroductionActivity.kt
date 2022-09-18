@@ -141,7 +141,8 @@ fun IntroView(
 		HorizontalPager(
 			6,
 			state = state,
-			modifier = Modifier.padding(it)
+			modifier = Modifier.padding(it),
+			userScrollEnabled = state.currentPage != IntroPages.License.ordinal || isLicenseRead
 		) { page ->
 			when (page) {
 				IntroPages.Title.ordinal -> IntroTitlePage()
