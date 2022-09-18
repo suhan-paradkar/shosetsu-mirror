@@ -1,8 +1,8 @@
 {
-  "latestVersion": "2.1.2",
-  "versionCode": 33,
-  "url": "https://cdn.shosetsu.app/v2.1.2/shosetsu-v2.1.2.apk",
+  "latestVersion": "2.1.3",
+  "versionCode": 34,
+  "url": "https://cdn.shosetsu.app/v2.1.3/shosetsu-v2.1.3.apk",
   "releaseNotes": [
-    "Remove permissions slide from introduction due to android 13 issues"
+    "Fix library crashing"
   ]
 }
