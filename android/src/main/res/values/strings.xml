@@ -741,6 +741,7 @@
     <string name="intro_license_desc_new">For legal purposes, please carefully read all of the following license to understand your rights.</string>
     <string name="intro_perm_notif_desc">Shosetsu uses notifications for many ongoing tasks such as updates and backups.</string>
     <string name="intro_perm_none">Good news, Shosetsu needs no permissions!</string>
+    <string name="intro_what_is_app_desc_new">"Shosetsu is a Libre FOSS Android application to read Novels.\nOnly with Shosetsu can you have all your novel reading features in one place."</string>
     <plurals name="controller_novel_toggle_delete_chapters">
         <!-- Ignore zero-->
         <item quantity="one">Delete %d chapter?</item>

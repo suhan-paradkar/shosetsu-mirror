@@ -11,9 +11,11 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import app.shosetsu.android.R
 import app.shosetsu.android.common.ext.readAsset
 import app.shosetsu.android.common.ext.viewModelDi
+import app.shosetsu.android.view.compose.ScrollStateBar
 import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.viewmodel.abstracted.AIntroViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -212,12 +215,13 @@ fun IntroExplanationPage() {
 		modifier = Modifier
 			.fillMaxSize()
 			.padding(16.dp),
-		verticalArrangement = Arrangement.Center,
+		verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
 		horizontalAlignment = Alignment.CenterHorizontally,
 	) {
+		Icon(Icons.Default.Info, null, modifier = Modifier.size(64.dp))
 		Text(stringResource(R.string.intro_what_is_app), style = MaterialTheme.typography.h5)
 		Text(
-			stringResource(R.string.intro_what_is_app_desc),
+			stringResource(R.string.intro_what_is_app_desc_new),
 			style = MaterialTheme.typography.body1,
 			textAlign = TextAlign.Center
 		)
@@ -245,15 +249,17 @@ fun IntroLicensePage(
 
 	Column(
 		modifier = Modifier
-			.fillMaxSize()
-			.padding(top = 16.dp),
+			.fillMaxSize(),
 		verticalArrangement = Arrangement.Center,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
-		Card {
+		Card(
+			shape = RectangleShape
+		) {
 			Column(
 				modifier = Modifier
-					.fillMaxWidth(),
+					.fillMaxWidth()
+					.padding(16.dp),
 				verticalArrangement = Arrangement.Center,
 				horizontalAlignment = Alignment.CenterHorizontally
 			) {
@@ -273,13 +279,15 @@ fun IntroLicensePage(
 						onLicenseRead()
 					}
 		}
-		Text(
-			LocalContext.current.readAsset("license-gplv3.txt"),
-			style = MaterialTheme.typography.body2,
-			modifier = Modifier
-				.verticalScroll(scrollState)
-				.padding(16.dp)
-		)
+		ScrollStateBar(scrollState) {
+			Text(
+				LocalContext.current.readAsset("license-gplv3.txt"),
+				style = MaterialTheme.typography.body2,
+				modifier = Modifier
+					.verticalScroll(scrollState)
+					.padding(16.dp)
+			)
+		}
 	}
 
 }
