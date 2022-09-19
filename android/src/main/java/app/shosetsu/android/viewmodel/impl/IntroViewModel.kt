@@ -52,8 +52,11 @@ class IntroViewModel(
 		}
 	}
 
+	override var isFinished: Boolean = false
+
 	override fun setFinished() {
 		launchIO {
+			isFinished = true
 			settingsRepo.setBoolean(SettingKey.FirstTime, false)
 		}
 	}

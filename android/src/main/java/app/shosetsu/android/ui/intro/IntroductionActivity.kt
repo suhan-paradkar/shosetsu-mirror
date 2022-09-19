@@ -2,6 +2,7 @@ package app.shosetsu.android.ui.intro
 
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,7 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.shosetsu.android.R
+import app.shosetsu.android.common.ext.logD
 import app.shosetsu.android.common.ext.readAsset
+import app.shosetsu.android.common.ext.viewModel
 import app.shosetsu.android.common.ext.viewModelDi
 import app.shosetsu.android.view.compose.ScrollStateBar
 import app.shosetsu.android.view.compose.ShosetsuCompose
@@ -63,6 +67,7 @@ import org.kodein.di.android.closestDI
 class IntroductionActivity : AppCompatActivity(), DIAware {
 
 	override val di: DI by closestDI()
+	private val viewModel: AIntroViewModel by viewModel()
 
 	/***/
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +75,7 @@ class IntroductionActivity : AppCompatActivity(), DIAware {
 
 		setContent {
 			ShosetsuCompose {
-				IntroView {
+				IntroView(viewModel) {
 					finish()
 				}
 			}
@@ -84,12 +89,23 @@ class IntroductionActivity : AppCompatActivity(), DIAware {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun IntroView(
+	viewModel: AIntroViewModel = viewModelDi(),
 	exit: () -> Unit
 ) {
-	val viewModel: AIntroViewModel = viewModelDi()
 	val state = rememberPagerState()
 	val scope = rememberCoroutineScope()
 	val isLicenseRead by viewModel.isLicenseRead.collectAsState()
+
+	BackHandler {
+		if (viewModel.isFinished) {
+			exit()
+		}
+	}
+
+	LaunchedEffect(state.currentPage) {
+		if (state.currentPage == IntroPages.End.ordinal)
+			viewModel.setFinished()
+	}
 
 	Scaffold(
 		bottomBar = {
@@ -124,14 +140,19 @@ fun IntroView(
 											state.scrollToPage(state.currentPage + 1)
 										}
 									else {
-										viewModel.setFinished()
+										logD("Icon exit")
 										exit()
 									}
 								}
 							) {
 								Icon(
-									Icons.Default.ArrowForward,
-									stringResource(R.string.intro_page_next)
+									if (state.currentPage != IntroPages.End.ordinal)
+										Icons.Default.ArrowForward
+									else Icons.Default.Close,
+									stringResource(
+										if (state.currentPage != IntroPages.End.ordinal)
+											R.string.intro_page_next else R.string.intro_close
+									)
 								)
 							}
 						}
@@ -404,7 +425,6 @@ fun PreviewIntroEndPage() {
 
 @Composable
 fun IntroEndPage() {
-
 	Column(
 		modifier = Modifier
 			.fillMaxSize()

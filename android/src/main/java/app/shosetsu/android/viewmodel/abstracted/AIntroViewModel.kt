@@ -48,6 +48,12 @@ abstract class AIntroViewModel : ShosetsuViewModel() {
 	 */
 	abstract fun setACRAEnabled(boolean: Boolean)
 
+
+	/**
+	 * If the user finished the entire introduction or not
+	 */
+	abstract val isFinished: Boolean
+
 	/**
 	 * The user has been introduced, continuing
 	 */
