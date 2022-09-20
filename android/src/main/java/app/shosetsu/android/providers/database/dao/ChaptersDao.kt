@@ -60,7 +60,7 @@ interface ChaptersDao : BaseDao<DBChapterEntity> {
 	 * Gets a flow of chapters as [ReaderChapterEntity]
 	 */
 	@Throws(SQLiteException::class)
-	@Query("SELECT id, title FROM chapters WHERE novelID = :novelID")
+	@Query("SELECT id, title FROM chapters WHERE novelID = :novelID ORDER BY `order`")
 	fun getReaderChaptersFlow(novelID: Int): Flow<List<ReaderChapterEntity>>
 
 
