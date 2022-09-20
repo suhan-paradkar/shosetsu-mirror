@@ -1,12 +1,10 @@
 {
-  "latestVersion": "2417",
-  "url": "https://github.com/shosetsuorg/shosetsu-preview/releases/download/r2417/shosetsu-r2417-universal.apk",
+  "latestVersion": "2465",
+  "url": "https://cdn.shosetsu.app/debug/r2465/shosetsu-r2465.apk",
   "releaseNotes": [
     "New:",
-    "- Add privacy button to about",
-    "- Add disclaimer to about",
-    "",
+    "- New introduction UI",
     "Fixes:",
-    "- Fix importing external repository novels in backup worker"
+    "- Numerous UI improvements provided by Jobobby04"
   ]
 }
