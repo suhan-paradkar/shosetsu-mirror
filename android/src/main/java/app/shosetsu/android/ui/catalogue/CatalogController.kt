@@ -210,7 +210,8 @@ class CatalogController : ShosetsuController(), ExtendedFABController, MenuProvi
 			return false
 		}
 
-		viewModel.backgroundNovelAdd(item.id, categories).observe(
+		var job: Job? = null
+		job = viewModel.backgroundNovelAdd(item.id, categories).observe(
 			catch = {
 				makeSnackBar(
 					getString(
@@ -237,6 +238,7 @@ class CatalogController : ShosetsuController(), ExtendedFABController, MenuProvi
 							}
 						)
 					)?.show()
+					job?.cancel()
 				}
 			}
 		}
