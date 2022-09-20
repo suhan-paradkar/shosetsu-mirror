@@ -222,14 +222,14 @@ class BrowseController : ShosetsuController(),
 			//bottomMenuRetriever.invoke()?.show()
 			if (bsg == null)
 				bsg = ComposeBottomSheetDialog(
-					this.view!!.context,
+					this.requireView().context,
 					this,
 					activity as MainActivity
 				)
 			if (bsg?.isShowing == false) {
 				bsg?.apply {
 					setContentView(
-						ComposeView(view!!.context).apply {
+						ComposeView(requireView().context).apply {
 							setContent {
 								ShosetsuCompose {
 									BrowseControllerFilterMenu(viewModel)

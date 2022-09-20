@@ -74,7 +74,7 @@ class MigrationController : ShosetsuController() {
 	private val viewModel: AMigrationViewModel by viewModel()
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		viewModel.setNovels(arguments!!.getIntArray(TARGETS_BUNDLE_KEY)!!)
+		viewModel.setNovels(requireArguments().getIntArray(TARGETS_BUNDLE_KEY)!!)
 	}
 
 	override fun onCreateView(

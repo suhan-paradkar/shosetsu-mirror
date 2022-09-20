@@ -336,7 +336,8 @@ class LibraryController
 		fab.setOnClickListener {
 			//bottomMenuRetriever.invoke()?.show()
 			if (bsg == null)
-				bsg = ComposeBottomSheetDialog(view!!.context, this, activity as MainActivity)
+				bsg =
+					ComposeBottomSheetDialog(requireView().context, this, activity as MainActivity)
 			if (bsg?.isShowing == false) {
 				bsg?.apply {
 					setContentView(

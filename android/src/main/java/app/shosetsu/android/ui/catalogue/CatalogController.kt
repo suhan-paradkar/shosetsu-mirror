@@ -158,7 +158,9 @@ class CatalogController : ShosetsuController(), ExtendedFABController, MenuProvi
 								findNavController().navigateSafely(
 									R.id.action_catalogController_to_novelController, bundleOf(
 										BUNDLE_NOVEL_ID to it.id,
-										BUNDLE_EXTENSION to arguments!!.getInt(BUNDLE_EXTENSION)
+										BUNDLE_EXTENSION to requireArguments().getInt(
+											BUNDLE_EXTENSION
+										)
 									),
 									navOptions {
 										setShosetsuTransition()
@@ -247,7 +249,7 @@ class CatalogController : ShosetsuController(), ExtendedFABController, MenuProvi
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		viewModel.setExtensionID(arguments!!.getInt(BUNDLE_EXTENSION))
+		viewModel.setExtensionID(requireArguments().getInt(BUNDLE_EXTENSION))
 		setupObservers()
 	}
 

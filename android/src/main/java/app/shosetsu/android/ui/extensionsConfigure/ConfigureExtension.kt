@@ -72,7 +72,7 @@ class ConfigureExtension : ShosetsuController(),
 	val viewModel: AExtensionConfigureViewModel by viewModel()
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		viewModel.setExtensionID(arguments!!.getInt(BUNDLE_EXTENSION))
+		viewModel.setExtensionID(requireArguments().getInt(BUNDLE_EXTENSION))
 	}
 
 	override fun onCreateView(

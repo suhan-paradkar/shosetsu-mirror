@@ -126,7 +126,7 @@ class NovelController : ShosetsuController(),
 	private val bottomMenuView: View
 		get() = NovelFilterMenuBuilder(
 			this,
-			activity!!.layoutInflater,
+			requireActivity().layoutInflater,
 			viewModel
 		).build()
 
@@ -189,7 +189,7 @@ class NovelController : ShosetsuController(),
 		findNavController().navigateSafely(
 			R.id.action_novelController_to_migrationController,
 			bundleOf(
-				TARGETS_BUNDLE_KEY to arrayOf(arguments!!.getNovelID()).toIntArray()
+				TARGETS_BUNDLE_KEY to arrayOf(requireArguments().getNovelID()).toIntArray()
 			),
 			navOptions {
 				setShosetsuTransition()
@@ -199,7 +199,7 @@ class NovelController : ShosetsuController(),
 
 	private fun openShare() {
 		openShareMenu(
-			activity!!,
+			requireActivity(),
 			this,
 			activity as MainActivity,
 			shareBasicURL = {
@@ -222,7 +222,7 @@ class NovelController : ShosetsuController(),
 			},
 			shareQRCode = {
 				openQRCodeShareDialog(
-					activity!!,
+					requireActivity(),
 					this,
 					activity as MainActivity,
 					viewModel.getQRCode()
@@ -281,7 +281,7 @@ class NovelController : ShosetsuController(),
 
 	private fun openChapterJumpDialog() {
 		val binding =
-			ControllerNovelJumpDialogBinding.inflate(LayoutInflater.from(activity!!))
+			ControllerNovelJumpDialogBinding.inflate(LayoutInflater.from(requireActivity()))
 
 		// Change hint & input type depending on findByChapterName state
 		binding.findByChapterName.setOnCheckedChangeListener { _, isChecked ->
@@ -294,7 +294,7 @@ class NovelController : ShosetsuController(),
 			}
 		}
 
-		AlertDialog.Builder(activity!!)
+		AlertDialog.Builder(requireActivity())
 			.setView(binding.root)
 			.setTitle(string.jump_to_chapter)
 			.setNegativeButton(android.R.string.cancel) { _, _ ->
@@ -350,9 +350,9 @@ class NovelController : ShosetsuController(),
 	private fun downloadCustom() {
 		if (context == null) return
 		viewModel.getChapterCount().collectLA(this, catch = {}) { max ->
-			AlertDialog.Builder(activity!!).apply {
+			AlertDialog.Builder(requireActivity()).apply {
 				setTitle(string.download_custom_chapters)
-				val numberPicker = NumberPicker(activity!!).apply {
+				val numberPicker = NumberPicker(requireActivity()).apply {
 					minValue = 0
 					maxValue = max
 				}
@@ -528,7 +528,7 @@ class NovelController : ShosetsuController(),
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		viewModel.setNovelID(arguments!!.getNovelID())
+		viewModel.setNovelID(requireArguments().getNovelID())
 		if (viewModel.isFromChapterReader) viewModel.deletePrevious().collectDeletePrevious()
 
 		viewModel.hasSelected.collectLatestLA(this, catch = {}) { hasSelected ->
@@ -593,7 +593,7 @@ class NovelController : ShosetsuController(),
 	}
 
 	private fun openFilterMenu() {
-		BottomSheetDialog(activity!!).apply {
+		BottomSheetDialog(requireActivity()).apply {
 			setContentView(bottomMenuView)
 		}.show()
 	}
