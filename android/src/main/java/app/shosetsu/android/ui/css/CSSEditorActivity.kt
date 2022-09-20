@@ -309,7 +309,7 @@ fun CSSEditorContent(
 	) {
 		val cssContent by cssContentLive.collectAsState("")
 
-		Column {
+		Column(modifier = Modifier.padding(it)) {
 			AndroidView(
 				factory = { context ->
 					WebView(context).apply {
