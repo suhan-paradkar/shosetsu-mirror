@@ -11,15 +11,13 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import okhttp3.OkHttpClient
 import java.io.IOException
-import java.io.InputStream
 
 /**
  * Load app updates from F-Droid
  */
 class FDroidAppUpdateDataSource(
 	private val okHttpClient: OkHttpClient
-) : IRemoteAppUpdateDataSource,
-	IRemoteAppUpdateDataSource.Downloadable {
+) : IRemoteAppUpdateDataSource {
 	companion object {
 		private const val FDROID_UPDATE_URL =
 			"https://f-droid.org/api/v1/packages/app.shosetsu.android"
@@ -76,6 +74,7 @@ class FDroidAppUpdateDataSource(
 		}
 	}
 
+	/*
 	@Throws(EmptyResponseBodyException::class, HTTPException::class, IOException::class)
 	override suspend fun downloadAppUpdate(update: AppUpdateEntity): InputStream {
 		okHttpClient.quickie(update.url).let { response ->
@@ -85,5 +84,6 @@ class FDroidAppUpdateDataSource(
 			} else throw HTTPException(response.code)
 		}
 	}
+	 */
 
 }
