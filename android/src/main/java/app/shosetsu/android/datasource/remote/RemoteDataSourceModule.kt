@@ -5,7 +5,7 @@ import app.shosetsu.android.common.utils.flavor
 import app.shosetsu.android.datasource.remote.base.*
 import app.shosetsu.android.datasource.remote.impl.*
 import app.shosetsu.android.datasource.remote.impl.update.FDroidAppUpdateDataSource
-import app.shosetsu.android.datasource.remote.impl.update.GithubAppUpdateDataSource
+import app.shosetsu.android.datasource.remote.impl.update.GitAppUpdateDataSource
 import app.shosetsu.android.datasource.remote.impl.update.PlayAppUpdateDataSource
 import app.shosetsu.android.datasource.remote.impl.update.UpToDownAppUpdateDataSource
 import org.kodein.di.DI
@@ -53,7 +53,7 @@ val remoteDataSouceModule: DI.Module = DI.Module("remote_data_source") {
 			ProductFlavors.PLAY_STORE -> PlayAppUpdateDataSource()
 			ProductFlavors.F_DROID -> FDroidAppUpdateDataSource(instance())
 			ProductFlavors.UP_TO_DOWN -> UpToDownAppUpdateDataSource()
-			ProductFlavors.STANDARD -> GithubAppUpdateDataSource(instance())
+			ProductFlavors.STANDARD -> GitAppUpdateDataSource(instance())
 		}
 	}
 }

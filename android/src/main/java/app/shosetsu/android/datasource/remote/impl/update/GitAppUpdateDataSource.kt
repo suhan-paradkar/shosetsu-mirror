@@ -38,7 +38,7 @@ import java.io.InputStream
  *
  * For standard releases
  */
-class GithubAppUpdateDataSource(
+class GitAppUpdateDataSource(
 	private val okHttpClient: OkHttpClient
 ) : IRemoteAppUpdateDataSource, IRemoteAppUpdateDataSource.Downloadable {
 	private val shosetsuGitUpdateURL: String by lazy {
