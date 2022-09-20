@@ -468,7 +468,9 @@ class NovelViewModel(
 	}
 
 	override fun toggleNovelBookmark(): Flow<ToggleBookmarkResponse> {
+		logI("")
 		return flow {
+			logI("toggleNovelBookmarkFlow")
 			val novel = novelFlow.first { it != null }!!
 			val newState = !novel.bookmarked
 			updateNovelUseCase(novel.copy(bookmarked = newState))
