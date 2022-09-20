@@ -34,6 +34,7 @@ import app.shosetsu.android.view.compose.setting.ButtonSettingContent
 import app.shosetsu.android.view.compose.setting.SliderSettingContent
 import app.shosetsu.android.view.compose.setting.SwitchSettingContent
 import app.shosetsu.android.view.controller.ShosetsuController
+import app.shosetsu.android.view.uimodels.StableHolder
 import app.shosetsu.android.viewmodel.abstracted.settings.ABackupSettingsViewModel
 
 /*
@@ -334,7 +335,7 @@ fun BackupSettingsContent(
 			SliderSettingContent(
 				title = stringResource(R.string.settings_backup_cycle_title),
 				description = stringResource(R.string.settings_backup_cycle_desc),
-				valueRange = 1..168,
+				valueRange = remember { StableHolder(1..168) },
 				parseValue = {
 					when (it) {
 						12 -> "Bi Daily"
