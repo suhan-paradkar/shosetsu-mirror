@@ -231,8 +231,8 @@ class LibraryViewModel(
 			.map { libraryUI ->
 				libraryUI.copy(
 					novels = libraryUI.novels.mapValues { categoryNovels ->
-						categoryNovels.value.distinctBy { it.id }
-					}
+						categoryNovels.value.distinctBy { it.id }.toImmutableList()
+					}.toImmutableMap()
 				)
 			}
 			.combineSelection()
