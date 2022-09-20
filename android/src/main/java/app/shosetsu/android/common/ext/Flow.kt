@@ -41,8 +41,7 @@ fun <T> Flow<T>.firstLa(
 	owner: LifecycleOwner,
 	catch: suspend FlowCollector<T>.(Throwable) -> Unit,
 	onCollect: (T) -> Unit
-) = flowWithLifecycle(owner.lifecycle)
-	.take(1)
+) = take(1)
 	.catch(catch)
 	.onEach(onCollect)
 	.launchIn(owner.lifecycleScope)
