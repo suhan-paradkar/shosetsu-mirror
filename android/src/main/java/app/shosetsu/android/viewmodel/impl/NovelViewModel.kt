@@ -461,7 +461,7 @@ class NovelViewModel(
 	override fun setNovelCategories(categories: IntArray): Flow<Unit> = flow {
 		val novel = novelFlow.first { it != null }!!
 		if (!novel.bookmarked) {
-			toggleNovelBookmark().collect()
+			updateNovelUseCase(novel.copy(bookmarked = true))
 		}
 		setNovelCategoriesUseCase(novel.id, categories)
 		emit(Unit)
