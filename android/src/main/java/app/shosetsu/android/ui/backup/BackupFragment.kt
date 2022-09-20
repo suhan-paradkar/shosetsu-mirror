@@ -31,6 +31,7 @@ import app.shosetsu.android.common.ext.toast
 import app.shosetsu.android.common.ext.viewModel
 import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.view.compose.setting.ButtonSettingContent
+import app.shosetsu.android.view.compose.setting.SliderSettingContent
 import app.shosetsu.android.view.compose.setting.SwitchSettingContent
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.viewmodel.abstracted.settings.ABackupSettingsViewModel
@@ -327,6 +328,48 @@ fun BackupSettingsContent(
 				)
 				Divider()
 			}
+		}
+
+		item {
+			SliderSettingContent(
+				title = stringResource(R.string.settings_backup_cycle_title),
+				description = stringResource(R.string.settings_backup_cycle_desc),
+				valueRange = 1..168,
+				parseValue = {
+					when (it) {
+						12 -> "Bi Daily"
+						24 -> "Daily"
+						48 -> "2 Days"
+						72 -> "3 Days"
+						96 -> "4 Days"
+						120 -> "5 Days"
+						144 -> "6 Days"
+						168 -> "Weekly"
+						else -> "$it Hour(s)"
+					}
+				},
+				repo = viewModel.settingsRepo,
+				key = SettingKey.BackupCycle,
+				haveSteps = false,
+				manipulateUpdate = {
+					when (it) {
+						in 24..35 -> 24
+						in 36..48 -> 48
+						in 48..59 -> 48
+						in 60..72 -> 72
+						in 72..83 -> 72
+						in 84..96 -> 96
+						in 96..107 -> 96
+						in 108..120 -> 120
+						in 120..131 -> 120
+						in 132..144 -> 144
+						in 144..156 -> 144
+						in 157..168 -> 168
+						else -> it
+					}
+				},
+				maxHeaderSize = 80.dp
+			)
 		}
 
 		item {
