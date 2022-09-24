@@ -1,8 +1,17 @@
 {
-  "latestVersion": "2.1.3",
-  "versionCode": 34,
-  "url": "https://cdn.shosetsu.app/v2.1.3/shosetsu-v2.1.3.apk",
+  "latestVersion": "2.1.4",
+  "versionCode": 35,
+  "url": "https://cdn.shosetsu.app/v2.1.4/shosetsu-v2.1.4.apk",
   "releaseNotes": [
-    "Fix library crashing"
+    "New:",
+    "- New Introduction UI",
+    "",
+    "Fixes:",
+    "- Fix chapter order being wonky",
+    "- Fix github extensions link",
+    "",
+    "Misc:",
+    "- Removed binary downloader for F-Droid updater",
+    "- Numerous performance improvements by @Jobobby04"
   ]
 }
