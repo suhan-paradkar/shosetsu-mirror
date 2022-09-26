@@ -1,1 +1,1 @@
-A regularly updated light novel reader for android
+The extendable novel reader for Android.
