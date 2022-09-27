@@ -202,7 +202,7 @@ dependencies {
 	implementation("androidx.work:work-runtime:2.7.1")
 	implementation("androidx.work:work-runtime-ktx:2.7.1")
 	implementation("androidx.appcompat:appcompat:1.5.1")
-	implementation("androidx.annotation:annotation:1.4.0")
+	implementation("androidx.annotation:annotation:1.5.0")
 	implementation("androidx.core:core-ktx:1.9.0")
 	implementation("androidx.collection:collection-ktx:1.2.0")
 	implementation("androidx.core:core-splashscreen:1.0.0")
