@@ -143,7 +143,6 @@ class MainActivity : AppCompatActivity(), DIAware {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		@Suppress("UNUSED_VARIABLE") // We keep this value
 		val splashScreen = installSplashScreen()
-		viewModel.navigationStyle.value
 
 		onBackPressedDispatcher.addCallback(this) {
 			logI("Back pressed")

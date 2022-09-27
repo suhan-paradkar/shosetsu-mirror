@@ -60,11 +60,11 @@ class MainViewModel(
 	override fun startAppUpdateCheck(): StateFlow<AppUpdateEntity?> =
 		loadAppUpdateFlowLiveUseCase()
 
-	override val navigationStyle by lazy {
+	override val navigationStyle =
 		loadNavigationStyleUseCase().map { NavigationStyle.values()[it] }
 			.onIO()
-			.stateIn(viewModelScopeIO, SharingStarted.Lazily, NavigationStyle.MATERIAL)
-	}
+			.stateIn(viewModelScopeIO, SharingStarted.Eagerly, NavigationStyle.MATERIAL)
+
 
 	override fun isOnline(): Boolean = isOnlineUseCase()
 
