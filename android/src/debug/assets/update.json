@@ -1,10 +1,18 @@
 {
-  "latestVersion": "2519",
-  "url": "https://cdn.shosetsu.app/debug/r2465/shosetsu-r2465.apk",
+  "latestVersion": "2533",
+  "url": "https://cdn.shosetsu.app/debug/r2533/shosetsu-r2533.apk",
   "releaseNotes": [
-    "New:",
-    "- New introduction UI",
-    "Fixes:",
-    "- Numerous UI improvements provided by Jobobby04"
+    "## New",
+    "",
+    "- Add separate ACRA for F-Droid",
+    "",
+    "## Fixes",
+    "",
+    "- Legacy navigation",
+    "- Random scroll behavior due to compose interop",
+    "",
+    "## Misc",
+    "",
+    "- Update dependencies"
   ]
 }
