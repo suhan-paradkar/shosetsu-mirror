@@ -1,17 +1,19 @@
 {
-  "latestVersion": "2.1.4",
-  "versionCode": 35,
-  "url": "https://cdn.shosetsu.app/v2.1.4/shosetsu-v2.1.4.apk",
+  "latestVersion": "2.1.5",
+  "versionCode": 36,
+  "url": "https://cdn.shosetsu.app/v2.1.5/shosetsu-v2.1.5.apk",
   "releaseNotes": [
-    "New:",
-    "- New Introduction UI",
+    "## New",
     "",
-    "Fixes:",
-    "- Fix chapter order being wonky",
-    "- Fix github extensions link",
+    "- Add separate ACRA for F-Droid",
     "",
-    "Misc:",
-    "- Removed binary downloader for F-Droid updater",
-    "- Numerous performance improvements by @Jobobby04"
+    "## Fixes",
+    "",
+    "- Legacy navigation",
+    "- Random scroll behavior due to compose interop",
+    "",
+    "## Misc",
+    "",
+    "- Update dependencies"
   ]
 }
