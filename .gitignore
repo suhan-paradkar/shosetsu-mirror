@@ -25,3 +25,4 @@ common/build/intermediates/*
 
 # Secrets
 acra.properties
+acra-debug.properties

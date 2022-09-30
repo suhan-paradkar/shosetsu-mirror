@@ -118,6 +118,16 @@ android {
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
 			)
+			buildConfigField(
+				"String",
+				"acraUsername",
+				loadSProperties("acra-debug")["username"]?.toString() ?: "\"\""
+			)
+			buildConfigField(
+				"String",
+				"acraPassword",
+				loadSProperties("acra-debug")["password"]?.toString() ?: "\"\""
+			)
 		}
 	}
 	flavorDimensions += listOf("default")
