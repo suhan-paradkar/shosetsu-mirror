@@ -128,7 +128,8 @@ fun MoreContent(
 	pushController: (Int, singleTop: Boolean) -> Unit
 ) {
 	LazyColumn(
-		modifier = Modifier.fillMaxSize()
+		modifier = Modifier.fillMaxSize(),
+		contentPadding = PaddingValues(bottom = 80.dp)
 	) {
 		item {
 			Card(
