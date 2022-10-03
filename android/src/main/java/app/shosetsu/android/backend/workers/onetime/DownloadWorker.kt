@@ -6,6 +6,9 @@ import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES
+import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.EXTRA_NOTIFICATION_ID
 import androidx.core.app.NotificationManagerCompat
@@ -29,8 +32,10 @@ import app.shosetsu.android.domain.repository.base.IChaptersRepository
 import app.shosetsu.android.domain.repository.base.IDownloadsRepository
 import app.shosetsu.android.domain.repository.base.ISettingsRepository
 import app.shosetsu.android.domain.usecases.get.GetExtensionUseCase
+import app.shosetsu.lib.Novel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import org.jsoup.Jsoup
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.closestDI
@@ -140,6 +145,39 @@ class DownloadWorker(
 		chapRepo.getChapter(downloadEntity.chapterID)!!.let { chapterEntity ->
 			getExt(chapterEntity.extensionID)!!.let { iExtension ->
 				chapRepo.getChapterPassage(iExtension, chapterEntity).let { passage ->
+
+					if (iExtension.chapterType == Novel.ChapterType.HTML) {
+						val passageString = passage.decodeToString()
+						val document = Jsoup.parse(passageString)
+						val imageLinks = document.select("img").map { it.attr("src") }
+
+						launchUI {
+							WebView(applicationContext).apply {
+								layoutParams = ViewGroup.LayoutParams(1000, 1000)
+								var loaded = false
+
+								webViewClient = object : WebViewClient() {
+									override fun onPageFinished(view: WebView?, url: String?) {
+										super.onPageFinished(view, url)
+										loaded = true
+									}
+								}
+
+								imageLinks.forEach {
+									this.loadUrl(it)
+
+									val delayer = ProgressiveDelayer()
+
+									while (!loaded) {
+										delayer.delay()
+									}
+
+									loaded = false
+								}
+							}
+						}.join()
+					}
+
 					chapRepo.saveChapterPassageToStorage(
 						chapterEntity,
 						iExtension.chapterType,

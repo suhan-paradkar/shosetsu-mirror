@@ -23,6 +23,7 @@ import android.content.ClipboardManager
 import android.os.Bundle
 import android.util.Base64
 import android.view.Window
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -315,6 +316,9 @@ fun CSSEditorContent(
 					WebView(context).apply {
 						@SuppressLint("SetJavaScriptEnabled")
 						settings.javaScriptEnabled = true
+						settings.apply {
+							cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+						}
 						loadData(
 							context.getString(R.string.activity_css_example),
 							"text/html",

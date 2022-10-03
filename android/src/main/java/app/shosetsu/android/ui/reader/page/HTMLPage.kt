@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
@@ -74,6 +75,7 @@ fun WebViewPageContent(
 					blockNetworkImage = false
 					loadsImagesAutomatically = true
 					allowFileAccess = true
+					cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
 				}
 
 				val inter = ShosetsuScript(
