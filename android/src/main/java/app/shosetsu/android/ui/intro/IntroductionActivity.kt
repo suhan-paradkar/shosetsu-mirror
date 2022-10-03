@@ -132,30 +132,30 @@ fun IntroView(
 						}
 					}
 					Box {
-						if (state.currentPage != IntroPages.License.ordinal || isLicenseRead) {
-							IconButton(
-								onClick = {
-									if (state.currentPage != IntroPages.End.ordinal)
-										scope.launch {
-											state.scrollToPage(state.currentPage + 1)
-										}
-									else {
-										logD("Icon exit")
-										exit()
+						//if (state.currentPage != IntroPages.License.ordinal || isLicenseRead) {
+						IconButton(
+							onClick = {
+								if (state.currentPage != IntroPages.End.ordinal)
+									scope.launch {
+										state.scrollToPage(state.currentPage + 1)
 									}
+								else {
+									logD("Icon exit")
+									exit()
 								}
-							) {
-								Icon(
-									if (state.currentPage != IntroPages.End.ordinal)
-										Icons.Default.ArrowForward
-									else Icons.Default.Close,
-									stringResource(
-										if (state.currentPage != IntroPages.End.ordinal)
-											R.string.intro_page_next else R.string.intro_close
-									)
-								)
 							}
+						) {
+							Icon(
+								if (state.currentPage != IntroPages.End.ordinal)
+									Icons.Default.ArrowForward
+								else Icons.Default.Close,
+								stringResource(
+									if (state.currentPage != IntroPages.End.ordinal)
+										R.string.intro_page_next else R.string.intro_close
+								)
+							)
 						}
+						//}
 
 					}
 				}
@@ -166,7 +166,7 @@ fun IntroView(
 			6,
 			state = state,
 			modifier = Modifier.padding(it),
-			userScrollEnabled = state.currentPage != IntroPages.License.ordinal || isLicenseRead
+			//userScrollEnabled = state.currentPage != IntroPages.License.ordinal || isLicenseRead
 		) { page ->
 			when (page) {
 				IntroPages.Title.ordinal -> IntroTitlePage()
