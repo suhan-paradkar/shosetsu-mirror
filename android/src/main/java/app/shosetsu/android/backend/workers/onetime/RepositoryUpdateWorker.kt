@@ -276,6 +276,16 @@ class RepositoryUpdateWorker(
 				// gets the latest list for the repo
 				val repoIndex = try {
 					extRepoRepo.getRepoData(repo)
+				} catch (e: IllegalArgumentException) {
+					notify(
+						"${e.message}",
+						notificationId = ID_REPOSITORY_UPDATE + 1 + repo.id
+					) {
+						removeProgress()
+						setContentTitle("${repo.name} failed to load")
+						setNotOngoing()
+					}
+					return@let
 				} catch (e: IOException) {
 					notify(
 						"${e.message}",
