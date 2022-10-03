@@ -20,10 +20,14 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.widget.addTextChangedListener
 import app.shosetsu.android.R
 import app.shosetsu.android.common.ext.*
 import app.shosetsu.android.databinding.RepositoryAddBinding
-import app.shosetsu.android.view.compose.*
+import app.shosetsu.android.view.compose.ErrorAction
+import app.shosetsu.android.view.compose.ErrorContent
+import app.shosetsu.android.view.compose.ShosetsuCompose
+import app.shosetsu.android.view.compose.rememberFakeSwipeRefreshState
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.controller.base.ExtendedFABController
 import app.shosetsu.android.view.controller.base.ExtendedFABController.EFabMaintainer
@@ -31,10 +35,10 @@ import app.shosetsu.android.view.controller.base.syncFABWithCompose
 import app.shosetsu.android.view.uimodels.model.RepositoryUI
 import app.shosetsu.android.viewmodel.abstracted.ARepositoryViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_CONSECUTIVE
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.collections.immutable.ImmutableList
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.acra.ACRA
 import androidx.appcompat.app.AlertDialog.Builder as AlertDialogBuilder
 
@@ -207,18 +211,28 @@ class RepositoryController : ShosetsuController(),
 	private fun launchAddRepositoryDialog(view: View) {
 		val addBinding: RepositoryAddBinding =
 			RepositoryAddBinding.inflate(LayoutInflater.from(view.context))
+		var error = false
+
+		addBinding.urlInput.addTextChangedListener {
+			error = false
+			if (it.toString().toHttpUrlOrNull() == null) {
+				error = true
+				addBinding.urlInput.error = getString(R.string.controller_repositories_add_error)
+			}
+		}
 
 		AlertDialogBuilder(view.context)
 			.setView(addBinding.root)
 			.setTitle(R.string.repository_add_title)
 			.setPositiveButton(android.R.string.ok) { _, _ ->
-				with(addBinding) {
-					// Pass data to view model, observe result
-					addRepository(
-						nameInput.text.toString(),
-						urlInput.text.toString()
-					)
-				}
+				if (!error)
+					with(addBinding) {
+						// Pass data to view model, observe result
+						addRepository(
+							nameInput.text.toString(),
+							urlInput.text.toString()
+						)
+					}
 			}
 			.setNegativeButton(android.R.string.cancel) { _, _ -> }
 			.show()
