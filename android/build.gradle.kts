@@ -241,7 +241,7 @@ dependencies {
 	implementation("org.jsoup:jsoup:1.15.3")
 
 	// Image loading
-	implementation("io.coil-kt:coil-compose:2.2.1")
+	implementation("io.coil-kt:coil-compose:2.2.2")
 
 	// Time control
 	implementation("joda-time:joda-time:2.11.1")
