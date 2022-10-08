@@ -35,7 +35,7 @@ interface IFileCachedChapterDataSource {
 	 *
 	 * Will launch a second coroutine that will clear out old content
 	 */
-	suspend fun saveChapterInCache(
+	fun saveChapterInCache(
 		chapterID: Int,
 		chapterType: Novel.ChapterType,
 		passage: ByteArray
@@ -45,7 +45,7 @@ interface IFileCachedChapterDataSource {
 	 * Gets chapter passage via it's ID
 	 */
 	@Throws(FileNotFoundException::class)
-	suspend fun loadChapterPassage(
+	fun loadChapterPassage(
 		chapterID: Int,
 		chapterType: Novel.ChapterType
 	): ByteArray

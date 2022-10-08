@@ -136,7 +136,7 @@ class FileCachedChapterDataSource(
 
 	@Throws(JSONException::class, FilePermissionException::class, IOException::class)
 	@Synchronized
-	override suspend fun saveChapterInCache(
+	override fun saveChapterInCache(
 		chapterID: Int,
 		chapterType: Novel.ChapterType,
 		passage: ByteArray
@@ -183,7 +183,7 @@ class FileCachedChapterDataSource(
 
 	@Throws(FileNotFoundException::class)
 	@Synchronized
-	override suspend fun loadChapterPassage(
+	override fun loadChapterPassage(
 		chapterID: Int,
 		chapterType: Novel.ChapterType
 	): ByteArray {
