@@ -252,9 +252,17 @@ fun AboutContent(
 			)
 		}
 		item {
+			val context = LocalContext.current
+			val clipboard = LocalClipboardManager.current
+
+			val id = remember { Installation.id(context) }
+
 			AboutItem(
 				R.string.fragment_about_acra_id,
-				description = Installation.id(LocalContext.current)
+				description = id,
+				onClick = {
+					clipboard.setText(AnnotatedString(id))
+				}
 			)
 		}
 		item {
