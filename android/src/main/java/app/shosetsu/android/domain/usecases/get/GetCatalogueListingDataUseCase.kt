@@ -96,6 +96,8 @@ class GetCatalogueListingDataUseCase(
 					LoadResult.Error(e)
 				} catch (e: LuaError) {
 					LoadResult.Error(e)
+				} catch (e: IllegalArgumentException) {
+					LoadResult.Error(e)
 				}
 			}
 		}
