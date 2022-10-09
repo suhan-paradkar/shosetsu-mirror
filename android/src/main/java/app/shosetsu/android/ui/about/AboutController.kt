@@ -16,18 +16,22 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.BuildConfig
@@ -36,7 +40,7 @@ import app.shosetsu.android.common.consts.*
 import app.shosetsu.android.common.enums.TextAsset
 import app.shosetsu.android.common.ext.navigateSafely
 import app.shosetsu.android.common.ext.setShosetsuTransition
-import app.shosetsu.android.common.ext.viewModel
+import app.shosetsu.android.common.ext.viewModelDi
 import app.shosetsu.android.ui.settings.sub.TextAssetReader.Companion.bundle
 import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.view.controller.ShosetsuController
@@ -70,8 +74,6 @@ class AboutController : ShosetsuController() {
 
 	override val viewTitleRes: Int = R.string.about
 
-	private val viewModel: AAboutViewModel by viewModel()
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -79,64 +81,76 @@ class AboutController : ShosetsuController() {
 	): View = ComposeView(requireContext()).apply {
 		setViewTitle()
 		setContent {
-			ShosetsuCompose {
-				AboutContent(
-					currentVersion = BuildConfig.VERSION_NAME,
-					onCheckForAppUpdate = viewModel::appUpdateCheck,
-					onOpenWebsite = ::openWebsite,
-					onOpenSource = ::openGithub,
-					onOpenExtensions = ::openExtensions,
-					onOpenDiscord = ::openDiscord,
-					onOpenPatreon = ::openPatreon,
-					onOpenLicense = ::onClickLicense,
-					onOpenDisclaimer = ::onClickDisclaimer,
-					onOpenMatrix = ::openMatrix,
-					onOpenPrivacy = ::openPrivacy
-				)
-			}
+			AboutView(
+				onNavigateSafely = { id, bundle, options ->
+					findNavController().navigateSafely(id, bundle, options)
+				}
+			)
 		}
 	}
+}
 
-	private fun onClickLicense() {
-		findNavController().navigateSafely(
+@Composable
+fun AboutView(
+	onNavigateSafely: (Int, Bundle, NavOptions) -> Unit
+) {
+	val viewModel: AAboutViewModel = viewModelDi()
+	val context = LocalContext.current
+	fun onClickLicense() {
+		onNavigateSafely(
 			R.id.action_aboutController_to_textAssetReader,
 			TextAsset.LICENSE.bundle,
-			navOptions = navOptions {
+			navOptions {
 				launchSingleTop = true
 				setShosetsuTransition()
 			}
 		)
 	}
 
-	private fun onClickDisclaimer() {
+	fun openSite(url: String) {
+		context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+	}
+
+	fun onClickDisclaimer() {
 		openSite(URL_DISCLAIMER)
 	}
 
-	private fun openSite(url: String) {
-		startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-	}
-
-	private fun openWebsite() =
+	fun openWebsite() =
 		openSite(URL_WEBSITE)
 
-	private fun openExtensions() =
+	fun openExtensions() =
 		openSite(URL_GITHUB_EXTENSIONS)
 
-
-	private fun openDiscord() =
+	fun openDiscord() =
 		openSite(URL_DISCORD)
 
-	private fun openMatrix() =
+	fun openMatrix() =
 		openSite(URL_MATRIX)
 
-	private fun openPatreon() =
+	fun openPatreon() =
 		openSite(URL_PATREON)
 
-	private fun openGithub() =
+	fun openGithub() =
 		openSite(URL_GITHUB_APP)
 
-	private fun openPrivacy() =
+	fun openPrivacy() =
 		openSite(URL_PRIVACY)
+
+	ShosetsuCompose {
+		AboutContent(
+			currentVersion = BuildConfig.VERSION_NAME,
+			onCheckForAppUpdate = viewModel::appUpdateCheck,
+			onOpenWebsite = ::openWebsite,
+			onOpenSource = ::openGithub,
+			onOpenExtensions = ::openExtensions,
+			onOpenDiscord = ::openDiscord,
+			onOpenPatreon = ::openPatreon,
+			onOpenLicense = ::onClickLicense,
+			onOpenDisclaimer = ::onClickDisclaimer,
+			onOpenMatrix = ::openMatrix,
+			onOpenPrivacy = ::openPrivacy
+		)
+	}
 }
 
 @ExperimentalMaterialApi
