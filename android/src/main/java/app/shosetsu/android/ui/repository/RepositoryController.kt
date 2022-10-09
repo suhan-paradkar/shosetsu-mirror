@@ -2,9 +2,7 @@ package app.shosetsu.android.ui.repository
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,8 +18,10 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.view.MenuProvider
 import androidx.core.widget.addTextChangedListener
 import app.shosetsu.android.R
+import app.shosetsu.android.common.consts.REPOSITORY_HELP_URL
 import app.shosetsu.android.common.ext.*
 import app.shosetsu.android.databinding.RepositoryAddBinding
 import app.shosetsu.android.view.compose.ErrorAction
@@ -64,7 +64,7 @@ import androidx.appcompat.app.AlertDialog.Builder as AlertDialogBuilder
  * 16 / 09 / 2020
  */
 class RepositoryController : ShosetsuController(),
-	ExtendedFABController {
+	ExtendedFABController, MenuProvider {
 	private val viewModel: ARepositoryViewModel by viewModel()
 
 	override val viewTitleRes: Int = R.string.repositories
@@ -74,6 +74,7 @@ class RepositoryController : ShosetsuController(),
 		container: ViewGroup?,
 		savedViewState: Bundle?
 	): View {
+		activity?.addMenuProvider(this, viewLifecycleOwner)
 		return ComposeView(requireContext()).apply {
 			setViewTitle()
 			setContent {
@@ -267,6 +268,19 @@ class RepositoryController : ShosetsuController(),
 			viewModel.updateRepositories()
 		} else displayOfflineSnackBar(R.string.controller_repositories_snackbar_offline_no_update)
 	}
+
+	override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+		menuInflater.inflate(R.menu.repositories, menu)
+	}
+
+	override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+		when (menuItem.itemId) {
+			R.id.help -> {
+				activity?.openInWebView(REPOSITORY_HELP_URL)
+				true
+			}
+			else -> false
+		}
 }
 
 @Composable
