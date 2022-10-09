@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.R
@@ -66,22 +67,36 @@ class ComposeMoreController
 	): View = ComposeView(requireContext()).apply {
 		setViewTitle()
 		setContent {
-			ShosetsuCompose {
-				MoreContent(
-					{
-						makeSnackBar(R.string.style_wait)?.show()
-					}
-				) { it, singleTop ->
-					findNavController().navigateSafely(
-						it,
-						null,
-						navOptions = navOptions {
-							launchSingleTop = singleTop
-							setShosetsuTransition()
-						}
-					)
+			MoreView(
+				makeSnackBar = {
+					makeSnackBar(it)?.show()
+				},
+				navigateSafely = { id, options ->
+					findNavController().navigateSafely(id, null, options)
 				}
+			)
+		}
+	}
+}
+
+@Composable
+fun MoreView(
+	makeSnackBar: (Int) -> Unit,
+	navigateSafely: (Int, NavOptions) -> Unit
+) {
+	ShosetsuCompose {
+		MoreContent(
+			showStyleBar = {
+				makeSnackBar(R.string.style_wait)
 			}
+		) { it, singleTop ->
+			navigateSafely(
+				it,
+				navOptions {
+					launchSingleTop = singleTop
+					setShosetsuTransition()
+				}
+			)
 		}
 	}
 }
