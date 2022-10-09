@@ -2,6 +2,9 @@
   "latestVersion": "2562",
   "url": "https://cdn.shosetsu.app/debug/r2562/shosetsu-r2562.apk",
   "releaseNotes": [
+    "## Major",
+    "- Revert back to stable compose, scroll issues return for reader stability",
+    "",
     "## New",
     "- Added help button to Repositories view",
     "- Cache images in downloaded chapters",
