@@ -17,9 +17,6 @@ package app.shosetsu.android.ui.browse
  * along with shosetsu.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import android.content.Intent
-import android.content.Intent.ACTION_VIEW
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -34,12 +31,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -59,12 +51,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import app.shosetsu.android.R
 import app.shosetsu.android.activity.MainActivity
+import app.shosetsu.android.common.consts.BROWSE_HELP_URL
 import app.shosetsu.android.common.consts.BundleKeys.BUNDLE_EXTENSION
-import app.shosetsu.android.common.consts.REPOSITORY_HELP_URL
 import app.shosetsu.android.common.ext.*
 import app.shosetsu.android.domain.model.local.ExtensionInstallOptionEntity
 import app.shosetsu.android.view.ComposeBottomSheetDialog
-import app.shosetsu.android.view.compose.*
+import app.shosetsu.android.view.compose.ErrorAction
+import app.shosetsu.android.view.compose.ErrorContent
+import app.shosetsu.android.view.compose.ImageLoadingError
+import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.controller.base.ExtendedFABController
 import app.shosetsu.android.view.controller.base.ExtendedFABController.EFabMaintainer
@@ -206,7 +201,7 @@ class BrowseController : ShosetsuController(),
 	}
 
 	private fun openHelpMenu() {
-		startActivity(Intent(ACTION_VIEW, Uri.parse(REPOSITORY_HELP_URL)))
+		activity?.openInWebView(BROWSE_HELP_URL)
 	}
 
 	private fun onRefresh() {
