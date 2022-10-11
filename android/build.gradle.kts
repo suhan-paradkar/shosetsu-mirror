@@ -182,25 +182,27 @@ ksp {
 }
 
 //TODO Fix application variant naming
-//android.applicationVariants.forEach { variant ->
-//	variant.outputs.all {
-//val v: BaseVariantOutput = this
-//val appName = "shosetsu"
-//val versionName = variant.versionName
-//def versionCode = variant.versionCode
-//val flavorName = variant.flavorName
-//val buildType = variant.buildType.name
-//def variantName = variant.name
-//val gitCount = getCommitCount()
+/*
+android.applicationVariants.forEach { variant ->
+	variant.outputs.all {
+		val v = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+		val appName = "shosetsu"
+		val versionName = variant.versionName
+		val versionCode = variant.versionCode
+		val flavorName = variant.flavorName
+		val buildType = variant.buildType.name
+		val variantName = variant.name
+		val gitCount = getCommitCount()
 
-//if (buildType == "debug" && flavorName.toString() == "standard") {
-//outputFileName = "${appName}-${gitCount}.apk"
-//} else {
-//outputFileName = "${appName}-${versionName}.apk"
-//}
-//	}
-
-//}
+		outputFileName = "${appName}-" +
+				if (buildType == "debug" && flavorName.toString() == "standard") {
+					gitCount
+				} else {
+					versionName
+				} + ".apk"
+	}
+}
+ */
 
 dependencies {
 	implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
