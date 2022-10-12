@@ -52,7 +52,7 @@ val remoteDataSouceModule: DI.Module = DI.Module("remote_data_source") {
 		when (flavor()) {
 			ProductFlavors.PLAY_STORE -> PlayAppUpdateDataSource()
 			ProductFlavors.F_DROID -> FDroidAppUpdateDataSource(instance())
-			ProductFlavors.UP_TO_DOWN -> UpToDownAppUpdateDataSource()
+			ProductFlavors.UP_TO_DOWN -> UpToDownAppUpdateDataSource(instance())
 			ProductFlavors.STANDARD -> GitAppUpdateDataSource(instance())
 		}
 	}
