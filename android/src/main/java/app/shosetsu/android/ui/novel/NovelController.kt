@@ -13,6 +13,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -1136,93 +1137,96 @@ fun NovelInfoHeaderContent(
 			Column(
 				modifier = Modifier.fillMaxWidth(),
 			) {
-				Row(
-					modifier = Modifier
-						.fillMaxWidth()
-						.padding(end = 8.dp),
-					verticalAlignment = Alignment.CenterVertically
-				) {
-					NovelInfoCoverContent(
-						novelInfo.imageURL,
+				SelectionContainer {
+					Row(
 						modifier = Modifier
-							.fillMaxWidth(.35f)
-							.aspectRatio(coverRatio)
-							.padding(top = 8.dp, start = 4.dp)
-							.clip(MaterialTheme.shapes.medium),
-						contentScale = ContentScale.Crop
+							.fillMaxWidth()
+							.padding(end = 8.dp),
+						verticalAlignment = Alignment.CenterVertically
 					) {
-						isCoverClicked = true
-					}
-					Column(
-						modifier = Modifier.padding(
-							top = 16.dp,
-							start = 8.dp,
-							end = 8.dp
-						),
-						verticalArrangement = Arrangement.Center
-					) {
-						Text(
-							novelInfo.title,
-							style = MaterialTheme.typography.h6,
+						NovelInfoCoverContent(
+							novelInfo.imageURL,
 							modifier = Modifier
-								.padding(bottom = 8.dp)
-								.fillMaxWidth(),
-						)
-						if (novelInfo.authors.isNotEmpty() && novelInfo.authors.all { it.isNotEmpty() })
-							Row(
-								modifier = Modifier.padding(bottom = 8.dp)
-							) {
-								if (novelInfo.artists.isEmpty() && novelInfo.artists.none { it.isNotEmpty() })
+								.fillMaxWidth(.35f)
+								.aspectRatio(coverRatio)
+								.padding(top = 8.dp, start = 4.dp)
+								.clip(MaterialTheme.shapes.medium),
+							contentScale = ContentScale.Crop
+						) {
+							isCoverClicked = true
+						}
+						Column(
+							modifier = Modifier.padding(
+								top = 16.dp,
+								start = 8.dp,
+								end = 8.dp
+							),
+							verticalArrangement = Arrangement.Center
+						) {
+							Text(
+								novelInfo.title,
+								style = MaterialTheme.typography.h6,
+								modifier = Modifier
+									.padding(bottom = 8.dp)
+									.fillMaxWidth(),
+							)
+							if (novelInfo.authors.isNotEmpty() && novelInfo.authors.all { it.isNotEmpty() })
+								Row(
+									modifier = Modifier.padding(bottom = 8.dp)
+								) {
+									if (novelInfo.artists.isEmpty() && novelInfo.artists.none { it.isNotEmpty() })
+										Text(
+											stringResource(string.novel_author),
+											style = MaterialTheme.typography.subtitle2
+										)
 									Text(
-										stringResource(string.novel_author),
+										novelInfo.displayAuthors,
 										style = MaterialTheme.typography.subtitle2
 									)
+								}
+
+							if (novelInfo.artists.isNotEmpty() && novelInfo.artists.all { it.isNotEmpty() })
+								Row(
+									modifier = Modifier.padding(bottom = 8.dp)
+								) {
+									if (novelInfo.authors.isEmpty() && novelInfo.authors.none { it.isNotEmpty() })
+										Text(
+											stringResource(string.artist_s),
+											style = MaterialTheme.typography.subtitle2
+										)
+									Text(
+										novelInfo.displayArtists,
+										style = MaterialTheme.typography.subtitle2
+									)
+								}
+
+							Row {
 								Text(
-									novelInfo.displayAuthors,
+									when (novelInfo.status) {
+										Novel.Status.PUBLISHING -> stringResource(string.publishing)
+										Novel.Status.COMPLETED -> stringResource(string.completed)
+										Novel.Status.PAUSED -> stringResource(string.paused)
+										Novel.Status.UNKNOWN -> stringResource(string.unknown)
+									},
+									style = MaterialTheme.typography.subtitle2
+								)
+								Text(
+									" • ",
+									style = MaterialTheme.typography.subtitle2
+								)
+								Text(
+									novelInfo.extName,
 									style = MaterialTheme.typography.subtitle2
 								)
 							}
-
-						if (novelInfo.artists.isNotEmpty() && novelInfo.artists.all { it.isNotEmpty() })
-							Row(
-								modifier = Modifier.padding(bottom = 8.dp)
-							) {
-								if (novelInfo.authors.isEmpty() && novelInfo.authors.none { it.isNotEmpty() })
-									Text(
-										stringResource(string.artist_s),
-										style = MaterialTheme.typography.subtitle2
-									)
-								Text(
-									novelInfo.displayArtists,
-									style = MaterialTheme.typography.subtitle2
-								)
-							}
-
-						Row {
-							Text(
-								when (novelInfo.status) {
-									Novel.Status.PUBLISHING -> stringResource(string.publishing)
-									Novel.Status.COMPLETED -> stringResource(string.completed)
-									Novel.Status.PAUSED -> stringResource(string.paused)
-									Novel.Status.UNKNOWN -> stringResource(string.unknown)
-								},
-								style = MaterialTheme.typography.subtitle2
-							)
-							Text(
-								" • ",
-								style = MaterialTheme.typography.subtitle2
-							)
-							Text(
-								novelInfo.extName,
-								style = MaterialTheme.typography.subtitle2
-							)
 						}
 					}
 				}
 
 				// Bookmark & Web view
 				Row(
-					modifier = Modifier.fillMaxWidth()
+					modifier = Modifier
+						.fillMaxWidth()
 						.padding(bottom = 8.dp),
 					horizontalArrangement = Arrangement.SpaceEvenly,
 					verticalAlignment = Alignment.CenterVertically
@@ -1306,14 +1310,15 @@ fun NovelInfoHeaderContent(
 		}
 
 		// Description
-		ExpandedText(
-			modifier = Modifier
-				.fillMaxWidth()
-				.padding(top = 8.dp),
-			text = novelInfo.description,
-			genre = novelInfo.displayGenre
-		)
-
+		SelectionContainer {
+			ExpandedText(
+				modifier = Modifier
+					.fillMaxWidth()
+					.padding(top = 8.dp),
+				text = novelInfo.description,
+				genre = novelInfo.displayGenre
+			)
+		}
 		Divider()
 
 		// Chapters header bar
@@ -1421,7 +1426,8 @@ fun ExpandedText(
 			}
 		} else {
 			FlowRow(
-				modifier = Modifier.fillMaxWidth()
+				modifier = Modifier
+					.fillMaxWidth()
 					.padding(vertical = 8.dp),
 				mainAxisSpacing = 8.dp,
 				crossAxisSpacing = 4.dp,
