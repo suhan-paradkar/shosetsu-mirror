@@ -1438,15 +1438,18 @@ fun ExpandedText(
 				}
 			}
 		}
-
-		if (!isExpanded)
-			Icon(
-				painterResource(drawable.expand_more),
-				contentDescription = stringResource(string.more)
-			)
-		else Icon(
-			painterResource(drawable.expand_less),
-			contentDescription = stringResource(string.less)
+		Icon(
+			painter = if (!isExpanded) {
+				painterResource(drawable.expand_more)
+			} else {
+				painterResource(drawable.expand_less)
+			},
+			contentDescription = if (!isExpanded) {
+				stringResource(string.more)
+			} else {
+				stringResource(string.less)
+			},
+			modifier = Modifier.padding(bottom = 8.dp)
 		)
 	}
 }
