@@ -1,4 +1,4 @@
-## Major
+## Alert
 - Revert back to stable compose, scroll issues return for reader stability
 
 ## New
@@ -8,6 +8,8 @@
 - Rudimentary input parsing when adding repository
 - Disabled license reading requirement
 - Browse help opens browse faq instead
+- Genres below description for new expansion mechanic
+- Novel information is now selectable
 
 ## Fixes
 - Fix updating categories (thanks @jobobby04)
@@ -25,3 +27,4 @@
 - Set jvm-default to all-compatibility
 - Migrate AboutController.kt to pure compose
 - Migrate MoreController.kt to pure compose
+- Update compose-theme-adapter to 1.1.20
