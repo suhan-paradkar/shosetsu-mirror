@@ -141,6 +141,16 @@ android {
 		create("uptodown") {
 			applicationIdSuffix = ".uptodown"
 			versionNameSuffix = "-uptodown"
+			buildConfigField(
+				"String",
+				"acraUsername",
+				loadSProperties("acra-uptodown")["username"]?.toString() ?: "\"\""
+			)
+			buildConfigField(
+				"String",
+				"acraPassword",
+				loadSProperties("acra-uptodown")["password"]?.toString() ?: "\"\""
+			)
 		}
 		create("fdroid") {
 			applicationIdSuffix = ".fdroid"
