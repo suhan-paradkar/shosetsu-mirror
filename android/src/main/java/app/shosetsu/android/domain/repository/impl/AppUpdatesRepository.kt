@@ -92,6 +92,8 @@ class AppUpdatesRepository(
 
 	@Throws(FilePermissionException::class, IOException::class, HTTPException::class)
 	override suspend fun loadRemoteUpdate(): AppUpdateEntity? = onIO {
+		// Ignore any attempt to run updater on non-standard debug versions
+		if (flavor() != ProductFlavors.STANDARD && BuildConfig.DEBUG) return@onIO null
 		val appUpdateEntity = try {
 			iRemoteAppUpdateDataSource.loadAppUpdate()
 		} catch (e: EmptyResponseBodyException) {
