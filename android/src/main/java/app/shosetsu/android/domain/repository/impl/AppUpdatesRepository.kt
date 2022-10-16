@@ -5,8 +5,10 @@ import app.shosetsu.android.common.EmptyResponseBodyException
 import app.shosetsu.android.common.FileNotFoundException
 import app.shosetsu.android.common.FilePermissionException
 import app.shosetsu.android.common.MissingFeatureException
+import app.shosetsu.android.common.enums.ProductFlavors
 import app.shosetsu.android.common.ext.logE
 import app.shosetsu.android.common.ext.onIO
+import app.shosetsu.android.common.utils.flavor
 import app.shosetsu.android.datasource.local.file.base.IFileCachedAppUpdateDataSource
 import app.shosetsu.android.datasource.remote.base.IRemoteAppUpdateDataSource
 import app.shosetsu.android.domain.model.local.AppUpdateEntity
@@ -76,6 +78,8 @@ class AppUpdatesRepository(
 
 	@Throws(FilePermissionException::class, IOException::class, HTTPException::class)
 	override suspend fun loadRemoteUpdate(): AppUpdateEntity? = onIO {
+		// Ignore any attempt to run updater on non-standard debug versions
+		if (flavor() != ProductFlavors.STANDARD && BuildConfig.DEBUG) return@onIO null
 		val appUpdateEntity = try {
 			iRemoteAppUpdateDataSource.loadAppUpdate()
 		} catch (e: EmptyResponseBodyException) {
