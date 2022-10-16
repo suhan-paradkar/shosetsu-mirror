@@ -62,6 +62,9 @@ class StartDownloadWorkerAfterUpdateUseCase(
 					.values
 					.flatten()
 
+				if (filteredChapters.isEmpty())
+					return@let false
+
 				download(filteredChapters)
 				startDownloadWorker()
 				true
