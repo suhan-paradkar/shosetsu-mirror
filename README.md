@@ -5,7 +5,11 @@ The Free & Open Source Android Application for reading (Light) Novels!
 We appreciate any help in improving the app, so let us know by [opening an issue](../../issues/new).
 
 ## Download:
-### [Latest](https://gitlab.com/shosetsuorg/shosetsu/-/releases/permalink/latest)
+| Direct    | F-Droid   |
+|-----------|-----------|
+| [Latest]  | [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"    alt="Get it on F-Droid" height="80">][F-Droid] |
+
+
 
 ## Capabilities:
 
@@ -61,3 +65,7 @@ Thank you Sweet0Potato#9784 for the CSS
 <p align="center">
     <img src="./screenshots/shosetsu-updates.png" width="50%"></img>
 </p>
+
+
+[Latest]: https://gitlab.com/shosetsuorg/shosetsu/-/releases/permalink/latest
+[F-Droid]: https://f-droid.org/packages/app.shosetsu.android.fdroid
