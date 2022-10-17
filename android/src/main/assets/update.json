@@ -1,10 +1,19 @@
 {
-  "latestVersion": "2.2.1",
-  "versionCode": 38,
-  "url": "https://cdn.shosetsu.app/v2.2.1/shosetsu-v2.2.1.apk",
+  "latestVersion": "2.2.2",
+  "versionCode": 39,
+  "url": "https://cdn.shosetsu.app/v2.2.2/shosetsu-v2.2.2.apk",
   "releaseNotes": [
+    "## New",
+    "- ACRA for uptodown",
+    "",
     "## Fixes",
+    "- Fix F-Droid updater",
+    "",
+    "### v2.2.1",
     "- Revert DownloadWorker.kt chapter image downloading due to app crashes",
-    "- Fix crash in which filteredChapters is empty"
+    "- Fix crash in which filteredChapters is empty",
+    "",
+    "## Misc",
+    "- Disable update on non-standard debug"
   ]
 }
