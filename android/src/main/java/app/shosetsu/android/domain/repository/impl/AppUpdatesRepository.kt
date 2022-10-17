@@ -7,12 +7,14 @@ import app.shosetsu.android.common.FilePermissionException
 import app.shosetsu.android.common.MissingFeatureException
 import app.shosetsu.android.common.enums.ProductFlavors
 import app.shosetsu.android.common.ext.logE
+import app.shosetsu.android.common.ext.logV
 import app.shosetsu.android.common.ext.onIO
 import app.shosetsu.android.common.utils.flavor
 import app.shosetsu.android.datasource.local.file.base.IFileCachedAppUpdateDataSource
 import app.shosetsu.android.datasource.remote.base.IRemoteAppUpdateDataSource
 import app.shosetsu.android.domain.model.local.AppUpdateEntity
 import app.shosetsu.android.domain.repository.base.IAppUpdatesRepository
+import app.shosetsu.lib.Version
 import app.shosetsu.lib.exceptions.HTTPException
 import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
@@ -47,32 +49,44 @@ class AppUpdatesRepository(
 		iFileAppUpdateDataSource.updateAvaLive
 
 	private fun compareVersion(newVersion: AppUpdateEntity): Int {
-		val currentV: Int
-		val remoteV: Int
+		when (flavor()) {
+			ProductFlavors.UP_TO_DOWN -> {
+				val currentVersion = Version(BuildConfig.VERSION_NAME.substringBefore("-"))
+				val remoteVersion = Version(
+					newVersion.version.substringBefore("-").substringAfter("v")
+				)
 
-		// Assuming update will return a dev update for debug
-		if (BuildConfig.DEBUG) {
-			currentV = BuildConfig.VERSION_NAME.substringAfter("-").toInt()
-			remoteV = newVersion.commit.takeIf { it != -1 } ?: newVersion.version.toInt()
-		} else {
-			currentV = BuildConfig.VERSION_CODE
-			remoteV = newVersion.versionCode
-		}
+				return remoteVersion.compareTo(currentVersion)
+			}
+			else -> {
+				val currentV: Int
+				val remoteV: Int
 
-		return when {
-			remoteV < currentV -> {
-				//println("This a future release compared to $newVersion")
-				-1
+				// Assuming update will return a dev update for debug
+				if (BuildConfig.DEBUG) {
+					currentV = BuildConfig.VERSION_NAME.substringAfter("-").toInt()
+					remoteV = newVersion.commit.takeIf { it != -1 } ?: newVersion.version.toInt()
+				} else {
+					currentV = BuildConfig.VERSION_CODE
+					remoteV = newVersion.versionCode
+				}
+
+				return when {
+					remoteV < currentV -> {
+						//println("This a future release compared to $newVersion")
+						-1
+					}
+					remoteV > currentV -> {
+						//println("Update found compared to $newVersion")
+						1
+					}
+					remoteV == currentV -> {
+						//println("This the current release compared to $newVersion")
+						0
+					}
+					else -> 0
+				}
 			}
-			remoteV > currentV -> {
-				//println("Update found compared to $newVersion")
-				1
-			}
-			remoteV == currentV -> {
-				//println("This the current release compared to $newVersion")
-				0
-			}
-			else -> 0
 		}
 	}
 
@@ -88,7 +102,7 @@ class AppUpdatesRepository(
 		}
 
 		val compared = compareVersion(appUpdateEntity)
-
+		logV("Compared value $compared")
 		if (compared > 0) {
 			iFileAppUpdateDataSource.putAppUpdateInCache(
 				appUpdateEntity,
