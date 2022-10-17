@@ -5,9 +5,9 @@ The Free & Open Source Android Application for reading (Light) Novels!
 We appreciate any help in improving the app, so let us know by [opening an issue](../../issues/new).
 
 ## Download:
-| Direct    | F-Droid   |
-|-----------|-----------|
-| [Latest]  | [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"    alt="Get it on F-Droid" height="80">][F-Droid] |
+| Direct    | F-Droid   | Uptodown  |
+|-----------|-----------|-----------|
+| [<img src="shosetsu-logo.svg" alt="Direct Download" height="80">][Latest]  | [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">][F-Droid] | [<img src="https://stc.utdstc.com/img/mediakit/download-gio-big.png" alt="Get it on uptodown" height="80">][uptodown] |
 
 
 
@@ -69,3 +69,4 @@ Thank you Sweet0Potato#9784 for the CSS
 
 [Latest]: https://gitlab.com/shosetsuorg/shosetsu/-/releases/permalink/latest
 [F-Droid]: https://f-droid.org/packages/app.shosetsu.android.fdroid
+[uptodown]: https://shosetsu.en.uptodown.com/android
