@@ -219,6 +219,11 @@ class LibraryViewModel(
 	private val unreadStatusFlow: MutableStateFlow<InclusionState?> by lazy {
 		MutableStateFlow(null)
 	}
+	private val arePinsOnTop: MutableStateFlow<Boolean> by lazy {
+		MutableStateFlow(
+			true
+		)
+	}
 
 	/**
 	 * This is outputed to the UI to display all the novels
@@ -243,6 +248,7 @@ class LibraryViewModel(
 			.combineUnreadStatus()
 			.combineSortType()
 			.combineSortReverse()
+			.combinePinTop()
 			.combineFilter()
 			.onIO()
 			.stateIn(viewModelScopeIO, SharingStarted.Lazily, null)
@@ -353,7 +359,21 @@ class LibraryViewModel(
 			novelResult.let { library ->
 				if (reversed)
 					library.copy(
-						novels = library.novels.mapValues { it.value.reversed().toImmutableList() }.toImmutableMap()
+						novels = library.novels.mapValues { it.value.reversed().toImmutableList() }
+							.toImmutableMap()
+					)
+				else library
+			}
+		}
+
+	private fun Flow<LibraryUI>.combinePinTop() =
+		combine(arePinsOnTop) { novelResult, reversed ->
+			novelResult.let { library ->
+				if (reversed)
+					library.copy(
+						novels = library.novels.mapValues {
+							it.value.sortedBy { it.pinned }.toImmutableList()
+						}.toImmutableMap()
 					)
 				else library
 			}
@@ -363,7 +383,8 @@ class LibraryViewModel(
 		combine(queryFlow) { library, query ->
 			library.copy(
 				novels = library.novels.mapValues {
-					it.value.filter { it.title.contains(query, ignoreCase = true) }.toImmutableList()
+					it.value.filter { it.title.contains(query, ignoreCase = true) }
+						.toImmutableList()
 				}.toImmutableMap()
 			)
 		}
@@ -463,6 +484,12 @@ class LibraryViewModel(
 
 	override fun setIsSortReversed(reversed: Boolean) {
 		areNovelsReversedFlow.value = reversed
+	}
+
+	override fun isPinnedOnTop(): Flow<Boolean> = arePinsOnTop
+
+	override fun setPinnedOnTop(onTop: Boolean) {
+		arePinsOnTop.value = onTop
 	}
 
 	override fun cycleFilterGenreState(genre: String, currentState: ToggleableState) {

@@ -73,6 +73,9 @@ abstract class ALibraryViewModel :
 	abstract fun isSortReversed(): Flow<Boolean>
 	abstract fun setIsSortReversed(reversed: Boolean)
 
+	abstract fun isPinnedOnTop(): Flow<Boolean>
+	abstract fun setPinnedOnTop(onTop: Boolean)
+
 	abstract fun cycleFilterGenreState(genre: String, currentState: ToggleableState)
 	abstract fun getFilterGenreState(name: String): Flow<ToggleableState>
 

@@ -751,6 +751,7 @@
     <string name="settings_backup_cycle_desc">How often should backups be automatically made</string>
     <string name="settings_backup_cycle_title">Backup Frequency</string>
     <string name="controller_repositories_add_error">Invalid URL</string>
+    <string name="pin_on_top">Pinned on top</string>
     <plurals name="controller_novel_toggle_delete_chapters">
         <!-- Ignore zero-->
         <item quantity="one">Delete %d chapter?</item>
