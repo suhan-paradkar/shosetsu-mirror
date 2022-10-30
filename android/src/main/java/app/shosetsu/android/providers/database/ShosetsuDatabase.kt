@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 		DBNovelCategoryEntity::class,
 		DBNovelReaderSettingEntity::class,
 		DBNovelEntity::class,
+		DBNovelPinEntity::class,
 		DBNovelSettingsEntity::class,
 		DBRepositoryEntity::class,
 		DBUpdate::class,
@@ -74,6 +75,7 @@ abstract class ShosetsuDatabase : RoomDatabase() {
 	abstract val novelCategoriesDao: NovelCategoriesDao
 	abstract val novelReaderSettingsDao: NovelReaderSettingsDao
 	abstract val novelsDao: NovelsDao
+	abstract val novelPinsDao: NovelPinsDao
 	abstract val novelSettingsDao: NovelSettingsDao
 	abstract val repositoryDao: RepositoryDao
 	abstract val updatesDao: UpdatesDao
