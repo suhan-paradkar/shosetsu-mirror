@@ -1,8 +1,8 @@
-package app.shosetsu.android.domain.model.database
+package app.shosetsu.android.providers.database.migrations
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import android.database.SQLException
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /*
  * This file is part of shosetsu.
@@ -24,25 +24,12 @@ import androidx.room.PrimaryKey
 /**
  * Shosetsu
  *
- * @since 30 / 10 / 2022
- * @author Doomsdayrs
- *
- * @param novelId id of the novel
- * @param pinned if the novel specified by [novelId] is pinned or not
+ * @since 08 / 08 / 2022
  */
-@Entity(
-	tableName = "novel_pins",
-	foreignKeys = [
-		ForeignKey(
-			entity = DBNovelEntity::class,
-			parentColumns = ["id"],
-			childColumns = ["novelId"],
-			onDelete = ForeignKey.CASCADE
-		)
-	]
-)
-data class DBNovelPinEntity(
-	@PrimaryKey
-	val novelId: Int,
-	val pinned: Boolean
-)
+object Migration7to8 : Migration(7, 8) {
+
+	@Throws(SQLException::class)
+	override fun migrate(database: SupportSQLiteDatabase) {
+		database.execSQL("CREATE TABLE IF NOT EXISTS `novel_pins` (`novelId` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, PRIMARY KEY(`novelId`), FOREIGN KEY(`novelId`) REFERENCES `novels`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
+	}
+}
