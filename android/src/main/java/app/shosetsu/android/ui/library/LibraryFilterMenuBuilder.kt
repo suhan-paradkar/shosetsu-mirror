@@ -216,7 +216,7 @@ class LibraryFilterMenuBuilder constructor(
 				viewModel.isPinnedOnTop().map { if (it) On else Off }
 			},
 			cycleState = { state ->
-				viewModel.setPinnedOnTop(state == On)
+				viewModel.setPinnedOnTop(state != On)
 			}
 		)
 	}
