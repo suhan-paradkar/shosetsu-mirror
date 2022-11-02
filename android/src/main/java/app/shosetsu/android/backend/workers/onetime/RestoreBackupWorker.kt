@@ -180,7 +180,7 @@ class RestoreBackupWorker(appContext: Context, params: WorkerParameters) : Corou
 			// Checks if the version is compatible
 			logV("Version in backup: $metaVersion")
 
-			if (!Version(VERSION_BACKUP).isCompatible(Version(metaVersion))) {
+			if (Version(VERSION_BACKUP).major != Version(metaVersion).major) {
 				logE(MESSAGE_LOG_JSON_OUTDATED)
 				notify(R.string.restore_notification_content_text_outdated) { setNotOngoing() }
 				return Result.failure()
