@@ -1,11 +1,6 @@
-package app.shosetsu.android.providers.database.dao
+package app.shosetsu.android.datasource.local.database.base
 
 import android.database.sqlite.SQLiteException
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
-import app.shosetsu.android.domain.model.database.DBNovelPinEntity
-import app.shosetsu.android.providers.database.dao.base.BaseDao
 
 /*
  * This file is part of shosetsu.
@@ -27,29 +22,14 @@ import app.shosetsu.android.providers.database.dao.base.BaseDao
 /**
  * Shosetsu
  *
- * @since 30 / 10 / 2022
+ * @since 01 / 11 / 2022
  * @author Doomsdayrs
  */
-@Dao
-interface NovelPinsDao : BaseDao<DBNovelPinEntity> {
-
-	@Query("SELECT * FROM novel_pins WHERE novelId = :id")
-	fun get(id: Int): DBNovelPinEntity?
+interface IDBNovelPinsDataSource {
 
 	/**
-	 * Toggle the pin of the following novel ids in one go via transaction.
+	 * Toggle the pin state of the following novel ids
 	 */
 	@Throws(SQLiteException::class)
-	@Transaction
-	suspend fun togglePin(ids: List<Int>) {
-		ids.forEach { id ->
-			val item = get(id)
-			if (item != null)
-				update(item.copy(pinned = !item.pinned))
-			else {
-				// Insert as true, as we are assuming null = false
-				insertIgnore(DBNovelPinEntity(id, true))
-			}
-		}
-	}
+	suspend fun togglePin(ids: List<Int>)
 }

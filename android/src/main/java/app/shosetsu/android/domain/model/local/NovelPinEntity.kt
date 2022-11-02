@@ -1,9 +1,6 @@
-package app.shosetsu.android.domain.model.database
+package app.shosetsu.android.domain.model.local
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
-import app.shosetsu.android.domain.model.local.NovelPinEntity
+import app.shosetsu.android.domain.model.database.DBNovelPinEntity
 import app.shosetsu.android.dto.Convertible
 
 /*
@@ -26,27 +23,12 @@ import app.shosetsu.android.dto.Convertible
 /**
  * Shosetsu
  *
- * @since 30 / 10 / 2022
+ * @since 01 / 11 / 2022
  * @author Doomsdayrs
  *
  * @param novelId id of the novel
  * @param pinned if the novel specified by [novelId] is pinned or not
  */
-@Entity(
-	tableName = "novel_pins",
-	foreignKeys = [
-		ForeignKey(
-			entity = DBNovelEntity::class,
-			parentColumns = ["id"],
-			childColumns = ["novelId"],
-			onDelete = ForeignKey.CASCADE
-		)
-	]
-)
-data class DBNovelPinEntity(
-	@PrimaryKey
-	val novelId: Int,
-	val pinned: Boolean
-) : Convertible<NovelPinEntity> {
-	override fun convertTo(): NovelPinEntity = NovelPinEntity(novelId, pinned)
+data class NovelPinEntity(val novelId: Int, val pinned: Boolean) : Convertible<DBNovelPinEntity> {
+	override fun convertTo(): DBNovelPinEntity = DBNovelPinEntity(novelId, pinned)
 }
