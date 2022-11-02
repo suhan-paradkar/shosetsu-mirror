@@ -111,7 +111,13 @@ android {
 		named("debug") {
 			versionNameSuffix = "-${getCommitCount()}"
 			applicationIdSuffix = ".debug"
-
+			isDebuggable = true
+			isMinifyEnabled = true
+			isShrinkResources = true
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
 			buildConfigField(
 				"String",
 				"acraUsername",
