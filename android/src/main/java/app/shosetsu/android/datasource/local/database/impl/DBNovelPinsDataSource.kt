@@ -2,6 +2,7 @@ package app.shosetsu.android.datasource.local.database.impl
 
 import android.database.sqlite.SQLiteException
 import app.shosetsu.android.datasource.local.database.base.IDBNovelPinsDataSource
+import app.shosetsu.android.domain.model.local.NovelPinEntity
 import app.shosetsu.android.providers.database.dao.NovelPinsDao
 
 /*
@@ -35,6 +36,12 @@ class DBNovelPinsDataSource(
 		dao.togglePin(ids)
 	}
 
+	@Throws(SQLiteException::class)
 	override suspend fun isPinned(id: Int): Boolean =
 		dao.isPinned(id)
+
+	@Throws(SQLiteException::class)
+	override suspend fun updateOrInsert(pinEntity: NovelPinEntity) {
+		dao.updateOrInsert(pinEntity.convertTo())
+	}
 }

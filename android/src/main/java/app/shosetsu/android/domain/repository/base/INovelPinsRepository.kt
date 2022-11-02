@@ -1,5 +1,8 @@
 package app.shosetsu.android.domain.repository.base
 
+import android.database.sqlite.SQLiteException
+import app.shosetsu.android.domain.model.local.NovelPinEntity
+
 /*
  * This file is part of shosetsu.
  *
@@ -29,6 +32,12 @@ interface INovelPinsRepository {
 	 * Toggle the pin state of the following novel ids
 	 */
 	suspend fun togglePin(ids: List<Int>)
+
+	/**
+	 * Update or insert a novel pin, this is useful for backup / restore
+	 */
+	@Throws(SQLiteException::class)
+	suspend fun updateOrInsert(pinEntity: NovelPinEntity)
 
 	/**
 	 * Is the novel pinned or not

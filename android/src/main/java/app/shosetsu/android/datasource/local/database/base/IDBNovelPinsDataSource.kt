@@ -1,6 +1,7 @@
 package app.shosetsu.android.datasource.local.database.base
 
 import android.database.sqlite.SQLiteException
+import app.shosetsu.android.domain.model.local.NovelPinEntity
 
 /*
  * This file is part of shosetsu.
@@ -35,4 +36,7 @@ interface IDBNovelPinsDataSource {
 
 	@Throws(SQLiteException::class)
 	suspend fun isPinned(id: Int): Boolean
+
+	@Throws(SQLiteException::class)
+	suspend fun updateOrInsert(pinEntity: NovelPinEntity)
 }

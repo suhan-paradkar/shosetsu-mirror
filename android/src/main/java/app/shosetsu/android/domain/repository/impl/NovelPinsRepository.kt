@@ -3,6 +3,7 @@ package app.shosetsu.android.domain.repository.impl
 import android.database.sqlite.SQLiteException
 import app.shosetsu.android.common.ext.onIO
 import app.shosetsu.android.datasource.local.database.base.IDBNovelPinsDataSource
+import app.shosetsu.android.domain.model.local.NovelPinEntity
 import app.shosetsu.android.domain.repository.base.INovelPinsRepository
 
 /*
@@ -41,6 +42,16 @@ class NovelPinsRepository(
 		}
 	}
 
+	@Throws(SQLiteException::class)
+	override suspend fun updateOrInsert(pinEntity: NovelPinEntity) {
+		db.updateOrInsert(pinEntity)
+	}
+
 	override suspend fun isPinned(id: Int): Boolean =
-		db.isPinned(id)
+		try {
+			db.isPinned(id)
+		} catch (e: SQLiteException) {
+			false
+		}
+
 }

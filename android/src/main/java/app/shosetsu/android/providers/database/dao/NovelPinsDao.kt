@@ -33,6 +33,7 @@ import app.shosetsu.android.providers.database.dao.base.BaseDao
 @Dao
 interface NovelPinsDao : BaseDao<DBNovelPinEntity> {
 
+	@Throws(SQLiteException::class)
 	@Query("SELECT * FROM novel_pins WHERE novelId = :id")
 	suspend fun get(id: Int): DBNovelPinEntity?
 
@@ -53,6 +54,13 @@ interface NovelPinsDao : BaseDao<DBNovelPinEntity> {
 		}
 	}
 
+	@Throws(SQLiteException::class)
 	@Query("SELECT pinned FROM novel_pins WHERE novelId = :id")
 	suspend fun isPinned(id: Int): Boolean
+
+	@Throws(SQLiteException::class)
+	@Transaction
+	suspend fun updateOrInsert(entity: DBNovelPinEntity) {
+		insertReplace(entity)
+	}
 }
