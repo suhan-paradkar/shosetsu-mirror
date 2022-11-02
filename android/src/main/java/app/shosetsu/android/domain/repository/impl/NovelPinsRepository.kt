@@ -40,4 +40,7 @@ class NovelPinsRepository(
 			ignored.printStackTrace()
 		}
 	}
+
+	override suspend fun isPinned(id: Int): Boolean =
+		db.isPinned(id)
 }

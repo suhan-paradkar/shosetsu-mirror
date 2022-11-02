@@ -34,7 +34,7 @@ import app.shosetsu.android.providers.database.dao.base.BaseDao
 interface NovelPinsDao : BaseDao<DBNovelPinEntity> {
 
 	@Query("SELECT * FROM novel_pins WHERE novelId = :id")
-	fun get(id: Int): DBNovelPinEntity?
+	suspend fun get(id: Int): DBNovelPinEntity?
 
 	/**
 	 * Toggle the pin of the following novel ids in one go via transaction.
@@ -52,4 +52,7 @@ interface NovelPinsDao : BaseDao<DBNovelPinEntity> {
 			}
 		}
 	}
+
+	@Query("SELECT pinned FROM novel_pins WHERE novelId = :id")
+	suspend fun isPinned(id: Int): Boolean
 }

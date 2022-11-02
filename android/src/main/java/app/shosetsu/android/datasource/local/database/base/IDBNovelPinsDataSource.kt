@@ -32,4 +32,7 @@ interface IDBNovelPinsDataSource {
 	 */
 	@Throws(SQLiteException::class)
 	suspend fun togglePin(ids: List<Int>)
+
+	@Throws(SQLiteException::class)
+	suspend fun isPinned(id: Int): Boolean
 }

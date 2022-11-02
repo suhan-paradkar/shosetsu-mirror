@@ -29,4 +29,9 @@ interface INovelPinsRepository {
 	 * Toggle the pin state of the following novel ids
 	 */
 	suspend fun togglePin(ids: List<Int>)
+
+	/**
+	 * Is the novel pinned or not
+	 */
+	suspend fun isPinned(id: Int): Boolean
 }

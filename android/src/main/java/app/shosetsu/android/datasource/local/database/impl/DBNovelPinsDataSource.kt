@@ -34,4 +34,7 @@ class DBNovelPinsDataSource(
 	override suspend fun togglePin(ids: List<Int>) {
 		dao.togglePin(ids)
 	}
+
+	override suspend fun isPinned(id: Int): Boolean =
+		dao.isPinned(id)
 }
