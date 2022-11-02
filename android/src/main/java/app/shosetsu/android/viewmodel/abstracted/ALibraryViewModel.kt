@@ -108,4 +108,9 @@ abstract class ALibraryViewModel :
 	abstract val activeCategory: StateFlow<Int>
 	abstract fun setActiveCategory(category: Int)
 
+	/**
+	 * Toggle pin of selected novels
+	 */
+	abstract fun togglePinSelected()
+
 }

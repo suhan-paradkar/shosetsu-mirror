@@ -29,6 +29,7 @@ import app.shosetsu.android.common.ext.logE
 import app.shosetsu.android.common.utils.copy
 import app.shosetsu.android.domain.usecases.IsOnlineUseCase
 import app.shosetsu.android.domain.usecases.SetNovelsCategoriesUseCase
+import app.shosetsu.android.domain.usecases.ToggleNovelPinUseCase
 import app.shosetsu.android.domain.usecases.load.*
 import app.shosetsu.android.domain.usecases.settings.SetNovelUITypeUseCase
 import app.shosetsu.android.domain.usecases.start.StartUpdateWorkerUseCase
@@ -61,7 +62,8 @@ class LibraryViewModel(
 	private val loadNovelUIColumnsP: LoadNovelUIColumnsPUseCase,
 	private val loadNovelUIBadgeToast: LoadNovelUIBadgeToastUseCase,
 	private val setNovelUITypeUseCase: SetNovelUITypeUseCase,
-	private val setNovelsCategoriesUseCase: SetNovelsCategoriesUseCase
+	private val setNovelsCategoriesUseCase: SetNovelsCategoriesUseCase,
+	private val toggleNovelPin: ToggleNovelPinUseCase
 ) : ALibraryViewModel() {
 
 	private val selectedNovels = MutableStateFlow<Map<Int, Map<Int, Boolean>>>(emptyMap())
@@ -113,9 +115,10 @@ class LibraryViewModel(
 			}
 
 			val selectionCategory = selection[category].orEmpty().copy()
-			list?.novels?.get(category).orEmpty().subList(firstSelected + 1, lastSelected).forEach { item ->
-				selectionCategory[item.id] = true
-			}
+			list?.novels?.get(category).orEmpty().subList(firstSelected + 1, lastSelected)
+				.forEach { item ->
+					selectionCategory[item.id] = true
+				}
 			selection[category] = selectionCategory
 
 			selectedNovels.value = selection
@@ -256,12 +259,20 @@ class LibraryViewModel(
 
 	override val columnsInH by lazy {
 		loadNovelUIColumnsH().onIO()
-			.stateIn(viewModelScopeIO, SharingStarted.Lazily, SettingKey.ChapterColumnsInLandscape.default)
+			.stateIn(
+				viewModelScopeIO,
+				SharingStarted.Lazily,
+				SettingKey.ChapterColumnsInLandscape.default
+			)
 	}
 
 	override val columnsInV by lazy {
 		loadNovelUIColumnsP().onIO()
-			.stateIn(viewModelScopeIO, SharingStarted.Lazily, SettingKey.ChapterColumnsInPortait.default)
+			.stateIn(
+				viewModelScopeIO,
+				SharingStarted.Lazily,
+				SettingKey.ChapterColumnsInPortait.default
+			)
 	}
 
 	override val badgeUnreadToastFlow by lazy {
@@ -372,7 +383,7 @@ class LibraryViewModel(
 				if (reversed)
 					library.copy(
 						novels = library.novels.mapValues {
-							it.value.sortedBy { it.pinned }.toImmutableList()
+							it.value.sortedBy { !it.pinned }.toImmutableList()
 						}.toImmutableMap()
 					)
 				else library
@@ -407,9 +418,15 @@ class LibraryViewModel(
 		combine(novelSortTypeFlow) { library, sortType ->
 			library.copy(
 				novels = when (sortType) {
-					NovelSortType.BY_TITLE -> library.novels.mapValues { it.value.sortedBy { it.title }.toImmutableList() }
-					NovelSortType.BY_UNREAD_COUNT -> library.novels.mapValues { it.value.sortedBy { it.unread }.toImmutableList() }
-					NovelSortType.BY_ID -> library.novels.mapValues { it.value.sortedBy { it.id }.toImmutableList() }
+					NovelSortType.BY_TITLE -> library.novels.mapValues {
+						it.value.sortedBy { it.title }.toImmutableList()
+					}
+					NovelSortType.BY_UNREAD_COUNT -> library.novels.mapValues {
+						it.value.sortedBy { it.unread }.toImmutableList()
+					}
+					NovelSortType.BY_ID -> library.novels.mapValues {
+						it.value.sortedBy { it.id }.toImmutableList()
+					}
 				}.toImmutableMap()
 			)
 		}
@@ -606,5 +623,18 @@ class LibraryViewModel(
 
 	override fun setActiveCategory(category: Int) {
 		activeCategory.value = category
+	}
+
+	override fun togglePinSelected() {
+		launchIO {
+			val selected = liveData.value?.novels
+				.orEmpty()
+				.flatMap { it.value }
+				.distinctBy { it.id }
+				.filter { it.isSelected }
+
+			clearSelected()
+			toggleNovelPin(selected)
+		}
 	}
 }
