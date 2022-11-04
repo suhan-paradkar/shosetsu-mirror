@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -90,6 +91,11 @@ fun WebViewPageContent(
 				.fillMaxWidth()
 				.verticalScroll(scrollState),
 			client = object : AccompanistWebViewClient() {
+				override fun shouldOverrideUrlLoading(
+					view: WebView?,
+					request: WebResourceRequest?
+				): Boolean = true
+
 				override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
 					super.onPageStarted(view, url, favicon)
 					view?.layoutParams = ViewGroup.LayoutParams(
