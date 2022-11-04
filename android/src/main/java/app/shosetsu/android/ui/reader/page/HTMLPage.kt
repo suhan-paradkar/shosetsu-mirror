@@ -1,7 +1,6 @@
 package app.shosetsu.android.ui.reader.page
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
@@ -96,14 +95,6 @@ fun WebViewPageContent(
 					request: WebResourceRequest?
 				): Boolean = true
 
-				override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-					super.onPageStarted(view, url, favicon)
-					view?.layoutParams = ViewGroup.LayoutParams(
-						ViewGroup.LayoutParams.MATCH_PARENT,
-						ViewGroup.LayoutParams.WRAP_CONTENT
-					)
-				}
-
 				override fun onPageFinished(view: WebView?, url: String?) {
 					super.onPageFinished(view, url)
 					view?.evaluateJavascript(
@@ -111,6 +102,10 @@ fun WebViewPageContent(
 						window.addEventListener("click",(event)=>{ shosetsuScript.onClick(); });
 						window.addEventListener("dblclick",(event)=>{ shosetsuScript.onDClick(); });
 						""".trimIndent(), null
+					)
+					view?.layoutParams = ViewGroup.LayoutParams(
+						ViewGroup.LayoutParams.MATCH_PARENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT
 					)
 				}
 			}
