@@ -19,9 +19,7 @@ package app.shosetsu.android.ui.downloads
 
 import android.os.Bundle
 import android.view.*
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -41,7 +39,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.MenuProvider
 import app.shosetsu.android.R
-import app.shosetsu.android.common.consts.SELECTED_STROKE_WIDTH
 import app.shosetsu.android.common.enums.DownloadStatus.*
 import app.shosetsu.android.common.ext.collectLA
 import app.shosetsu.android.common.ext.displayOfflineSnackBar
@@ -324,20 +321,19 @@ fun DownloadContent(
 	onClick: () -> Unit,
 	onLongClick: () -> Unit,
 ) {
-	Card(
-		border = if (item.isSelected) {
-			BorderStroke(
-				width = (SELECTED_STROKE_WIDTH / 2).dp,
-				color = MaterialTheme.colors.primary
-			)
-		} else {
-			null
-		},
+	Box(
 		modifier = Modifier
 			.combinedClickable(
 				onClick = onClick,
 				onLongClick = onLongClick
 			)
+			.background(
+				if (item.isSelected) {
+					MaterialTheme.colors.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.08f else 0.22f)
+				} else {
+					MaterialTheme.colors.surface
+				}
+			),
 	) {
 		Column(
 			Modifier
