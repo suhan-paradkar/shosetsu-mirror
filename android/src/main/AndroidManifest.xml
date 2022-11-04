@@ -89,9 +89,11 @@
             android:theme="@style/AppTheme.Main" />
         <activity
             android:name="app.shosetsu.android.ui.reader.ChapterReader"
+            android:exported="false"
             android:theme="@style/AppTheme.Main" />
         <activity
             android:name="app.shosetsu.android.ui.intro.IntroductionActivity"
+            android:exported="false"
             android:theme="@style/AppTheme.Main" />
     </application>
 
