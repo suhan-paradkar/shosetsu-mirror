@@ -164,6 +164,10 @@ sealed class SettingKey<T : Any>(val name: String, val default: T) {
 	object DownloadOnLowBattery : BooleanKey("downloadNotLowBattery", true)
 	object DownloadOnMeteredConnection : BooleanKey("downloadNotMetered", true)
 
+	/**
+	 * Set the time between any two downloads, forcing the task to occur in a reasonable time frame.
+	 */
+	object DownloadBufferTime : IntKey("download_time_space", 5)
 	object DownloadOnlyWhenIdle : BooleanKey("downloadIdle", false)
 
 	object NotifyExtensionDownload : BooleanKey("notifyExtensionDownloading", false)

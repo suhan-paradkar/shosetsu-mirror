@@ -156,6 +156,19 @@ fun DownloadSettingsContent(
 			)
 		}
 
+		item {
+			SliderSettingContent(
+				stringResource(R.string.settings_download_buffer_title),
+				stringResource(R.string.settings_download_buffer_desc),
+				remember { StableHolder(1..9) },
+				{ "${it}00 ms" },
+				viewModel.settingsRepo,
+				SettingKey.DownloadBufferTime,
+				modifier = Modifier
+					.fillMaxWidth()
+			)
+		}
+
 		// TODO Figure out how to change download directory
 		item {
 			SwitchSettingContent(

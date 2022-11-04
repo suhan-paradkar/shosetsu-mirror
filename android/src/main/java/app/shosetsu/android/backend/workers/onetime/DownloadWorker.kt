@@ -31,6 +31,7 @@ import app.shosetsu.android.domain.repository.base.ISettingsRepository
 import app.shosetsu.android.domain.usecases.get.GetExtensionUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import org.acra.ACRA
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.closestDI
@@ -125,9 +126,16 @@ class DownloadWorker(
 		settingRepo.getBoolean(DownloadNotifyChapters)
 
 	/** Loads the download count that is present currently */
-	@Throws(SQLiteException::class)
-	private suspend fun getDownloadCount(): Int =
+	private suspend fun getDownloadCount(): Int = try {
 		downloadsRepo.loadDownloadCount()
+	} catch (e: SQLiteException) {
+		ACRA.errorReporter.handleSilentException(e)
+		0
+	}
+
+	/** Buffer between each chapter download */
+	private suspend fun getDownloadBuffer(): Int =
+		settingRepo.getInt(DownloadBufferTime)
 
 	@Throws(
 		IOException::class,
@@ -277,12 +285,12 @@ class DownloadWorker(
 			}
 			activeJobs++
 
-			logV("Downloading $downloadEntity")
+			logI("Downloading ${downloadEntity.novelName}/${downloadEntity.chapterName}")
 			notify(downloadEntity)
 
 			try {
 				download(downloadEntity)
-
+				logI("Downloaded ${downloadEntity.novelName}/${downloadEntity.chapterName}")
 				notify(downloadEntity, isComplete = true)
 				downloadsRepo.deleteEntity(downloadEntity)
 			} catch (e: Exception) {//TODO specify
@@ -297,7 +305,7 @@ class DownloadWorker(
 					toast { e.message ?: "Download error" }
 				}
 			} finally {
-				delay(500) // Runtime delay
+				delay((getDownloadBuffer() * 100).toLong()) // Runtime delay
 				activeJobs-- // Drops active job count once completed task
 				activeExtensions.remove(downloadEntity.extensionID)
 			}
