@@ -355,7 +355,7 @@ dependencies {
 	implementation(androidxCompose("material"))
 
 	// - accompanist
-	val accompanistVersion = "0.25.1"
+	val accompanistVersion = "0.27.0"
 	fun accompanist(module: String, version: String = accompanistVersion) =
 		"com.google.accompanist:$module:$version"
 
