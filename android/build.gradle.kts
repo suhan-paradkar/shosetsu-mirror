@@ -395,7 +395,7 @@ dependencies {
 	implementation(paging("paging-compose", "1.0.0-alpha14"))
 	implementation(kotlin("reflect"))
 
-	val navVersion = "2.5.1"
+	val navVersion = "2.5.3"
 	fun navigation(module: String, version: String = navVersion) =
 		"androidx.navigation:navigation-$module:$version"
 
