@@ -372,7 +372,7 @@ dependencies {
 	implementation("androidx.compose.runtime:runtime-livedata:1.3.0")
 
 	// MDC Adapter
-	implementation("com.google.android.material:compose-theme-adapter:1.1.20")
+	implementation("com.google.android.material:compose-theme-adapter:1.1.21")
 
 	val androidxActivity = "1.6.1"
 	fun androidxActivity(module: String, version: String = androidxActivity) =
