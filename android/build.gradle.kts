@@ -333,7 +333,7 @@ dependencies {
 	}*/
 
 	// Compose
-	val androidxCompose = "1.2.1"
+	val androidxCompose = "1.3.0"
 	fun androidxCompose(
 		module: String,
 		submodule: String = module,
