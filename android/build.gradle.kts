@@ -352,7 +352,7 @@ dependencies {
 	implementation(androidxCompose("animation-core", "animation"))
 
 	// - Material
-	implementation(androidxCompose("material"))
+	implementation(androidxCompose("material3", version = "1.0.0"))
 
 	// - accompanist
 	val accompanistVersion = "0.27.0"
