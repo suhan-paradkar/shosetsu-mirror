@@ -43,6 +43,7 @@ import app.shosetsu.android.common.ext.logE
 import app.shosetsu.android.common.ext.makeSnackBar
 import app.shosetsu.android.common.ext.viewModel
 import app.shosetsu.android.databinding.CategoriesAddBinding
+import app.shosetsu.android.view.compose.ErrorContent
 import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.controller.base.ExtendedFABController
@@ -177,51 +178,57 @@ fun CategoriesContent(
 	val state = rememberLazyListState()
 	syncFABWithCompose(state, fab)
 
-	LazyColumn(
-		Modifier.fillMaxSize(),
-		state,
-		contentPadding = PaddingValues(bottom = 64.dp, top = 16.dp, start = 8.dp, end = 8.dp),
-		verticalArrangement = Arrangement.spacedBy(4.dp)
-	) {
-		val isNotSingluar by derivedStateOf { items.size > 1 }
+	if (items.isNotEmpty())
+		LazyColumn(
+			Modifier.fillMaxSize(),
+			state,
+			contentPadding = PaddingValues(bottom = 64.dp, top = 16.dp, start = 8.dp, end = 8.dp),
+			verticalArrangement = Arrangement.spacedBy(4.dp)
+		) {
+			val isNotSingluar by derivedStateOf { items.size > 1 }
 
-		itemsIndexed(items) { index, item ->
-			Card {
-				Row(
-					Modifier
-						.padding(horizontal = 8.dp, vertical = 4.dp)
-						.fillMaxWidth(),
-					verticalAlignment = Alignment.CenterVertically,
-					horizontalArrangement = Arrangement.SpaceBetween
-				) {
-					Text(item.name, style = MaterialTheme.typography.h6)
+			itemsIndexed(items) { index, item ->
+				Card {
 					Row(
+						Modifier
+							.padding(horizontal = 8.dp, vertical = 4.dp)
+							.fillMaxWidth(),
 						verticalAlignment = Alignment.CenterVertically,
 						horizontalArrangement = Arrangement.SpaceBetween
 					) {
-						if (isNotSingluar) {
-							if (index != 0)
-								IconButton(onClick = { onMoveDown(item) }) {
-									Icon(
-										painterResource(R.drawable.expand_less),
-										contentDescription = null
-									)
-								}
+						Text(item.name, style = MaterialTheme.typography.h6)
+						Row(
+							verticalAlignment = Alignment.CenterVertically,
+							horizontalArrangement = Arrangement.SpaceBetween
+						) {
+							if (isNotSingluar) {
+								if (index != 0)
+									IconButton(onClick = { onMoveDown(item) }) {
+										Icon(
+											painterResource(R.drawable.expand_less),
+											contentDescription = null
+										)
+									}
 
-							if (index != items.lastIndex)
-								IconButton(onClick = { onMoveUp(item) }) {
-									Icon(
-										painterResource(R.drawable.expand_more),
-										contentDescription = null
-									)
-								}
-						}
-						IconButton(onClick = { onRemove(item) }) {
-							Icon(painterResource(R.drawable.trash), contentDescription = null)
+								if (index != items.lastIndex)
+									IconButton(onClick = { onMoveUp(item) }) {
+										Icon(
+											painterResource(R.drawable.expand_more),
+											contentDescription = null
+										)
+									}
+							}
+							IconButton(onClick = { onRemove(item) }) {
+								Icon(painterResource(R.drawable.trash), contentDescription = null)
+							}
 						}
 					}
 				}
 			}
 		}
+	else {
+		ErrorContent(
+			R.string.categories_empty
+		)
 	}
 }
