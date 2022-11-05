@@ -93,8 +93,12 @@ class DownloadsViewModel(
 		it.status == DownloadStatus.DOWNLOADING
 	})
 
+	private val downloadsFlow by lazy {
+		getDownloadsUseCase()
+	}
+
 	override val liveData: StateFlow<ImmutableList<DownloadUI>> by lazy {
-		getDownloadsUseCase().combine(selectedDownloads) { list, map ->
+		downloadsFlow.combine(selectedDownloads) { list, map ->
 			list.sort().map {
 				it.copy(isSelected = map.getOrElse(it.chapterID) { false })
 			}.toImmutableList()
@@ -134,6 +138,12 @@ class DownloadsViewModel(
 		selectedDownloads.mapLatest { map ->
 			map.values.any { it }
 		}.onIO().stateIn(viewModelScopeIO, SharingStarted.Lazily, false)
+	}
+
+	override val showFAB: Flow<Boolean> by lazy {
+		downloadsFlow.map {
+			it.isNotEmpty() || settings.getBoolean(IsDownloadPaused)
+		}.distinctUntilChanged()
 	}
 
 	override fun togglePause() {

@@ -129,6 +129,11 @@ class DownloadsController : ShosetsuController(),
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		viewModel.showFAB.collectLA(this, catch = {}) { showFAB ->
+			if (showFAB)
+				fab?.show()
+			else fab?.hide()
+		}
 		viewModel.isDownloadPaused.collectLA(this, catch = {}) {
 			fab?.setText(
 				if (it)

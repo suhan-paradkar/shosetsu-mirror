@@ -6,6 +6,7 @@ import app.shosetsu.android.viewmodel.base.IsOnlineCheckViewModel
 import app.shosetsu.android.viewmodel.base.ShosetsuViewModel
 import app.shosetsu.android.viewmodel.base.SubscribeViewModel
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 /*
@@ -40,6 +41,11 @@ abstract class ADownloadsViewModel :
 	abstract val selectedDownloadState: StateFlow<SelectedDownloadsState>
 	abstract val isDownloadPaused: StateFlow<Boolean>
 	abstract val hasSelectedFlow: StateFlow<Boolean>
+
+	/**
+	 * Used to toggle FAB
+	 */
+	abstract val showFAB: Flow<Boolean>
 
 	/**
 	 * Toggles paused downloads
