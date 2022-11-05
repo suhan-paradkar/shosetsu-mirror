@@ -957,20 +957,14 @@ fun NovelChapterContent(
 	openChapter: () -> Unit,
 	onToggleSelection: () -> Unit
 ) {
-	Box(
+	SelectableBox(
+		chapter.isSelected,
 		modifier = Modifier
 			.let {
 				if (chapter.readingStatus == ReadingStatus.READ)
 					it.alpha(.5f)
 				else it
 			}
-			.background(
-				if (chapter.isSelected) {
-					MaterialTheme.colors.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.08f else 0.22f)
-				} else {
-					MaterialTheme.colors.surface
-				}
-			)
 			.combinedClickable(
 				onClick =
 				if (!selectionMode)

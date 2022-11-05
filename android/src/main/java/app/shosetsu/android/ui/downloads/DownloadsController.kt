@@ -44,6 +44,7 @@ import app.shosetsu.android.common.ext.collectLA
 import app.shosetsu.android.common.ext.displayOfflineSnackBar
 import app.shosetsu.android.common.ext.viewModel
 import app.shosetsu.android.view.compose.ErrorContent
+import app.shosetsu.android.view.compose.SelectableBox
 import app.shosetsu.android.view.compose.ShosetsuCompose
 import app.shosetsu.android.view.controller.ShosetsuController
 import app.shosetsu.android.view.controller.base.ExtendedFABController
@@ -321,19 +322,13 @@ fun DownloadContent(
 	onClick: () -> Unit,
 	onLongClick: () -> Unit,
 ) {
-	Box(
+	SelectableBox(
+		item.isSelected,
 		modifier = Modifier
 			.combinedClickable(
 				onClick = onClick,
 				onLongClick = onLongClick
 			)
-			.background(
-				if (item.isSelected) {
-					MaterialTheme.colors.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.08f else 0.22f)
-				} else {
-					MaterialTheme.colors.surface
-				}
-			),
 	) {
 		Column(
 			Modifier
