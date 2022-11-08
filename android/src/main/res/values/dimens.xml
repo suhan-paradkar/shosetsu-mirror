@@ -9,7 +9,4 @@
 
     <dimen name="sub_text_size">12sp</dimen>
 
-    <dimen name="header_height">35dp</dimen>
-
-    <dimen name="reader_bottom_bar_height">64dp</dimen>
 </resources>

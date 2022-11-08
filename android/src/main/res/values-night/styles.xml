@@ -8,8 +8,4 @@
     </style>
 
 
-    <style name="AppTheme.Widget.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:colorBackground">@color/grey_B_15</item>
-        <item name="android:panelColorBackground">@color/grey_B_15</item>
-    </style>
 </resources>

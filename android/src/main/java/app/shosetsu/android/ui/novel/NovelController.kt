@@ -231,10 +231,6 @@ class NovelController : ShosetsuController(),
 			migrateOpen()
 			true
 		}
-		R.id.webview -> {
-			openWebView()
-			true
-		}
 		R.id.share -> {
 			openShare()
 			true
