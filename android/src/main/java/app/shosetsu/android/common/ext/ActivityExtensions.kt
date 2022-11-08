@@ -1,6 +1,7 @@
 package app.shosetsu.android.common.ext
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -39,8 +40,21 @@ import java.io.IOException
  * 06 / 05 / 2020
  */
 
-fun Activity.openInBrowser(url: Uri): Unit = startActivity(Intent(Intent.ACTION_VIEW, url))
-fun Activity.openInBrowser(url: String): Unit = openInBrowser(Uri.parse(url))
+fun Activity.openInBrowser(url: Uri, pkg: String? = null) {
+	try {
+		startActivity(
+			Intent(Intent.ACTION_VIEW, url).apply {
+				setPackage(pkg)
+			}
+		)
+	} catch (e: ActivityNotFoundException) {
+		// if pkg is not found, retry with pkg null
+		openInBrowser(url)
+	}
+}
+
+fun Activity.openInBrowser(url: String, pkg: String? = null): Unit =
+	openInBrowser(Uri.parse(url), pkg)
 
 fun Activity.openInWebView(url: String) {
 	logI("Opening in web view: $url")

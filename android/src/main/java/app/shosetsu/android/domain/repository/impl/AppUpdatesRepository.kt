@@ -62,8 +62,8 @@ class AppUpdatesRepository(
 				val currentV: Int
 				val remoteV: Int
 
-				// Assuming update will return a dev update for debug
-				if (BuildConfig.DEBUG) {
+				// Assuming update will return a dev update for debug, only on standard
+				if (flavor() == ProductFlavors.STANDARD && BuildConfig.DEBUG) {
 					currentV = BuildConfig.VERSION_NAME.substringAfter("-").toInt()
 					remoteV = newVersion.commit.takeIf { it != -1 } ?: newVersion.version.toInt()
 				} else {

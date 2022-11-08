@@ -3,8 +3,10 @@ package app.shosetsu.android.viewmodel.impl
 import app.shosetsu.android.common.SettingKey
 import app.shosetsu.android.common.enums.AppThemes
 import app.shosetsu.android.common.enums.NavigationStyle
+import app.shosetsu.android.common.enums.ProductFlavors
 import app.shosetsu.android.common.ext.launchIO
 import app.shosetsu.android.common.utils.archURL
+import app.shosetsu.android.common.utils.flavor
 import app.shosetsu.android.domain.model.local.AppUpdateEntity
 import app.shosetsu.android.domain.repository.base.ISettingsRepository
 import app.shosetsu.android.domain.usecases.CanAppSelfUpdateUseCase
@@ -84,8 +86,12 @@ class MainViewModel(
 					} else {
 						loadAppUpdateUseCase().let {
 							AppUpdateAction.UserUpdate(
-								it.version,
-								it.archURL()
+								it.archURL(),
+								when (flavor()) {
+									ProductFlavors.PLAY_STORE -> "com.android.vending"
+									ProductFlavors.F_DROID -> "org.fdroid.fdroid"
+									else -> null
+								}
 							)
 						}
 					}

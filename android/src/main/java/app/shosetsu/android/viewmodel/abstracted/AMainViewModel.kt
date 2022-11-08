@@ -64,10 +64,12 @@ abstract class AMainViewModel : ShosetsuViewModel(), IsOnlineCheckViewModel {
 
 		/**
 		 * The user has to handle the update
+		 *
+		 * @param pkg preferred application to open with
 		 */
 		data class UserUpdate(
-			val updateTitle: String,
-			val updateURL: String
+			val updateURL: String,
+			val pkg: String?
 		) : AppUpdateAction()
 
 	}

@@ -23,7 +23,7 @@ class FDroidAppUpdateDataSource(
 			"https://f-droid.org/api/v1/packages/app.shosetsu.android.fdroid"
 
 		private const val FDROID_DOWNLOAD_URL =
-			"https://f-droid.org/repo/app.shosetsu.android.fdroid"
+			"https://f-droid.org/packages/app.shosetsu.android.fdroid/"
 
 		private val json = Json {
 			encodeDefaults = true
@@ -65,7 +65,7 @@ class FDroidAppUpdateDataSource(
 						AppUpdateEntity(
 							packageData.versionName,
 							packageData.versionCode,
-							url = "$FDROID_DOWNLOAD_URL/${packageData.versionCode}.apk",
+							url = FDROID_DOWNLOAD_URL,
 							notes = emptyList()
 						)
 					}
