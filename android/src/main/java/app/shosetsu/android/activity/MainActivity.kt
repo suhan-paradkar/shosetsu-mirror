@@ -622,8 +622,10 @@ class MainActivity : AppCompatActivity(), DIAware {
 			}
 			MATERIAL -> {
 				supportActionBar?.setDisplayHomeAsUpEnabled(false)
-				if (!isTablet)
+				if (!isTablet) {
+					binding.navBottom.translationY = 0f
 					binding.navBottom.isVisible = true
+				}
 			}
 		}
 	}
