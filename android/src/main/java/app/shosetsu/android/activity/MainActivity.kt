@@ -527,7 +527,7 @@ class MainActivity : AppCompatActivity(), DIAware {
 	}
 
 	private fun handleAppUpdate() {
-		viewModel.handleAppUpdate().collectLA(this, catch = {
+		viewModel.handleAppUpdate().firstLa(this, catch = {
 			makeSnackBar(
 				getString(
 					R.string.activity_main_error_handle_update,
