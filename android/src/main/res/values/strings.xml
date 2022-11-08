@@ -8,7 +8,7 @@
     <string name="matrix" translatable="false">Matrix</string>
     <string name="discord" translatable="false">Discord</string>
 
-    <string name="patreon" translatable="false">Support the dev on Patreon</string>
+    <string name="patreon">Support the dev on Patreon</string>
 
 
     <string name="header_text">Novel reading right on your phone!</string>
