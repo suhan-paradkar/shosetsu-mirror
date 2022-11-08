@@ -367,7 +367,7 @@
     <string name="settings_backup_alert_location_internal">Internal</string>
     <string name="settings_backup_alert_internal_title">Select a backup</string>
     <string name="restore_notification_content_text_outdated">Backup is outdated</string>
-    <string name="restore_notification_content_missing_key">Backup does not contain \'version\' key</string>
+    <string name="restore_notification_content_missing_key">Backup does not contain \‘version\’ key</string>
     <string name="restore_notification_content_decoding_string">Decoding</string>
     <string name="restore_notification_content_unzipping_bytes">Unzipping</string>
     <string name="restore_notification_content_unexpected_empty">Received empty, should not happen</string>
@@ -430,7 +430,7 @@
 
     <!-- Empty View Messages -->
     <string name="empty_browse_message">There are no extensions, Refresh this page or check your repositories</string>
-    <string name="empty_library_message">You don\'t have any novels, Go to "Browse" and add some</string>
+    <string name="empty_library_message">You don\'t have any novels, Go to “Browse” and add some</string>
     <string name="empty_updates_message">No updates, Lets check for some\n(Refresh or press below)</string>
     <string name="empty_downloads_message">No downloads pending, Go download some chapters</string>
     <string name="empty_repositories_message">You have no repositories, This app is useless without them</string>
@@ -508,9 +508,9 @@
     <string name="controller_settings_advanced_snackbar_purge_success">Purged unbookmarked novels</string>
     <string name="worker_novel_update_load_failure">Failed to update %s</string>
     <string name="controller_settings_advanced_snackbar_ui_change">Press apply to change the UI</string>
-    <string name="controller_catalogue_toast_background_add_success">Added \"%s\" to Library</string>
+    <string name="controller_catalogue_toast_background_add_success">Added \“%s\” to Library</string>
     <string name="jump_to_chapter_short">Jump</string>
-    <string name="worker_novel_update_updated_novel">New chapters available for \"%s\"</string>
+    <string name="worker_novel_update_updated_novel">New chapters available for \“%s\”</string>
     <string name="worker_novel_updating_silent">Updating novels…</string>
     <string name="activity_webview_null_url">URL to load was null, Sorry!</string>
     <string name="settings_reader_show_divider">Show divider between chapters</string>
@@ -552,7 +552,7 @@
     <string name="settings_update_novel_show_progress_title">Notify update progress</string>
     <string name="settings_update_novel_show_progress_desc">If toggled on, You will have no idea what novels are being updated</string>
     <string name="settings_update_novel_classic_notification_title">Classic notification completion</string>
-    <string name="settings_update_novel_classic_notification_desc">Instead of showing you which how many chapters are in each novel, simply says \"Completed Update\"</string>
+    <string name="settings_update_novel_classic_notification_desc">Instead of showing you which how many chapters are in each novel, simply says \“Completed Update\”</string>
     <string name="settings_update_novel_categories_update">Categories to update</string>
     <string name="settings_update_novel_categories_download">Categories to download</string>
     <string name="settings_update_novel_categories_open">Open</string>
