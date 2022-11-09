@@ -19,6 +19,7 @@
 package app.shosetsu.android.view.uimodels.model
 
 import androidx.compose.runtime.Immutable
+import app.shosetsu.android.common.SettingKey
 import app.shosetsu.android.domain.model.local.NovelReaderSettingEntity
 import app.shosetsu.android.dto.Convertible
 
@@ -31,8 +32,8 @@ import app.shosetsu.android.dto.Convertible
 @Immutable
 data class NovelReaderSettingUI(
 	val novelID: Int,
-	val paragraphIndentSize: Int,
-	val paragraphSpacingSize: Float,
+	val paragraphIndentSize: Int = SettingKey.ReaderIndentSize.default,
+	val paragraphSpacingSize: Float = SettingKey.ReaderParagraphSpacing.default,
 ) : Convertible<NovelReaderSettingEntity> {
 	override fun convertTo(): NovelReaderSettingEntity = NovelReaderSettingEntity(
 		novelID,

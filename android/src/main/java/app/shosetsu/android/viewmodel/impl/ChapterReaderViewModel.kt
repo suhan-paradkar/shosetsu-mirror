@@ -429,7 +429,7 @@ class ChapterReaderViewModel(
 	private val readerSettingsFlow: StateFlow<NovelReaderSettingUI> by lazy {
 		novelIDLive.flatMapLatest {
 			getReaderSettingsUseCase(it)
-		}.onIO().stateIn(viewModelScopeIO, SharingStarted.Lazily, NovelReaderSettingUI(-1, 0, 0.0F))
+		}.onIO().stateIn(viewModelScopeIO, SharingStarted.Lazily, NovelReaderSettingUI(-1))
 	}
 
 	private val themeFlow: StateFlow<Pair<Int, Int>> by lazy {
