@@ -192,6 +192,17 @@ fun ExposedSettingsRepoViewModel.readerKeepScreenOnOption() {
 }
 
 @Composable
+fun ExposedSettingsRepoViewModel.readerTableHackOption() {
+	SwitchSettingContent(
+		stringResource(R.string.settings_reader_table_hack_title),
+		stringResource(R.string.settings_reader_table_hack_desc),
+		settingsRepo,
+		ReaderTableHack, modifier = Modifier
+			.fillMaxWidth()
+	)
+}
+
+@Composable
 fun ExposedSettingsRepoViewModel.volumeScrollingOption() {
 	SwitchSettingContent(
 		stringResource(R.string.settings_reader_volume_scroll_title),

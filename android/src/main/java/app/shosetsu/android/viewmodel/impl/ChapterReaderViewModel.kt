@@ -104,6 +104,10 @@ class ChapterReaderViewModel(
 		}
 	}
 
+	private val tableHackEnabledFlow: Flow<Boolean> by lazy {
+		settingsRepo.getBooleanFlow(ReaderTableHack)
+	}
+
 	private val doubleTapSystemFlow: StateFlow<Boolean> by lazy {
 		settingsRepo.getBooleanFlow(ReaderDoubleTapSystem)
 			.let {
@@ -701,7 +705,8 @@ class ChapterReaderViewModel(
 		val foregroundColor: Int = Color.BLACK,
 		val textSize: Float = ReaderTextSize.default,
 		val indentSize: Int = ReaderIndentSize.default,
-		val paragraphSpacing: Float = ReaderParagraphSpacing.default
+		val paragraphSpacing: Float = ReaderParagraphSpacing.default,
+		val tableHackEnabled: Boolean = false
 	)
 
 	private val shosetsuCss: Flow<String> by lazy {
@@ -718,6 +723,10 @@ class ChapterReaderViewModel(
 		}.combine(paragraphSpacingFlow) { builder, space ->
 			builder.copy(
 				paragraphSpacing = space
+			)
+		}.combine(tableHackEnabledFlow) { builder, enabled ->
+			builder.copy(
+				tableHackEnabled = enabled
 			)
 		}.map {
 			val shosetsuStyle: HashMap<String, HashMap<String, String>> = hashMapOf()
@@ -745,6 +754,13 @@ class ChapterReaderViewModel(
 				this["max-width"] = "100%"
 				this["height"] = "initial !important"
 			}
+
+			if (it.tableHackEnabled)
+				setShosetsuStyle("table") {
+					this["overflow-x"] = "auto"
+					this["display"] = "block"
+					this["white-space"] = "nowrap"
+				}
 
 			shosetsuStyle.map { elem ->
 				"${elem.key} {" + elem.value.map { rule -> "${rule.key}:${rule.value}" }

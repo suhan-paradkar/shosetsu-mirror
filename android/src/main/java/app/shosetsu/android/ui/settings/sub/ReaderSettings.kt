@@ -307,6 +307,10 @@ fun ReaderSettingsContent(
 			viewModel.showReaderDivider()
 		}
 
+		item {
+			viewModel.readerTableHackOption()
+		}
+
 		item { viewModel.doubleTapFocus() }
 		item { viewModel.doubleTapSystem() }
 	}

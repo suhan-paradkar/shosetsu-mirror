@@ -131,6 +131,11 @@ sealed class SettingKey<T : Any>(val name: String, val default: T) {
 	object ReaderKeepScreenOn : BooleanKey("reader_keep_screen_on", false)
 
 	/**
+	 * If the reader table hack is enabled or not
+	 */
+	object ReaderTableHack : BooleanKey("reader_table_hack_enabled", false)
+
+	/**
 	 * Should the reader display a separator between chapters
 	 */
 	object ReaderShowChapterDivider : BooleanKey("reader_show_divider_page", true)

@@ -591,6 +591,8 @@
     <string name="settings_backup_cycle_title">Backup Frequency</string>
     <string name="controller_repositories_add_error">Invalid URL</string>
     <string name="categories_empty">There are no categories, add one!</string>
+    <string name="settings_reader_table_hack_title">Enable table hack</string>
+    <string name="settings_reader_table_hack_desc">Force tables to have a scroll bar for overflows. Enabling this can break accessibility functionality.</string>
     <plurals name="controller_novel_toggle_delete_chapters">
         <!-- Ignore zero-->
         <item quantity="one">Delete %d chapter?</item>

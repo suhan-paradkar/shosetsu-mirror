@@ -257,6 +257,7 @@ class ChapterReader
 								item { viewModel.stringAsHtmlOption() }
 								item { viewModel.doubleTapFocus() }
 								item { viewModel.doubleTapSystem() }
+								item { viewModel.readerTableHackOption() }
 							},
 							toggleFocus = viewModel::toggleFocus,
 							onShowNavigation = viewModel::toggleSystemVisible.takeIf { enableFullscreen && !matchFullscreenToFocus },
