@@ -734,6 +734,7 @@ class ChapterReaderViewModel(
 				this["scroll-behavior"] = "smooth"
 				this["text-indent"] = "${it.indentSize}em"
 				this["overflow-wrap"] = "break-word"
+				this["margin"] = "1em" // ensure everything stays away from the edge
 			}
 
 			setShosetsuStyle("p") {
