@@ -45,7 +45,7 @@ fun ShosetsuCompose(
 	) {
 		Surface(
 			modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection()),
-			color = MaterialTheme.colors.background,
+			color = MaterialTheme.colorScheme.background,
 			content = content
 		)
 	}

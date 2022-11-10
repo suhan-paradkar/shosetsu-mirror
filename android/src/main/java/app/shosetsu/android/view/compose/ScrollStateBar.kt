@@ -74,7 +74,7 @@ fun ScrollStateBar(scrollState: ScrollState, content: @Composable () -> Unit) {
 							.padding(horizontal = 4.dp)
 							.width(2.dp)
 							.background(
-								color = MaterialTheme.colors.primary,
+								color = MaterialTheme.colorScheme.primary,
 								shape = MaterialTheme.shapes.medium
 							)
 							.height(16.dp)

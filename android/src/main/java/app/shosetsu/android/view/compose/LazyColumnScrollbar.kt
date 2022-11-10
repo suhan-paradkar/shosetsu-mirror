@@ -32,8 +32,8 @@ fun LazyColumnScrollbar(
 	thickness: Dp = 6.dp,
 	padding: Dp = 8.dp,
 	thumbMinHeight: Float = 0.1f,
-	thumbColor: Color = MaterialTheme.colors.primary,
-	thumbSelectedColor: Color = MaterialTheme.colors.primarySurface,
+	thumbColor: Color = MaterialTheme.colorScheme.primary,
+	thumbSelectedColor: Color = MaterialTheme.colorScheme.primarySurface,
 	thumbShape: Shape = CircleShape,
 	content: @Composable () -> Unit
 ) {
@@ -61,8 +61,8 @@ fun LazyColumnScrollbar(
 	thickness: Dp = 6.dp,
 	padding: Dp = 8.dp,
 	thumbMinHeight: Float = 0.1f,
-	thumbColor: Color = MaterialTheme.colors.primary,
-	thumbSelectedColor: Color = MaterialTheme.colors.primarySurface,
+	thumbColor: Color = MaterialTheme.colorScheme.primary,
+	thumbSelectedColor: Color = MaterialTheme.colorScheme.primarySurface,
 	thumbShape: Shape = CircleShape,
 ) {
 	val coroutineScope = rememberCoroutineScope()

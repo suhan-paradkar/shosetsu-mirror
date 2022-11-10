@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
  */
 
 fun Modifier.selectedOutline(isSelected: Boolean) = composed {
-	val secondary = MaterialTheme.colors.secondary
+	val secondary = MaterialTheme.colorScheme.secondary
 	if (isSelected) {
 		drawBehind {
 			val additional = 24.dp.value

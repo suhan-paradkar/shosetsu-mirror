@@ -387,7 +387,7 @@ fun RepositoryContent(
 						onCheckedChange()
 					},
 					colors = SwitchDefaults.colors(
-						checkedThumbColor = MaterialTheme.colors.secondary
+						checkedThumbColor = MaterialTheme.colorScheme.secondary
 					)
 				)
 			}

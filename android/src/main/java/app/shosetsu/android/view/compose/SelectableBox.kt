@@ -41,9 +41,9 @@ fun SelectableBox(
 		modifier = modifier
 			.background(
 				if (isSelected) {
-					MaterialTheme.colors.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.5f else 0.22f)
+					MaterialTheme.colorScheme.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.5f else 0.22f)
 				} else {
-					MaterialTheme.colors.surface
+					MaterialTheme.colorScheme.surface
 				}
 			),
 		content = content

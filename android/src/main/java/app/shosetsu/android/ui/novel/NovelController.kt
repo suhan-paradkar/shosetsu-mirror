@@ -793,7 +793,7 @@ fun NovelInfoContent(
 		) {
 			LazyColumnScrollbar(
 				listState = state,
-				thumbColor = MaterialTheme.colors.primary,
+				thumbColor = MaterialTheme.colorScheme.primary,
 				thumbSelectedColor = Color.Gray,
 			) {
 				LazyColumn(
@@ -978,7 +978,7 @@ fun NovelChapterContent(
 				modifier = Modifier
 					.fillMaxWidth()
 					.padding(bottom = 8.dp),
-				color = if (chapter.bookmarked) MaterialTheme.colors.primary else Color.Unspecified
+				color = if (chapter.bookmarked) MaterialTheme.colorScheme.primary else Color.Unspecified
 			)
 
 			Row(
@@ -1247,9 +1247,9 @@ fun NovelInfoHeaderContent(
 								},
 								null,
 								tint = if (novelInfo.bookmarked)
-									MaterialTheme.colors.primary
+									MaterialTheme.colorScheme.primary
 								else
-									MaterialTheme.colors.onSurface,
+									MaterialTheme.colorScheme.onSurface,
 								modifier = Modifier.size(20.dp)
 							)
 							Spacer(Modifier.height(4.dp))
@@ -1263,9 +1263,9 @@ fun NovelInfoHeaderContent(
 								),
 								style = MaterialTheme.typography.bodyLarge,
 								color = if (novelInfo.bookmarked)
-									MaterialTheme.colors.primary
+									MaterialTheme.colorScheme.primary
 								else
-									MaterialTheme.colors.onSurface,
+									MaterialTheme.colorScheme.onSurface,
 								fontSize = 12.sp,
 								textAlign = TextAlign.Center,
 							)
@@ -1284,12 +1284,12 @@ fun NovelInfoHeaderContent(
 								painterResource(drawable.open_in_browser),
 								stringResource(string.controller_novel_info_open_web),
 								modifier = Modifier.size(20.dp),
-								tint = MaterialTheme.colors.onSurface
+								tint = MaterialTheme.colorScheme.onSurface
 							)
 							Spacer(Modifier.height(4.dp))
 							Text(
 								stringResource(string.controller_novel_info_open_web_text),
-								color = MaterialTheme.colors.onSurface,
+								color = MaterialTheme.colorScheme.onSurface,
 								fontSize = 12.sp,
 								textAlign = TextAlign.Center,
 							)

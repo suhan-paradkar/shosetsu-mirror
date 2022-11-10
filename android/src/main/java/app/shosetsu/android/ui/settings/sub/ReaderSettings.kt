@@ -154,7 +154,7 @@ fun ReaderSettingsContent(
 						Card(
 							border = if (themeItem.isSelected) BorderStroke(
 								SELECTED_STROKE_WIDTH.dp,
-								MaterialTheme.colors.secondary
+								MaterialTheme.colorScheme.secondary
 							) else null,
 							onClick = {
 								launchIO {

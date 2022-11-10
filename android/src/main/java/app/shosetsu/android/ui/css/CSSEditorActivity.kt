@@ -222,7 +222,7 @@ fun CSSEditorContent(
 			Column {
 				if (!isCSSInvalid && cssInvalidReason != null)
 					Card(
-						border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+						border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
 						modifier = Modifier
 							.align(Alignment.CenterHorizontally)
 							.fillMaxWidth()
@@ -298,7 +298,7 @@ fun CSSEditorContent(
 			FloatingActionButton(
 				onClick = onSave,
 				shape = fabShape,
-				containerColor = MaterialTheme.colors.primary,
+				containerColor = MaterialTheme.colorScheme.primary,
 				contentColor = colorResource(android.R.color.white)
 			) {
 				Icon(

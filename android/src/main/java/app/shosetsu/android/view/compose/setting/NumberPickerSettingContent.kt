@@ -55,7 +55,7 @@ fun NumberPickerSettingContent(
 		IconButton({
 			openDialog = true
 		}) {
-			Text("$value", color = MaterialTheme.colors.secondary)
+			Text("$value", color = MaterialTheme.colorScheme.secondary)
 		}
 	}
 
@@ -96,7 +96,7 @@ fun NumberPickerSettingDialogContent(
 				value = value,
 				onValueChange = onValueChanged,
 				range = range.item,
-				dividersColor = MaterialTheme.colors.secondary,
+				dividersColor = MaterialTheme.colorScheme.secondary,
 			)
 		}
 	}

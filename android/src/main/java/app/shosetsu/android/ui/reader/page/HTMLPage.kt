@@ -61,7 +61,7 @@ fun WebViewPageContent(
 			}
 		}
 
-	val backgroundColor = MaterialTheme.colors.background
+	val backgroundColor = MaterialTheme.colorScheme.background
 	ScrollStateBar(scrollState) {
 		WebView(
 			state,

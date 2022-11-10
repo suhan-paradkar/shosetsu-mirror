@@ -77,7 +77,7 @@ fun ChapterReaderHTMLContent(
 		AChapterReaderViewModel.ChapterPassage.Loading -> {
 			Box(
 				Modifier
-					.background(MaterialTheme.colors.background)
+					.background(MaterialTheme.colorScheme.background)
 					.fillMaxSize()
 			) {
 				LinearProgressIndicator(

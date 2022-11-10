@@ -52,7 +52,7 @@ fun HeaderSettingContent(
 			name,
 			style = MaterialTheme.typography.h6,
 			modifier = Modifier.padding(bottom = 8.dp),
-			color = MaterialTheme.colors.primary
+			color = MaterialTheme.colorScheme.primary
 		)
 		Divider(modifier = Modifier.fillMaxWidth())
 	}

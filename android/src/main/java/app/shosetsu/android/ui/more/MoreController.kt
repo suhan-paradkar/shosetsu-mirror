@@ -124,7 +124,7 @@ fun MoreItemContent(
 				modifier = Modifier
 					.padding(start = 16.dp, top = 16.dp, bottom = 16.dp, end = 24.dp)
 					.size(24.dp),
-				tint = MaterialTheme.colors.primary
+				tint = MaterialTheme.colorScheme.primary
 			)
 			Text(stringResource(title))
 		}

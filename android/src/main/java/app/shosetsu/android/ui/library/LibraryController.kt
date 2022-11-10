@@ -425,7 +425,7 @@ fun LibraryPager(
 						Modifier.pagerTabIndicatorOffset(state, tabPositions)
 					)
 				},
-				containerColor = MaterialTheme.colors.primary.copy(alpha = 0.1F),
+				containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1F),
 				edgePadding = 0.dp,
 			) {
 				library.categories.forEachIndexed { index, category ->
@@ -614,7 +614,7 @@ fun Badge(modifier: Modifier, text: String, onClick: (() -> Unit)? = null) {
 	Box(
 		modifier = modifier then Modifier
 			.height(20.dp)
-			.background(MaterialTheme.colors.secondary, MaterialTheme.shapes.medium)
+			.background(MaterialTheme.colorScheme.secondary, MaterialTheme.shapes.medium)
 			.clip(MaterialTheme.shapes.medium)
 			.let {
 				if (onClick != null) {
@@ -626,7 +626,7 @@ fun Badge(modifier: Modifier, text: String, onClick: (() -> Unit)? = null) {
 		Text(
 			text,
 			fontSize = 12.sp,
-			color = MaterialTheme.colors.onSecondary,
+			color = MaterialTheme.colorScheme.onSecondary,
 			modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp)
 		)
 	}

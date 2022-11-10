@@ -44,7 +44,7 @@ fun Surface(
 	modifier: Modifier = Modifier,
 	onLongClick: (() -> Unit)? = null,
 	shape: Shape = RectangleShape,
-	color: Color = MaterialTheme.colors.surface,
+	color: Color = MaterialTheme.colorScheme.surface,
 	contentColor: Color = contentColorFor(color),
 	border: BorderStroke? = null,
 	tonalElevation: Dp = 0.dp,
@@ -110,7 +110,7 @@ private fun surfaceColorAtElevation(
 	elevationOverlay: ElevationOverlay?,
 	absoluteElevation: Dp
 ): Color {
-	return if (color == MaterialTheme.colors.surface && elevationOverlay != null) {
+	return if (color == MaterialTheme.colorScheme.surface && elevationOverlay != null) {
 		elevationOverlay.apply(color, absoluteElevation)
 	} else {
 		color
