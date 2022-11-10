@@ -298,7 +298,7 @@ fun CSSEditorContent(
 			FloatingActionButton(
 				onClick = onSave,
 				shape = fabShape,
-				backgroundColor = MaterialTheme.colors.primary,
+				containerColor = MaterialTheme.colors.primary,
 				contentColor = colorResource(android.R.color.white)
 			) {
 				Icon(

@@ -107,7 +107,7 @@ abstract class AChapterReaderViewModel :
 	abstract val currentChapterID: StateFlow<Int>
 
 	abstract val textColor: StateFlow<Int>
-	abstract val backgroundColor: StateFlow<Int>
+	abstract val containerColor: StateFlow<Int>
 
 	abstract val liveTextSize: StateFlow<Float>
 

@@ -441,8 +441,8 @@ class ChapterReaderViewModel(
 			settingsRepo.getStringSet(ReaderUserThemes)
 				.map { ColorChoiceData.fromString(it) }
 				.find { it.identifier == id.toLong() }
-				?.let { (_, _, textColor, backgroundColor) ->
-					(textColor to backgroundColor)
+				?.let { (_, _, textColor, containerColor) ->
+					(textColor to containerColor)
 				} ?: (Color.BLACK to Color.WHITE)
 		}.onIO().stateIn(viewModelScopeIO, SharingStarted.Lazily, Color.BLACK to Color.WHITE)
 	}
@@ -452,7 +452,7 @@ class ChapterReaderViewModel(
 			.stateIn(viewModelScopeIO, SharingStarted.Lazily, themeFlow.value.first)
 	}
 
-	override val backgroundColor: StateFlow<Int> by lazy {
+	override val containerColor: StateFlow<Int> by lazy {
 		themeFlow.map { it.second }.onIO()
 			.stateIn(viewModelScopeIO, SharingStarted.Lazily, themeFlow.value.second)
 	}
@@ -701,7 +701,7 @@ class ChapterReaderViewModel(
 	}
 
 	data class ShosetsuCSSBuilder(
-		val backgroundColor: Int = Color.WHITE,
+		val containerColor: Int = Color.WHITE,
 		val foregroundColor: Int = Color.BLACK,
 		val textSize: Float = ReaderTextSize.default,
 		val indentSize: Int = ReaderIndentSize.default,
@@ -712,7 +712,7 @@ class ChapterReaderViewModel(
 	private val shosetsuCss: Flow<String> by lazy {
 		themeFlow.combine(liveTextSize) { (fore, back), textSize ->
 			ShosetsuCSSBuilder(
-				backgroundColor = back,
+				containerColor = back,
 				foregroundColor = fore,
 				textSize = textSize
 			)
@@ -737,7 +737,7 @@ class ChapterReaderViewModel(
 			fun Int.cssColor(): String = "rgb($red,$green,$blue)"
 
 			setShosetsuStyle("body") {
-				this["background-color"] = it.backgroundColor.cssColor()
+				this["background-color"] = it.containerColor.cssColor()
 				this["color"] = it.foregroundColor.cssColor()
 				this["font-size"] = "${it.textSize / HTML_SIZE_DIVISION}pt"
 				this["scroll-behavior"] = "smooth"

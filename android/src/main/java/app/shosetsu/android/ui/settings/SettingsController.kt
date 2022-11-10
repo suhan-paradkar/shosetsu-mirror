@@ -78,7 +78,7 @@ fun SettingMenuItem(@StringRes title: Int, @DrawableRes drawableRes: Int, onClic
 		modifier = Modifier.fillMaxWidth(),
 		elevation = 0.dp,
 		onClick = onClick,
-		backgroundColor = colorResource(android.R.color.transparent),
+		containerColor = colorResource(android.R.color.transparent),
 		shape = RectangleShape
 	) {
 		Row(

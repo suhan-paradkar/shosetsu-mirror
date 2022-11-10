@@ -89,7 +89,7 @@ fun openShareMenu(
 								.height(56.dp)
 								.fillMaxWidth(),
 							shape = RectangleShape,
-							backgroundColor = Color.Transparent,
+							containerColor = Color.Transparent,
 							elevation = 0.dp
 						) {
 							Row(
@@ -122,7 +122,7 @@ fun openShareMenu(
 								.height(56.dp)
 								.fillMaxWidth(),
 							shape = RectangleShape,
-							backgroundColor = Color.Transparent,
+							containerColor = Color.Transparent,
 							elevation = 0.dp
 						) {
 							Row(

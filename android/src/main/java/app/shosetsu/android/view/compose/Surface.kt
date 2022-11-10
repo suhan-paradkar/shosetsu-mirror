@@ -66,7 +66,7 @@ fun Surface(
 				.minimumTouchTargetSize()
 				.surface(
 					shape = shape,
-					backgroundColor = surfaceColorAtElevation(
+					containerColor = surfaceColorAtElevation(
 						color = color,
 						elevationOverlay = LocalElevationOverlay.current,
 						absoluteElevation = absoluteElevation
@@ -94,14 +94,14 @@ fun Surface(
 
 private fun Modifier.surface(
 	shape: Shape,
-	backgroundColor: Color,
+	containerColor: Color,
 	border: BorderStroke?,
 	tonalElevation: Dp
 	shadowElevation: Dp
 ) = this
 	.shadow(elevation, shape, clip = false)
 	.then(if (border != null) Modifier.border(border, shape) else Modifier)
-	.background(color = backgroundColor, shape = shape)
+	.background(color = containerColor, shape = shape)
 	.clip(shape)
 
 @Composable

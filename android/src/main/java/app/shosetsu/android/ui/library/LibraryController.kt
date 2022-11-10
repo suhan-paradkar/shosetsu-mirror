@@ -425,7 +425,7 @@ fun LibraryPager(
 						Modifier.pagerTabIndicatorOffset(state, tabPositions)
 					)
 				},
-				backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.1F),
+				containerColor = MaterialTheme.colors.primary.copy(alpha = 0.1F),
 				edgePadding = 0.dp,
 			) {
 				library.categories.forEachIndexed { index, category ->

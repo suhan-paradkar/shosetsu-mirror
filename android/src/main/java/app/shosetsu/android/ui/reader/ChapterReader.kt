@@ -290,7 +290,7 @@ class ChapterReader
 													retryChapter = viewModel::retryChapter,
 													textSizeFlow = { viewModel.liveTextSize },
 													textColorFlow = { viewModel.textColor },
-													backgroundColorFlow = { viewModel.backgroundColor },
+													containerColorFlow = { viewModel.containerColor },
 													onScroll = viewModel::onScroll,
 													onClick = viewModel::onReaderClicked,
 													onDoubleClick = viewModel::onReaderDoubleClicked,

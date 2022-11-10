@@ -81,7 +81,7 @@ fun Button(
 		modifier = modifier,
 		enabled = enabled,
 		shape = shape,
-		color = colors.backgroundColor(enabled).value,
+		color = colors.containerColor(enabled).value,
 		contentColor = contentColor.copy(alpha = 1f),
 		border = border,
 		shadowElevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,

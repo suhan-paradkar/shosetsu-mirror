@@ -110,7 +110,7 @@ fun MoreItemContent(
 ) {
 	Card(
 		shape = RectangleShape,
-		backgroundColor = colorResource(android.R.color.transparent),
+		containerColor = colorResource(android.R.color.transparent),
 		onClick = onClick,
 		modifier = Modifier.fillMaxWidth(),
 		elevation = 0.dp
