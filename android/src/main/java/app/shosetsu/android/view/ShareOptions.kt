@@ -70,7 +70,7 @@ fun openShareMenu(
 						) {
 							Text(
 								stringResource(R.string.share),
-								style = MaterialTheme.typography.body1,
+								style = MaterialTheme.typography.bodyLarge,
 								modifier = Modifier.alpha(0.8f)
 							)
 						}
@@ -104,7 +104,7 @@ fun openShareMenu(
 								)
 								Text(
 									stringResource(R.string.menu_share_url),
-									style = MaterialTheme.typography.body1
+									style = MaterialTheme.typography.bodyLarge
 								)
 							}
 						}
@@ -137,7 +137,7 @@ fun openShareMenu(
 								)
 								Text(
 									stringResource(R.string.menu_share_qr),
-									style = MaterialTheme.typography.body1
+									style = MaterialTheme.typography.bodyLarge
 								)
 							}
 						}

@@ -171,7 +171,7 @@ fun BackupSelectionDialog(
 			) {
 				Text(
 					stringResource(R.string.settings_backup_alert_select_backup_title),
-					style = MaterialTheme.typography.h6,
+					style = MaterialTheme.typography.titleLarge,
 					modifier = Modifier.padding(
 						bottom = 16.dp,
 						top = 8.dp,
@@ -285,7 +285,7 @@ fun BackupSettingsContent(
 					title = {
 						Text(
 							stringResource(R.string.settings_backup_alert_select_location_title),
-							style = MaterialTheme.typography.h6,
+							style = MaterialTheme.typography.titleLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								top = 8.dp,
@@ -325,7 +325,7 @@ fun BackupSettingsContent(
 				Text(
 					stringResource(R.string.fragment_backup_settings_label),
 					modifier = Modifier.padding(end = 8.dp),
-					style = MaterialTheme.typography.h6
+					style = MaterialTheme.typography.titleLarge
 				)
 				Divider()
 			}

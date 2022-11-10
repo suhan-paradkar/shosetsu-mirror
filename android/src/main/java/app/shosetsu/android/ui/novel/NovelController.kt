@@ -1155,7 +1155,7 @@ fun NovelInfoHeaderContent(
 						) {
 							Text(
 								novelInfo.title,
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier
 									.padding(bottom = 8.dp)
 									.fillMaxWidth(),
@@ -1167,11 +1167,11 @@ fun NovelInfoHeaderContent(
 									if (novelInfo.artists.isEmpty() && novelInfo.artists.none { it.isNotEmpty() })
 										Text(
 											stringResource(string.novel_author),
-											style = MaterialTheme.typography.subtitle2
+											style = MaterialTheme.typography.titleSmall
 										)
 									Text(
 										novelInfo.displayAuthors,
-										style = MaterialTheme.typography.subtitle2
+										style = MaterialTheme.typography.titleSmall
 									)
 								}
 
@@ -1182,11 +1182,11 @@ fun NovelInfoHeaderContent(
 									if (novelInfo.authors.isEmpty() && novelInfo.authors.none { it.isNotEmpty() })
 										Text(
 											stringResource(string.artist_s),
-											style = MaterialTheme.typography.subtitle2
+											style = MaterialTheme.typography.titleSmall
 										)
 									Text(
 										novelInfo.displayArtists,
-										style = MaterialTheme.typography.subtitle2
+										style = MaterialTheme.typography.titleSmall
 									)
 								}
 
@@ -1198,15 +1198,15 @@ fun NovelInfoHeaderContent(
 										Novel.Status.PAUSED -> stringResource(string.paused)
 										Novel.Status.UNKNOWN -> stringResource(string.unknown)
 									},
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 								Text(
 									" • ",
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 								Text(
 									novelInfo.extName,
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 							}
 						}
@@ -1261,7 +1261,7 @@ fun NovelInfoHeaderContent(
 										string.controller_novel_add_to_library
 									}
 								),
-								style = MaterialTheme.typography.body1,
+								style = MaterialTheme.typography.bodyLarge,
 								color = if (novelInfo.bookmarked)
 									MaterialTheme.colors.primary
 								else
@@ -1398,7 +1398,7 @@ fun ExpandedText(
 					else it
 				}
 			},
-			style = MaterialTheme.typography.body2,
+			style = MaterialTheme.typography.bodyMedium,
 			modifier = Modifier.padding(start = 8.dp, end = 8.dp)
 		)
 
@@ -1452,7 +1452,7 @@ private fun NovelGenre(
 		Text(
 			text,
 			modifier = Modifier.padding(8.dp),
-			style = MaterialTheme.typography.body2
+			style = MaterialTheme.typography.bodyMedium
 		)
 	}
 }

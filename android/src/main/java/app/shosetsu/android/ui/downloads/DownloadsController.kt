@@ -342,11 +342,11 @@ fun DownloadContent(
 		) {
 			Text(
 				text = item.novelName,
-				style = MaterialTheme.typography.body1
+				style = MaterialTheme.typography.bodyLarge
 			)
 			Text(
 				text = item.chapterName,
-				style = MaterialTheme.typography.body2
+				style = MaterialTheme.typography.bodyMedium
 			)
 
 			Row(
@@ -387,7 +387,7 @@ fun DownloadContent(
 						}
 					),
 					textAlign = TextAlign.End,
-					style = MaterialTheme.typography.caption,
+					style = MaterialTheme.typography.bodySmall,
 					modifier = Modifier
 						.padding(start = 8.dp)
 						.fillMaxWidth()

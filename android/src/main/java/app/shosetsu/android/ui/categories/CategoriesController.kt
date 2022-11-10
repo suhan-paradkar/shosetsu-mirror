@@ -196,7 +196,7 @@ fun CategoriesContent(
 						verticalAlignment = Alignment.CenterVertically,
 						horizontalArrangement = Arrangement.SpaceBetween
 					) {
-						Text(item.name, style = MaterialTheme.typography.h6)
+						Text(item.name, style = MaterialTheme.typography.titleLarge)
 						Row(
 							verticalAlignment = Alignment.CenterVertically,
 							horizontalArrangement = Arrangement.SpaceBetween

@@ -77,7 +77,7 @@ fun DiscreteSlider(
 
 						Text(
 							stringResource(R.string.input_float),
-							style = MaterialTheme.typography.h6,
+							style = MaterialTheme.typography.titleLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								top = 8.dp,
@@ -92,7 +92,7 @@ fun DiscreteSlider(
 								valueRange.item.first,
 								valueRange.item.last
 							),
-							style = MaterialTheme.typography.body1,
+							style = MaterialTheme.typography.bodyLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								start = 24.dp,
@@ -216,7 +216,7 @@ fun DiscreteSlider(
 
 						Text(
 							stringResource(R.string.input_float),
-							style = MaterialTheme.typography.h6,
+							style = MaterialTheme.typography.titleLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								top = 8.dp,
@@ -231,7 +231,7 @@ fun DiscreteSlider(
 								valueRange.item.first,
 								valueRange.item.last
 							),
-							style = MaterialTheme.typography.body1,
+							style = MaterialTheme.typography.bodyLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								start = 24.dp,

@@ -358,14 +358,14 @@ fun RepositoryContent(
 					Row {
 						Text(
 							text = stringResource(id = R.string.id_label),
-							style = MaterialTheme.typography.caption
+							style = MaterialTheme.typography.bodySmall
 						)
-						Text(text = "${item.id}", style = MaterialTheme.typography.caption)
+						Text(text = "${item.id}", style = MaterialTheme.typography.bodySmall)
 					}
 					SelectionContainer {
 						Text(
 							text = item.url,
-							style = MaterialTheme.typography.caption,
+							style = MaterialTheme.typography.bodySmall,
 							modifier = Modifier.padding(start = 8.dp)
 						)
 					}

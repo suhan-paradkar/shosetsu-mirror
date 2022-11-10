@@ -89,7 +89,7 @@ fun Button(
 		interactionSource = interactionSource,
 	) {
 		CompositionLocalProvider(LocalContentColor provides contentColor) {
-			ProvideTextStyle(value = MaterialTheme.typography.button) {
+			ProvideTextStyle(value = MaterialTheme.typography.labelLarge) {
 				Row(
 					Modifier
 						.defaultMinSize(

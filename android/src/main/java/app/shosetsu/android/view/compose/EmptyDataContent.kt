@@ -160,7 +160,7 @@ fun ErrorContent(
 					} else {
 						""
 					},
-					style = MaterialTheme.typography.caption,
+					style = MaterialTheme.typography.bodySmall,
 				)
 			}
 		}
