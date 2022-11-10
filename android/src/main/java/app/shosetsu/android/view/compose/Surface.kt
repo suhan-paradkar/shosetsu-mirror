@@ -47,7 +47,8 @@ fun Surface(
 	color: Color = MaterialTheme.colors.surface,
 	contentColor: Color = contentColorFor(color),
 	border: BorderStroke? = null,
-	elevation: Dp = 0.dp,
+	tonalElevation: Dp = 0.dp,
+	shadowElevation: Dp = 0.dp,
 	interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 	indication: Indication? = LocalIndication.current,
 	enabled: Boolean = true,
@@ -95,7 +96,8 @@ private fun Modifier.surface(
 	shape: Shape,
 	backgroundColor: Color,
 	border: BorderStroke?,
-	elevation: Dp
+	tonalElevation: Dp
+	shadowElevation: Dp
 ) = this
 	.shadow(elevation, shape, clip = false)
 	.then(if (border != null) Modifier.border(border, shape) else Modifier)

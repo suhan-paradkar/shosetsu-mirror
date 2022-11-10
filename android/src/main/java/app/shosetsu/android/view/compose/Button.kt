@@ -84,7 +84,8 @@ fun Button(
 		color = colors.backgroundColor(enabled).value,
 		contentColor = contentColor.copy(alpha = 1f),
 		border = border,
-		elevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
+		shadowElevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
+		tonalElevation = elevation?.elevation(enabled, interactionSource)?.value ?: 0.dp,
 		interactionSource = interactionSource,
 	) {
 		CompositionLocalProvider(LocalContentColor provides contentColor) {
