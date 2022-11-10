@@ -1,15 +1,15 @@
 package app.shosetsu.android.view.compose
 
 import android.content.Context
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.android.material.composethemeadapter.Mdc3Theme
 
 /*
  * This file is part of shosetsu.
@@ -40,7 +40,7 @@ fun ShosetsuCompose(
 	context: Context = LocalContext.current,
 	content: @Composable () -> Unit
 ) {
-	MdcTheme(
+	Mdc3Theme(
 		context = context
 	) {
 		Surface(

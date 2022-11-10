@@ -9,7 +9,7 @@ import android.view.KeyEvent
 import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.ExperimentalMaterialApi
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.view.WindowInsetsCompat.Type
@@ -27,7 +27,7 @@ import app.shosetsu.android.viewmodel.abstracted.AChapterReaderViewModel.Chapter
 import app.shosetsu.android.viewmodel.impl.settings.*
 import app.shosetsu.lib.Novel.ChapterType
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.android.material.composethemeadapter.Mdc3Theme
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
@@ -179,7 +179,7 @@ class ChapterReader
 			val isSwipeInverted by viewModel.isSwipeInverted.collectAsState()
 			//val isTapToScroll by viewModel.tapToScroll.collectAsState(false)
 
-			MdcTheme {
+			Mdc3Theme {
 				ChapterReaderContent(
 					isFirstFocus = isFirstFocus,
 					isFocused = isFocused,

@@ -12,12 +12,12 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
+import androidx.compose.material3.icons.Icons
+import androidx.compose.material3.icons.filled.ArrowBack
+import androidx.compose.material3.icons.filled.ArrowForward
+import androidx.compose.material3.icons.filled.Close
+import androidx.compose.material3.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +33,7 @@ import app.shosetsu.android.common.ext.openInBrowser
 import app.shosetsu.android.common.ext.toast
 import app.shosetsu.android.common.utils.CookieJarSync
 import com.google.accompanist.web.*
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.android.material.composethemeadapter.Mdc3Theme
 import okhttp3.Cookie
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.kodein.di.DI
@@ -91,7 +91,7 @@ class WebViewApp : AppCompatActivity(), DIAware {
 		}
 
 		setContent {
-			MdcTheme {
+			Mdc3Theme {
 				WebViewScreen(
 					onUp = ::finish,
 					url = url,

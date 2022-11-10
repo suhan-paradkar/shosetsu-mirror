@@ -18,8 +18,8 @@
 
 package app.shosetsu.android.view.compose
 
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.ExperimentalMaterialApi
+import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.LayoutModifier
