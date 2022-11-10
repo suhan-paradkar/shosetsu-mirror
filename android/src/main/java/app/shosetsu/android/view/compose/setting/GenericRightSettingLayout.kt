@@ -2,7 +2,6 @@ package app.shosetsu.android.view.compose.setting
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ContentAlpha
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,13 +52,13 @@ fun GenericRightSettingLayout(
 		Column(
 			Modifier.fillMaxWidth(0.6f)
 		) {
-			val alpha = if (enabled) 1F else ContentAlpha.disabled
-			Text(title, color = LocalContentColor.current.copy(alpha = alpha))
+			val alpha = if (enabled) 1f else 0.38f
+			Text(title, color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha))
 			Text(
 				description,
 				fontSize = dimensionResource(R.dimen.sub_text_size).value.sp,
 				modifier = Modifier.alpha(0.7f),
-				color = LocalContentColor.current.copy(alpha = alpha)
+				color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha)
 			)
 		}
 		right()
