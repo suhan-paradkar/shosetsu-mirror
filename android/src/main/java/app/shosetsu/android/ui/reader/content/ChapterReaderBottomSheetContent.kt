@@ -3,7 +3,7 @@ package app.shosetsu.android.ui.reader.content
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterialApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
