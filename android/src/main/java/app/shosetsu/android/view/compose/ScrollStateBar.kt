@@ -1,9 +1,10 @@
 package app.shosetsu.android.view.compose
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +40,7 @@ fun ScrollStateBar(scrollState: ScrollState, content: @Composable () -> Unit) {
 	BoxWithConstraints(
 		modifier = Modifier.fillMaxSize()
 	) {
-		val viewMaxHeight = constraints.maxHeight.toFloat()
+		val viewMaxHeight = constraints.maxHeight.toFloat() - 160f
 
 		// Ensure divide by zero does not occur
 		val scrollPercentage =
@@ -49,37 +50,23 @@ fun ScrollStateBar(scrollState: ScrollState, content: @Composable () -> Unit) {
 				0f
 			}
 
-		val paddingSize =
-			if (scrollPercentage < 0.98) {
-				scrollPercentage * viewMaxHeight
-			} else {
-				.98f * viewMaxHeight
-			}
+		val paddingSize = (scrollPercentage * viewMaxHeight) + 64f
 
 		content()
 
-		BoxWithConstraints(Modifier.fillMaxWidth()) {
-			BoxWithConstraints(
-				Modifier
+		if (scrollState.isScrollInProgress)
+			Card(
+				modifier = Modifier
 					.align(Alignment.TopEnd)
-					.fillMaxHeight()
-			) {
-				if (scrollState.isScrollInProgress)
-					Box(
-						Modifier
-							.align(Alignment.TopEnd)
-							.graphicsLayer {
-								translationY = paddingSize
-							}
-							.padding(horizontal = 4.dp)
-							.width(2.dp)
-							.background(
-								color = MaterialTheme.colors.primary,
-								shape = MaterialTheme.shapes.medium
-							)
-							.height(16.dp)
-					)
-			}
-		}
+					.graphicsLayer {
+						translationY = paddingSize
+					}
+					.padding(horizontal = 4.dp)
+					.width(2.dp)
+					.height(16.dp),
+				colors = CardDefaults.cardColors(
+					containerColor = MaterialTheme.colorScheme.primary
+				)
+			) {}
 	}
 }
