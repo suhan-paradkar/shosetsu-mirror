@@ -235,7 +235,7 @@ fun UpdateItemContent(updateUI: UpdatesUI, onClick: () -> Unit) {
 fun UpdateHeaderItemContent(dateTime: StableHolder<DateTime>) {
 	Surface(
 		modifier = Modifier.fillMaxWidth(),
-		tonalElevation = 2.dp
+		tonalElevation = 2.dp,
 		shadowElevation = 2.dp
 	) {
 		val context = LocalContext.current

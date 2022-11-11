@@ -96,7 +96,7 @@ private fun Modifier.surface(
 	shape: Shape,
 	containerColor: Color,
 	border: BorderStroke?,
-	tonalElevation: Dp
+	tonalElevation: Dp,
 	shadowElevation: Dp
 ) = this
 	.shadow(elevation, shape, clip = false)
