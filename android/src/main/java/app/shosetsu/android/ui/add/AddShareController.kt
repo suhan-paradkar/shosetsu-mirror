@@ -202,6 +202,7 @@ fun PreviewAboutContent() {
 	}
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun AddShareContent(
 	showURLInput: Boolean,
@@ -317,7 +318,7 @@ fun AddShareContent(
 			Text(
 				stringResource(R.string.controller_add_following),
 				modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
-				style = MaterialTheme.typography.h5
+				style = MaterialTheme.typography.headlineSmall
 			)
 
 			LazyColumn(
@@ -330,7 +331,7 @@ fun AddShareContent(
 						Column {
 							Text(
 								stringResource(R.string.controller_add_novel),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 
@@ -372,7 +373,7 @@ fun AddShareContent(
 											)
 											Text(
 												novelLink.url,
-												style = MaterialTheme.typography.caption
+												style = MaterialTheme.typography.bodySmall
 											)
 										}
 									}
@@ -389,7 +390,7 @@ fun AddShareContent(
 						Column {
 							Text(
 								stringResource(R.string.controller_add_extension),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 							Card(
@@ -435,7 +436,7 @@ fun AddShareContent(
 								stringResource(
 									R.string.controller_add_repository,
 								),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 							Card(
@@ -451,7 +452,7 @@ fun AddShareContent(
 									)
 									Text(
 										repositoryLink.url,
-										style = MaterialTheme.typography.caption,
+										style = MaterialTheme.typography.bodySmall,
 
 										)
 								}
