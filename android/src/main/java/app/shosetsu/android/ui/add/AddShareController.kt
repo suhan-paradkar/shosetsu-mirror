@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -230,7 +230,7 @@ fun AddShareContent(
 	if (isComplete) {
 		Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 			Column(horizontalAlignment = Alignment.CenterHorizontally) {
-				Text(stringResource(R.string.completed), style = MaterialTheme.typography.body1)
+				Text(stringResource(R.string.completed), style = MaterialTheme.typography.bodyLarge)
 				TextButton(onClick = reject) {
 					Text(stringResource(android.R.string.ok))
 				}
@@ -368,7 +368,7 @@ fun AddShareContent(
 										) {
 											Text(
 												novelLink.name,
-												style = MaterialTheme.typography.body1
+												style = MaterialTheme.typography.bodyLarge
 											)
 											Text(
 												novelLink.url,
@@ -420,7 +420,7 @@ fun AddShareContent(
 										)
 										Text(
 											extensionLink.name,
-											style = MaterialTheme.typography.body1
+											style = MaterialTheme.typography.bodyLarge
 										)
 									}
 								}
@@ -447,7 +447,7 @@ fun AddShareContent(
 
 									Text(
 										repositoryLink.name,
-										style = MaterialTheme.typography.body1
+										style = MaterialTheme.typography.bodyLarge
 									)
 									Text(
 										repositoryLink.url,
