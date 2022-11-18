@@ -28,6 +28,9 @@ import app.shosetsu.android.viewmodel.factory.ViewModelFactory
 import app.shosetsu.lib.ShosetsuSharedLib
 import app.shosetsu.lib.lua.ShosetsuLuaLib
 import app.shosetsu.lib.lua.shosetsuGlobals
+import coil.ImageLoader
+import coil.ImageLoaderFactory
+import coil.disk.DiskCache
 import com.google.android.material.color.DynamicColors
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -68,7 +71,7 @@ import java.util.*
  * 28 / 01 / 2020
  */
 class ShosetsuApplication : Application(), LifecycleEventObserver, DIAware,
-	Configuration.Provider {
+	Configuration.Provider, ImageLoaderFactory {
 	private val extLibRepository by instance<IExtensionLibrariesRepository>()
 	private val okHttpClient by instance<OkHttpClient>()
 	private val startRepositoryUpdateManagerUseCase: StartRepositoryUpdateManagerUseCase by instance()
@@ -239,5 +242,15 @@ class ShosetsuApplication : Application(), LifecycleEventObserver, DIAware,
 
 	override fun getWorkManagerConfiguration(): Configuration =
 		Configuration.Builder().apply {
+		}.build()
+
+	override fun newImageLoader(): ImageLoader =
+		ImageLoader.Builder(this).apply {
+			diskCache {
+				DiskCache.Builder().apply {
+					directory(cacheDir.resolve("image_cache"))
+
+				}.build()
+			}
 		}.build()
 }
