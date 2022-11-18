@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -202,6 +202,7 @@ fun PreviewAboutContent() {
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddShareContent(
 	showURLInput: Boolean,
@@ -230,7 +231,7 @@ fun AddShareContent(
 	if (isComplete) {
 		Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 			Column(horizontalAlignment = Alignment.CenterHorizontally) {
-				Text(stringResource(R.string.completed), style = MaterialTheme.typography.body1)
+				Text(stringResource(R.string.completed), style = MaterialTheme.typography.bodyLarge)
 				TextButton(onClick = reject) {
 					Text(stringResource(android.R.string.ok))
 				}
@@ -317,7 +318,7 @@ fun AddShareContent(
 			Text(
 				stringResource(R.string.controller_add_following),
 				modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
-				style = MaterialTheme.typography.h5
+				style = MaterialTheme.typography.headlineSmall
 			)
 
 			LazyColumn(
@@ -330,7 +331,7 @@ fun AddShareContent(
 						Column {
 							Text(
 								stringResource(R.string.controller_add_novel),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 
@@ -368,11 +369,11 @@ fun AddShareContent(
 										) {
 											Text(
 												novelLink.name,
-												style = MaterialTheme.typography.body1
+												style = MaterialTheme.typography.bodyLarge
 											)
 											Text(
 												novelLink.url,
-												style = MaterialTheme.typography.caption
+												style = MaterialTheme.typography.bodySmall
 											)
 										}
 									}
@@ -389,7 +390,7 @@ fun AddShareContent(
 						Column {
 							Text(
 								stringResource(R.string.controller_add_extension),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 							Card(
@@ -420,7 +421,7 @@ fun AddShareContent(
 										)
 										Text(
 											extensionLink.name,
-											style = MaterialTheme.typography.body1
+											style = MaterialTheme.typography.bodyLarge
 										)
 									}
 								}
@@ -435,7 +436,7 @@ fun AddShareContent(
 								stringResource(
 									R.string.controller_add_repository,
 								),
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier.padding(bottom = 8.dp)
 							)
 							Card(
@@ -447,11 +448,11 @@ fun AddShareContent(
 
 									Text(
 										repositoryLink.name,
-										style = MaterialTheme.typography.body1
+										style = MaterialTheme.typography.bodyLarge
 									)
 									Text(
 										repositoryLink.url,
-										style = MaterialTheme.typography.caption,
+										style = MaterialTheme.typography.bodySmall,
 
 										)
 								}
