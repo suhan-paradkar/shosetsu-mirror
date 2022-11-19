@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -181,7 +182,7 @@ fun AboutItem(
 	onClick: () -> Unit = {}
 ) {
 	Box(
-		modifier = Modifier.clickable { onClick()}
+		modifier = Modifier.clickable { onClick() }
 	) {
 		Row(
 			verticalAlignment = Alignment.CenterVertically,
@@ -196,17 +197,15 @@ fun AboutItem(
 				horizontalAlignment = Alignment.Start,
 				modifier = Modifier.fillMaxWidth()
 			) {
-				Text(stringResource(titleRes))
+				Text(stringResource(titleRes), style = MaterialTheme.typography.bodyLarge)
 
-				if (descriptionRes != null)
+				if (descriptionRes != null || description != null)
 					Text(
-						stringResource(descriptionRes),
-						style = SUB_TEXT_SIZE,
-						modifier = Modifier.alpha(0.7f)
-					)
-				else if (description != null)
-					Text(
-						description,
+						if (descriptionRes != null) {
+							stringResource(descriptionRes)
+						} else {
+							description ?: return@Column
+						},
 						style = SUB_TEXT_SIZE,
 						modifier = Modifier.alpha(0.7f)
 					)
