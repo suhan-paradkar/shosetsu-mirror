@@ -43,15 +43,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.getSystemService
 import app.shosetsu.android.R
+import app.shosetsu.android.common.consts.SUB_TEXT_SIZE
 import app.shosetsu.android.common.ext.logI
 import app.shosetsu.android.common.ext.openInWebView
 import app.shosetsu.android.common.ext.viewModel
@@ -236,7 +235,7 @@ fun CSSEditorContent(
 							)
 							Text(
 								cssInvalidReason,
-								fontSize = dimensionResource(R.dimen.sub_text_size).value.sp,
+								style = SUB_TEXT_SIZE,
 								modifier = Modifier
 									.alpha(0.7f)
 							)

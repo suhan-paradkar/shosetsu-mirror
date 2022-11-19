@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
@@ -20,17 +20,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -204,13 +201,13 @@ fun AboutItem(
 				if (descriptionRes != null)
 					Text(
 						stringResource(descriptionRes),
-						fontSize = dimensionResource(R.dimen.sub_text_size).value.sp,
+						style = SUB_TEXT_SIZE,
 						modifier = Modifier.alpha(0.7f)
 					)
 				else if (description != null)
 					Text(
 						description,
-						fontSize = dimensionResource(R.dimen.sub_text_size).value.sp,
+						style = SUB_TEXT_SIZE,
 						modifier = Modifier.alpha(0.7f)
 					)
 			}

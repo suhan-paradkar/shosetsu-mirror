@@ -1,5 +1,9 @@
 package app.shosetsu.android.common.consts
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextStyle
+
 /*
  * This file is part of shosetsu.
  *
@@ -22,6 +26,13 @@ const val SELECTED_STROKE_WIDTH: Int = 8
 
 /** How fast the user must fling inorder to activate the scroll to last */
 const val FLING_THRESHOLD = 19999
+
+/**
+ * Size of sub text, used for description
+ */
+val SUB_TEXT_SIZE: TextStyle
+	@Composable
+	get() = MaterialTheme.typography.bodySmall
 
 /**
  * File system directory for extension scripts

@@ -9,10 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import app.shosetsu.android.R
+import app.shosetsu.android.common.consts.SUB_TEXT_SIZE
 import app.shosetsu.android.view.compose.ShosetsuCompose
 
 
@@ -57,7 +55,7 @@ fun GenericRightSettingLayout(
 			Text(title, color = LocalContentColor.current.copy(alpha = alpha))
 			Text(
 				description,
-				fontSize = dimensionResource(R.dimen.sub_text_size).value.sp,
+				style = SUB_TEXT_SIZE,
 				modifier = Modifier.alpha(0.7f),
 				color = LocalContentColor.current.copy(alpha = alpha)
 			)
