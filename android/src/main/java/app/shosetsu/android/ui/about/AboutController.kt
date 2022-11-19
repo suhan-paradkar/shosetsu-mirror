@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -153,7 +153,7 @@ fun AboutView(
 	}
 }
 
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 @Preview
 @Composable
 fun PreviewAboutContent() {
@@ -174,7 +174,7 @@ fun PreviewAboutContent() {
 	}
 }
 
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 @Composable
 fun AboutItem(
 	@StringRes titleRes: Int,
@@ -183,10 +183,8 @@ fun AboutItem(
 	@DrawableRes iconRes: Int? = null,
 	onClick: () -> Unit = {}
 ) {
-	Card(
-		onClick = onClick,
-		elevation = 0.dp,
-		shape = RectangleShape,
+	Box(
+		modifier = Modifier.clickable { onClick()}
 	) {
 		Row(
 			verticalAlignment = Alignment.CenterVertically,
@@ -220,7 +218,7 @@ fun AboutItem(
 	}
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutContent(
 	currentVersion: String,
