@@ -251,7 +251,6 @@ fun AddShareContent(
 			horizontalAlignment = Alignment.CenterHorizontally,
 			verticalArrangement = Arrangement.Center
 		) {
-			@ExperimentalMaterial3Api
 			TextField(url, setURL, isError = isUrlValid)
 			TextButton(applyURL) {
 				Text(stringResource(R.string.apply))
