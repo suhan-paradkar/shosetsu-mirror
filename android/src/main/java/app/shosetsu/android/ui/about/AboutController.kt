@@ -11,7 +11,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -183,8 +182,8 @@ fun AboutItem(
 	@DrawableRes iconRes: Int? = null,
 	onClick: () -> Unit = {}
 ) {
-	Card(
-		onClick = onClick
+	Box(
+		modifier = Modifier.clickable { onClick()}
 	) {
 		Row(
 			verticalAlignment = Alignment.CenterVertically,
