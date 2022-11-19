@@ -202,6 +202,7 @@ fun PreviewAboutContent() {
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddShareContent(
 	showURLInput: Boolean,
