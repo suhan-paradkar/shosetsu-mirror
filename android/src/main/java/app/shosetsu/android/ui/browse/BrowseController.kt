@@ -463,7 +463,7 @@ fun BrowseExtensionContent(
 									onClick = {
 										install(s)
 										isDropdownVisible = false
-									}
+									},
 									text = {
 										Text(
 											text = AnnotatedString(s.repoName)
