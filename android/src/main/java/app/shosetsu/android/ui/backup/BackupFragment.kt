@@ -267,8 +267,6 @@ fun BackupSettingsContent(
 						}) {
 								Text(stringResource(R.string.settings_backup_alert_location_external))
 							}
-					},
-					confirmButton {
 						TextButton(onClick = {
 							isDialogShowing = false
 							isRestoreDialogShowing = true
