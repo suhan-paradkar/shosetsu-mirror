@@ -50,7 +50,7 @@ fun HeaderSettingContent(
 	Column(modifier = modifier then Modifier.padding(horizontal = 16.dp)) {
 		Text(
 			name,
-			style = MaterialTheme.typography.h6,
+			style = MaterialTheme.typography.titleLarge,
 			modifier = Modifier.padding(bottom = 8.dp),
 			color = MaterialTheme.colors.primary
 		)

@@ -18,7 +18,7 @@
 
 package app.shosetsu.android.view.compose
 
-import androidx.compose.material3.ExperimentalMaterialApi
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.DpSize
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Suppress("ModifierInspectorInfo")
 fun Modifier.minimumTouchTargetSize(): Modifier = composed(
 	inspectorInfo = debugInspectorInfo {
