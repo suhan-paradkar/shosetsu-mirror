@@ -362,7 +362,7 @@ fun PreviewBrowseExtensionContent() {
 }
 
 @OptIn(
-	ExperimentalMaterialApi::class,
+	ExperimentalMaterial3Api::class,
 	androidx.compose.foundation.ExperimentalFoundationApi::class,
 	androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi::class,
 	androidx.compose.ui.unit.ExperimentalUnitApi::class
@@ -432,7 +432,7 @@ fun BrowseExtensionContent(
 										),
 										modifier = Modifier.padding(start = 8.dp),
 										fontSize = TextUnit(14f, TextUnitType.Sp),
-										color = MaterialTheme.colors.secondary
+										color = MaterialTheme.colorScheme.Tertiary
 									)
 							}
 						}
@@ -487,7 +487,7 @@ fun BrowseExtensionContent(
 								painterResource(R.drawable.download),
 								stringResource(R.string.update),
 								modifier = Modifier.rotate(180f),
-								tint = MaterialTheme.colors.secondary
+								tint = MaterialTheme.colorScheme.Tertiary
 							)
 						}
 					}
@@ -528,7 +528,7 @@ fun BrowseExtensionContent(
 				if (item.updateVersion == Version(-9, -9, -9)) {
 					Box(
 						modifier = Modifier
-							.background(MaterialTheme.colors.secondary)
+							.background(MaterialTheme.colorScheme.Tertiary)
 							.fillMaxWidth()
 					) {
 						Text(
