@@ -85,6 +85,7 @@ fun PreviewBrowseControllerNameFilter() {
 	BrowseControllerNameFilter("") {}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BrowseControllerNameFilter(searchTerm: String, setSearchTerm: (newTerm: String) -> Unit) {
 	OutlinedTextField(
