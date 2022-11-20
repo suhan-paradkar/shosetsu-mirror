@@ -260,26 +260,20 @@ fun BackupSettingsContent(
 						isDialogShowing = false
 					},
 					confirmButton {
-						Row(
-							modifier = Modifier
-								.fillMaxWidth()
-								.padding(8.dp),
-							horizontalArrangement = Arrangement.SpaceEvenly
-						) {
-							TextButton(onClick = {
-								// Open file selector
-								performFileSelection()
-								isDialogShowing = false
-							}) {
+						TextButton(onClick = {
+							// Open file selector
+							performFileSelection()
+							isDialogShowing = false
+						}) {
 								Text(stringResource(R.string.settings_backup_alert_location_external))
 							}
-
-							TextButton(onClick = {
-								isDialogShowing = false
-								isRestoreDialogShowing = true
-							}) {
-								Text(stringResource(R.string.settings_backup_alert_location_internal))
-							}
+					},
+					confirmButton {
+						TextButton(onClick = {
+							isDialogShowing = false
+							isRestoreDialogShowing = true
+						}) {
+							Text(stringResource(R.string.settings_backup_alert_location_internal))
 						}
 					},
 					title = {
