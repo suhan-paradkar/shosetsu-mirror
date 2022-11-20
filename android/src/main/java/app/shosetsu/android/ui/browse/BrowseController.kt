@@ -432,7 +432,7 @@ fun BrowseExtensionContent(
 										),
 										modifier = Modifier.padding(start = 8.dp),
 										fontSize = TextUnit(14f, TextUnitType.Sp),
-										color = MaterialTheme.colorScheme.Tertiary
+										color = MaterialTheme.colorScheme.tertiary
 									)
 							}
 						}
@@ -464,8 +464,7 @@ fun BrowseExtensionContent(
 										install(s)
 										isDropdownVisible = false
 									}
-								) {
-									Row {
+									text = {
 										Text(
 											text = AnnotatedString(s.repoName)
 										)
@@ -474,7 +473,7 @@ fun BrowseExtensionContent(
 											modifier = Modifier.padding(start = 8.dp)
 										)
 									}
-								}
+								)
 							}
 						}
 					}
@@ -487,7 +486,7 @@ fun BrowseExtensionContent(
 								painterResource(R.drawable.download),
 								stringResource(R.string.update),
 								modifier = Modifier.rotate(180f),
-								tint = MaterialTheme.colorScheme.Tertiary
+								tint = MaterialTheme.colorScheme.tertiary
 							)
 						}
 					}
@@ -528,7 +527,7 @@ fun BrowseExtensionContent(
 				if (item.updateVersion == Version(-9, -9, -9)) {
 					Box(
 						modifier = Modifier
-							.background(MaterialTheme.colorScheme.Tertiary)
+							.background(MaterialTheme.colorScheme.tertiary)
 							.fillMaxWidth()
 					) {
 						Text(
