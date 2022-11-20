@@ -259,7 +259,7 @@ fun BackupSettingsContent(
 					onDismissRequest = {
 						isDialogShowing = false
 					},
-					confirmButton {
+					confirmButton = {
 						TextButton(onClick = {
 							// Open file selector
 							performFileSelection()
