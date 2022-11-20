@@ -259,7 +259,7 @@ fun BackupSettingsContent(
 					onDismissRequest = {
 						isDialogShowing = false
 					},
-					buttons = {
+					confirmButton {
 						Row(
 							modifier = Modifier
 								.fillMaxWidth()
