@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -41,9 +41,9 @@ fun SelectableBox(
 		modifier = modifier
 			.background(
 				if (isSelected) {
-					MaterialTheme.colors.secondary.copy(alpha = if (isSystemInDarkTheme()) 0.5f else 0.22f)
+					MaterialTheme.colorScheme.tertiary.copy(alpha = if (isSystemInDarkTheme()) 0.5f else 0.22f)
 				} else {
-					MaterialTheme.colors.surface
+					MaterialTheme.colorScheme.tertiary.copy(alpha = 0f)
 				}
 			),
 		content = content

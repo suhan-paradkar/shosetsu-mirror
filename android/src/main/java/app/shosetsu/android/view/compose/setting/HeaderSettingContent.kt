@@ -3,9 +3,9 @@ package app.shosetsu.android.view.compose.setting
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,9 +50,9 @@ fun HeaderSettingContent(
 	Column(modifier = modifier then Modifier.padding(horizontal = 16.dp)) {
 		Text(
 			name,
-			style = MaterialTheme.typography.h6,
+			style = MaterialTheme.typography.titleLarge,
 			modifier = Modifier.padding(bottom = 8.dp),
-			color = MaterialTheme.colors.primary
+			color = MaterialTheme.colorScheme.primary
 		)
 		Divider(modifier = Modifier.fillMaxWidth())
 	}

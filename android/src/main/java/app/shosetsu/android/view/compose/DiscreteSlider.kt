@@ -2,7 +2,7 @@ package app.shosetsu.android.view.compose
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +47,7 @@ fun PreviewSeekBar() {
  * @param updateValue Called when [Slider] updates its value, is fed a rounded float
  * @param valueRange An integer range of possible values
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiscreteSlider(
 	value: Int,
@@ -77,7 +78,7 @@ fun DiscreteSlider(
 
 						Text(
 							stringResource(R.string.input_float),
-							style = MaterialTheme.typography.h6,
+							style = MaterialTheme.typography.titleLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								top = 8.dp,
@@ -92,7 +93,7 @@ fun DiscreteSlider(
 								valueRange.item.first,
 								valueRange.item.last
 							),
-							style = MaterialTheme.typography.body1,
+							style = MaterialTheme.typography.bodyLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								start = 24.dp,
@@ -186,6 +187,7 @@ fun DiscreteSlider(
  * @param updateValue Called when [Slider] updates its value
  * @param valueRange An integer range of possible values
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiscreteSlider(
 	value: Float,
@@ -216,7 +218,7 @@ fun DiscreteSlider(
 
 						Text(
 							stringResource(R.string.input_float),
-							style = MaterialTheme.typography.h6,
+							style = MaterialTheme.typography.titleLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								top = 8.dp,
@@ -231,7 +233,7 @@ fun DiscreteSlider(
 								valueRange.item.first,
 								valueRange.item.last
 							),
-							style = MaterialTheme.typography.body1,
+							style = MaterialTheme.typography.bodyLarge,
 							modifier = Modifier.padding(
 								bottom = 16.dp,
 								start = 24.dp,

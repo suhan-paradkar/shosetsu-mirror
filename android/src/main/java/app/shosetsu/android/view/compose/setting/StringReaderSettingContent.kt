@@ -2,9 +2,10 @@ package app.shosetsu.android.view.compose.setting
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,6 +31,8 @@ import app.shosetsu.android.domain.repository.base.ISettingsRepository
  * You should have received a copy of the GNU General Public License
  * along with shosetsu.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StringSettingContent(
 	title: String,
@@ -51,6 +54,7 @@ fun StringSettingContent(
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StringSettingContent(
 	title: String,

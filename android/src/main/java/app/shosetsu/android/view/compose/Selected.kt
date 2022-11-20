@@ -1,6 +1,6 @@
 package app.shosetsu.android.view.compose
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
  */
 
 fun Modifier.selectedOutline(isSelected: Boolean) = composed {
-	val secondary = MaterialTheme.colors.secondary
+	val secondary = MaterialTheme.colorScheme.tertiary
 	if (isSelected) {
 		drawBehind {
 			val additional = 24.dp.value

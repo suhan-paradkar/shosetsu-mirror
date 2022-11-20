@@ -1,6 +1,6 @@
 package app.shosetsu.android.view.compose.setting
 
-import androidx.compose.material.Switch
+import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue

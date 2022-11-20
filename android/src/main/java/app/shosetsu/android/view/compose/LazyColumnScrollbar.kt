@@ -10,8 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.systemGestureExclusion
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.primarySurface
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,8 +31,8 @@ fun LazyColumnScrollbar(
 	thickness: Dp = 6.dp,
 	padding: Dp = 8.dp,
 	thumbMinHeight: Float = 0.1f,
-	thumbColor: Color = MaterialTheme.colors.primary,
-	thumbSelectedColor: Color = MaterialTheme.colors.primarySurface,
+	thumbColor: Color = MaterialTheme.colorScheme.primary,
+	thumbSelectedColor: Color = MaterialTheme.colorScheme.secondary,
 	thumbShape: Shape = CircleShape,
 	content: @Composable () -> Unit
 ) {
@@ -61,8 +60,8 @@ fun LazyColumnScrollbar(
 	thickness: Dp = 6.dp,
 	padding: Dp = 8.dp,
 	thumbMinHeight: Float = 0.1f,
-	thumbColor: Color = MaterialTheme.colors.primary,
-	thumbSelectedColor: Color = MaterialTheme.colors.primarySurface,
+	thumbColor: Color = MaterialTheme.colorScheme.primary,
+	thumbSelectedColor: Color = MaterialTheme.colorScheme.secondary,
 	thumbShape: Shape = CircleShape,
 ) {
 	val coroutineScope = rememberCoroutineScope()
