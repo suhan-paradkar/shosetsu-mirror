@@ -28,6 +28,7 @@ import app.shosetsu.android.viewmodel.impl.settings.*
 import app.shosetsu.lib.Novel.ChapterType
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.android.material.composethemeadapter3.Mdc3Theme
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
@@ -178,156 +179,157 @@ class ChapterReader
 			val isFirstFocus by viewModel.isFirstFocusFlow.collectAsState()
 			val isSwipeInverted by viewModel.isSwipeInverted.collectAsState()
 			//val isTapToScroll by viewModel.tapToScroll.collectAsState(false)
-
 			MdcTheme {
-				ChapterReaderContent(
-					isFirstFocus = isFirstFocus,
-					isFocused = isFocused,
-					onFirstFocus = viewModel::onFirstFocus,
-					sheetContent = { state ->
-						ChapterReaderBottomSheetContent(
-							scaffoldState = state,
-							isTTSCapable = isTTSCapable,
-							isTTSPlaying = isTTSPlaying,
-							isBookmarked = isBookmarked,
-							isRotationLocked = isRotationLocked,
-							setting = setting,
-							toggleRotationLock = viewModel::toggleScreenRotationLock,
-							toggleBookmark = viewModel::toggleBookmark,
-							exit = {
-								finish()
-							},
-							onPlayTTS = {
-								if (chapterType == null) return@ChapterReaderBottomSheetContent
-								items
-									.orEmpty()
-									.filterIsInstance<ReaderChapterUI>()
-									.find { it.id == currentChapterID }
-									?.let { item ->
-										tts.setPitch(viewModel.ttsPitch.value)
-										tts.setSpeechRate(viewModel.ttsSpeed.value)
-										when (chapterType!!) {
-											ChapterType.STRING -> {
-												viewModel.getChapterStringPassage(item)
-													.collectLA(
-														this@ChapterReader,
-														catch = {}) { content ->
-														if (content is ChapterPassage.Success)
-															tts.speak(
-																content.content,
-																TextToSpeech.QUEUE_FLUSH,
-																null,
-																content.hashCode().toString()
-															)
-													}
+				Mdc3Theme {
+					ChapterReaderContent(
+						isFirstFocus = isFirstFocus,
+						isFocused = isFocused,
+						onFirstFocus = viewModel::onFirstFocus,
+						sheetContent = { state ->
+							ChapterReaderBottomSheetContent(
+								scaffoldState = state,
+								isTTSCapable = isTTSCapable,
+								isTTSPlaying = isTTSPlaying,
+								isBookmarked = isBookmarked,
+								isRotationLocked = isRotationLocked,
+								setting = setting,
+								toggleRotationLock = viewModel::toggleScreenRotationLock,
+								toggleBookmark = viewModel::toggleBookmark,
+								exit = {
+									finish()
+								},
+								onPlayTTS = {
+									if (chapterType == null) return@ChapterReaderBottomSheetContent
+									items
+										.orEmpty()
+										.filterIsInstance<ReaderChapterUI>()
+										.find { it.id == currentChapterID }
+										?.let { item ->
+											tts.setPitch(viewModel.ttsPitch.value)
+											tts.setSpeechRate(viewModel.ttsSpeed.value)
+											when (chapterType!!) {
+												ChapterType.STRING -> {
+													viewModel.getChapterStringPassage(item)
+														.collectLA(
+															this@ChapterReader,
+															catch = {}) { content ->
+															if (content is ChapterPassage.Success)
+																tts.speak(
+																	content.content,
+																	TextToSpeech.QUEUE_FLUSH,
+																	null,
+																	content.hashCode().toString()
+																)
+														}
 
-											}
-											ChapterType.HTML -> {
-												viewModel.getChapterStringPassage(item)
-													.collectLA(
-														this@ChapterReader,
-														catch = {}) { content ->
-														if (content is ChapterPassage.Success)
-															tts.speak(
-																content.content,
-																TextToSpeech.QUEUE_FLUSH,
-																null,
-																content.hashCode().toString()
-															)
-													}
-											}
-											else -> {}
-										}
-									}
-							},
-							onStopTTS = {
-								tts.stop()
-							},
-							updateSetting = viewModel::updateSetting,
-							lowerSheet = {
-								item { viewModel.textSizeOption() }
-								//item { viewModel.tapToScrollOption() }
-								//item { viewModel.volumeScrollingOption() }
-								//item { viewModel.horizontalSwitchOption() }
-								item { viewModel.invertChapterSwipeOption() }
-								item { viewModel.readerKeepScreenOnOption() }
-								item { viewModel.enableFullscreen() }
-								item { viewModel.matchFullscreenToFocus() }
-								item { viewModel.showReaderDivider() }
-								item { viewModel.stringAsHtmlOption() }
-								item { viewModel.doubleTapFocus() }
-								item { viewModel.doubleTapSystem() }
-								item { viewModel.readerTableHackOption() }
-							},
-							toggleFocus = viewModel::toggleFocus,
-							onShowNavigation = viewModel::toggleSystemVisible.takeIf { enableFullscreen && !matchFullscreenToFocus },
-						)
-					},
-					content = { paddingValues ->
-						ChapterReaderPagerContent(
-							paddingValues = paddingValues,
-							items = items ?: persistentListOf(),
-							isHorizontal = isHorizontalReading,
-							isSwipeInverted = isSwipeInverted,
-							currentPage = currentPage,
-							onPageChanged = viewModel::setCurrentPage,
-							markChapterAsCurrent = {
-								viewModel.onViewed(it)
-								viewModel.setCurrentChapterID(it.id)
-							},
-							onChapterRead = viewModel::updateChapterAsRead,
-							onStopTTS = {
-								tts.stop()
-							},
-							createPage = { page ->
-								when (val item = items.orEmpty()[page]) {
-									is ReaderChapterUI -> {
-										when (chapterType) {
-											ChapterType.STRING -> {
-												ChapterReaderStringContent(
-													item = item,
-													getStringContent = viewModel::getChapterStringPassage,
-													retryChapter = viewModel::retryChapter,
-													textSizeFlow = { viewModel.liveTextSize },
-													textColorFlow = { viewModel.textColor },
-													backgroundColorFlow = { viewModel.backgroundColor },
-													onScroll = viewModel::onScroll,
-													onClick = viewModel::onReaderClicked,
-													onDoubleClick = viewModel::onReaderDoubleClicked,
-													progressFlow = {
-														viewModel.getChapterProgress(item)
-													}
-												)
-											}
-											ChapterType.HTML -> {
-												ChapterReaderHTMLContent(
-													item = item,
-													getHTMLContent = viewModel::getChapterHTMLPassage,
-													retryChapter = viewModel::retryChapter,
-													onScroll = viewModel::onScroll,
-													onClick = viewModel::onReaderClicked,
-													onDoubleClick = viewModel::onReaderDoubleClicked,
-													progressFlow = {
-														viewModel.getChapterProgress(item)
-													}
-												)
-											}
-											else -> {
+												}
+												ChapterType.HTML -> {
+													viewModel.getChapterStringPassage(item)
+														.collectLA(
+															this@ChapterReader,
+															catch = {}) { content ->
+															if (content is ChapterPassage.Success)
+																tts.speak(
+																	content.content,
+																	TextToSpeech.QUEUE_FLUSH,
+																	null,
+																	content.hashCode().toString()
+																)
+														}
+												}
+												else -> {}
 											}
 										}
-									}
-									is ReaderDividerUI -> {
-										DividierPageContent(
-											item.prev.title,
-											item.next?.title
-										)
+								},
+								onStopTTS = {
+									tts.stop()
+								},
+								updateSetting = viewModel::updateSetting,
+								lowerSheet = {
+									item { viewModel.textSizeOption() }
+									//item { viewModel.tapToScrollOption() }
+									//item { viewModel.volumeScrollingOption() }
+									//item { viewModel.horizontalSwitchOption() }
+									item { viewModel.invertChapterSwipeOption() }
+									item { viewModel.readerKeepScreenOnOption() }
+									item { viewModel.enableFullscreen() }
+									item { viewModel.matchFullscreenToFocus() }
+									item { viewModel.showReaderDivider() }
+									item { viewModel.stringAsHtmlOption() }
+									item { viewModel.doubleTapFocus() }
+									item { viewModel.doubleTapSystem() }
+									item { viewModel.readerTableHackOption() }
+								},
+								toggleFocus = viewModel::toggleFocus,
+								onShowNavigation = viewModel::toggleSystemVisible.takeIf { enableFullscreen && !matchFullscreenToFocus },
+							)
+						},
+						content = { paddingValues ->
+							ChapterReaderPagerContent(
+								paddingValues = paddingValues,
+								items = items ?: persistentListOf(),
+								isHorizontal = isHorizontalReading,
+								isSwipeInverted = isSwipeInverted,
+								currentPage = currentPage,
+								onPageChanged = viewModel::setCurrentPage,
+								markChapterAsCurrent = {
+									viewModel.onViewed(it)
+									viewModel.setCurrentChapterID(it.id)
+								},
+								onChapterRead = viewModel::updateChapterAsRead,
+								onStopTTS = {
+									tts.stop()
+								},
+								createPage = { page ->
+									when (val item = items.orEmpty()[page]) {
+										is ReaderChapterUI -> {
+											when (chapterType) {
+												ChapterType.STRING -> {
+													ChapterReaderStringContent(
+														item = item,
+														getStringContent = viewModel::getChapterStringPassage,
+														retryChapter = viewModel::retryChapter,
+														textSizeFlow = { viewModel.liveTextSize },
+														textColorFlow = { viewModel.textColor },
+														backgroundColorFlow = { viewModel.backgroundColor },
+														onScroll = viewModel::onScroll,
+														onClick = viewModel::onReaderClicked,
+														onDoubleClick = viewModel::onReaderDoubleClicked,
+														progressFlow = {
+															viewModel.getChapterProgress(item)
+														}
+													)
+												}
+												ChapterType.HTML -> {
+													ChapterReaderHTMLContent(
+														item = item,
+														getHTMLContent = viewModel::getChapterHTMLPassage,
+														retryChapter = viewModel::retryChapter,
+														onScroll = viewModel::onScroll,
+														onClick = viewModel::onReaderClicked,
+														onDoubleClick = viewModel::onReaderDoubleClicked,
+														progressFlow = {
+															viewModel.getChapterProgress(item)
+														}
+													)
+												}
+												else -> {
+												}
+											}
+										}
+										is ReaderDividerUI -> {
+											DividierPageContent(
+												item.prev.title,
+												item.next?.title
+											)
+										}
 									}
 								}
-							}
-						)
-					}
-					//isTapToScroll = isTapToScroll
-				)
+							)
+						}
+						//isTapToScroll = isTapToScroll
+					)
+				}
 			}
 		}
 

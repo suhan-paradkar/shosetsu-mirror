@@ -34,6 +34,7 @@ import app.shosetsu.android.common.ext.toast
 import app.shosetsu.android.common.utils.CookieJarSync
 import com.google.accompanist.web.*
 import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.android.material.composethemeadapter3.Mdc3Theme
 import okhttp3.Cookie
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.kodein.di.DI
@@ -92,12 +93,14 @@ class WebViewApp : AppCompatActivity(), DIAware {
 
 		setContent {
 			MdcTheme {
-				WebViewScreen(
-					onUp = ::finish,
-					url = url,
-					onShare = ::shareWebpage,
-					onOpenInBrowser = ::openInBrowser
-				)
+				Mdc3Theme {
+					WebViewScreen(
+						onUp = ::finish,
+						url = url,
+						onShare = ::shareWebpage,
+						onOpenInBrowser = ::openInBrowser
+					)
+				}
 			}
 		}
 	}
