@@ -265,8 +265,8 @@ fun BackupSettingsContent(
 							performFileSelection()
 							isDialogShowing = false
 						}) {
-								Text(stringResource(R.string.settings_backup_alert_location_external))
-							}
+							Text(stringResource(R.string.settings_backup_alert_location_external))
+						}
 						TextButton(onClick = {
 							isDialogShowing = false
 							isRestoreDialogShowing = true
