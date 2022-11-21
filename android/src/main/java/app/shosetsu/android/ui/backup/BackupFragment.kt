@@ -161,13 +161,12 @@ fun BackupSelectionDialog(
 	Dialog(
 		onDismissRequest = {
 			dismiss()
-		}
+		},
 	) {
-		Card(
-			modifier = Modifier.fillMaxHeight(.6f)
-		) {
+		Card {
 			Column(
-				modifier = Modifier.padding(8.dp),
+				modifier = Modifier
+					.padding(8.dp),
 			) {
 				Text(
 					stringResource(R.string.settings_backup_alert_select_backup_title),
@@ -183,6 +182,7 @@ fun BackupSelectionDialog(
 				LazyColumn(
 					modifier = Modifier
 						.padding(bottom = 8.dp, start = 24.dp, end = 24.dp)
+						.height(200.dp)
 						.fillMaxWidth()
 				) {
 					items(options) { option ->
@@ -197,17 +197,6 @@ fun BackupSelectionDialog(
 								}
 							)
 						}
-					}
-				}
-
-				Row(
-					horizontalArrangement = Arrangement.End,
-					modifier = Modifier.fillMaxWidth()
-				) {
-					TextButton(
-						onClick = dismiss,
-					) {
-						Text(stringResource(android.R.string.cancel))
 					}
 				}
 			}
