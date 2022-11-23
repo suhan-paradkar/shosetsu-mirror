@@ -32,7 +32,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -162,6 +162,7 @@ fun PreviewCSSEditorContent() {
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CSSEditorContent(
 	cssTitle: String,
@@ -185,43 +186,39 @@ fun CSSEditorContent(
 	Scaffold(
 		topBar = {
 			Column {
-				TopAppBar {
-					Row(
-						horizontalArrangement = Arrangement.SpaceBetween,
-						verticalAlignment = Alignment.CenterVertically,
-						modifier = Modifier.fillMaxWidth()
-					) {
-						Row(
-							verticalAlignment = Alignment.CenterVertically
-						) {
-							IconButton(
-								onClick = onBack
-							) {
-								Icon(
-									Icons.Filled.ArrowBack,
-									stringResource(androidx.appcompat.R.string.abc_action_bar_up_description),
-								)
-							}
-							Text(cssTitle)
-						}
-
+				TopAppBar (
+					title = {
+						Text(cssTitle)
+					},
+					scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+					navigationIcon = {
 						IconButton(
-							onClick = onHelp
+							onClick = onBack
 						) {
 							Icon(
-								painterResource(R.drawable.help_outline_24),
-								stringResource(R.string.help),
-							)
+								Icons.Filled.ArrowBack,
+								stringResource(androidx.appcompat.R.string.abc_action_bar_up_description),
+								)
+							}
+						},
+						actions = {
+							IconButton(
+								onClick = onHelp
+							) {
+								Icon(
+									painterResource(R.drawable.help_outline_24),
+									stringResource(R.string.help),
+								)
 						}
 					}
-				}
+				)
 			}
 		},
 		bottomBar = {
 			Column {
 				if (!isCSSInvalid && cssInvalidReason != null)
 					Card(
-						border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+						border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
 						modifier = Modifier
 							.align(Alignment.CenterHorizontally)
 							.fillMaxWidth()
@@ -241,9 +238,7 @@ fun CSSEditorContent(
 							)
 						}
 					}
-				BottomAppBar(
-					cutoutShape = fabShape
-				) {
+				BottomAppBar{
 					Row(
 						verticalAlignment = Alignment.CenterVertically,
 						horizontalArrangement = Arrangement.SpaceBetween,
@@ -297,7 +292,7 @@ fun CSSEditorContent(
 			FloatingActionButton(
 				onClick = onSave,
 				shape = fabShape,
-				backgroundColor = MaterialTheme.colors.primary,
+				containerColor = MaterialTheme.colorScheme.primary,
 				contentColor = colorResource(android.R.color.white)
 			) {
 				Icon(
@@ -306,7 +301,6 @@ fun CSSEditorContent(
 				)
 			}
 		},
-		isFloatingActionButtonDocked = true,
 		floatingActionButtonPosition = FabPosition.Center
 	) {
 		Column(Modifier.padding(it)) {
