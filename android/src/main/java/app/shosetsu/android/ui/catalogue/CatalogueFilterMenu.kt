@@ -8,19 +8,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Divider
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.IconToggleButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.material.TriStateCheckbox
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -337,6 +338,7 @@ fun PreviewCatalogFilterMenuTextContent() =
 		)
 	}
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatalogFilterMenuTextContent(
 	filterHolder: StableHolder<Filter.Text>,
@@ -546,11 +548,11 @@ fun CatalogFilterMenuDropDownContent(
 						onClick = {
 							setInt(filter, i)
 							expanded = false
-						}) {
-						Text(
-							text = AnnotatedString(s)
-						)
-					}
+						},
+						text = {
+							Text(text = AnnotatedString(s))
+						}
+					)
 				}
 			}
 		}
@@ -644,7 +646,8 @@ fun CatalogFilterMenuControlContent(
 	) {
 		Row(
 			horizontalArrangement = Arrangement.SpaceEvenly,
-			verticalAlignment = Alignment.CenterVertically
+			verticalAlignment = Alignment.CenterVertically,
+			modifier = Modifier.fillMaxWidth()
 		) {
 			TextButton(onClick = resetFilter, contentPadding = PaddingValues(8.dp)) {
 				Text(text = stringResource(id = R.string.reset))
