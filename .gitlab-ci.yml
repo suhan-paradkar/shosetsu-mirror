@@ -59,22 +59,52 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
     - android-home
+    - android/build/
+    - build/
+
+stages:
+  - lint
+  - standard
+  - fdroid
+  - uptodown
+  - playstore
 
 # Basic android and gradle stuff
 # Check linting
 lint:
   interruptible: true
-  stage: .pre
+  stage: lint
   script:
     - ./gradlew -Pci --console=plain :android:lint -PbuildDir=lint
 
 # Make Project
-build:
+assembleStandard:
   interruptible: true
-  stage: build
+  stage: standard
   timeout: 2 hours # We need extra time for building
   script:
-    - ./gradlew build
+    - ./gradlew assembleStandard
+
+assembleFdroid:
+  interruptible: true
+  stage: fdroid
+  timeout: 2 hours # We need extra time for building
+  script:
+    - ./gradlew assembleFdroid
+
+assembleUptodown:
+  interruptible: true
+  stage: uptodown
+  timeout: 2 hours # We need extra time for building
+  script:
+    - ./gradlew assembleUptodown
+
+assemblePlaystore:
+  interruptible: true
+  stage: playstore
+  timeout: 2 hours # We need extra time for building
+  script:
+    - ./gradlew assemblePlaystore
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 #debugTests:
