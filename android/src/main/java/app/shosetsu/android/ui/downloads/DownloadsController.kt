@@ -24,7 +24,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -342,11 +342,11 @@ fun DownloadContent(
 		) {
 			Text(
 				text = item.novelName,
-				style = MaterialTheme.typography.body1
+				style = MaterialTheme.typography.bodyLarge
 			)
 			Text(
 				text = item.chapterName,
-				style = MaterialTheme.typography.body2
+				style = MaterialTheme.typography.bodyMedium
 			)
 
 			Row(
@@ -387,7 +387,7 @@ fun DownloadContent(
 						}
 					),
 					textAlign = TextAlign.End,
-					style = MaterialTheme.typography.caption,
+					style = MaterialTheme.typography.bodySmall,
 					modifier = Modifier
 						.padding(start = 8.dp)
 						.fillMaxWidth()
