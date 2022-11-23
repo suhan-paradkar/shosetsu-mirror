@@ -72,6 +72,7 @@ lint:
 build:
   interruptible: true
   stage: build
+  timeout: 2 hours # We need extra time for building
   script:
     - ./gradlew build
 
