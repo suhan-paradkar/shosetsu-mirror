@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -86,7 +86,7 @@ class IntroductionActivity : AppCompatActivity(), DIAware {
 /**
  * Introduction view in compose
  */
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun IntroView(
 	viewModel: AIntroViewModel = viewModelDi(),
@@ -217,7 +217,7 @@ fun IntroTitlePage() {
 	) {
 		Icon(painterResource(R.drawable.shou_icon), stringResource(R.string.app_name))
 		Text(
-			stringResource(R.string.intro_title_greet), style = MaterialTheme.typography.h4,
+			stringResource(R.string.intro_title_greet), style = MaterialTheme.typography.headlineMedium,
 			textAlign = TextAlign.Center
 		)
 	}
@@ -240,10 +240,10 @@ fun IntroExplanationPage() {
 		horizontalAlignment = Alignment.CenterHorizontally,
 	) {
 		Icon(Icons.Default.Info, null, modifier = Modifier.size(64.dp))
-		Text(stringResource(R.string.intro_what_is_app), style = MaterialTheme.typography.h5)
+		Text(stringResource(R.string.intro_what_is_app), style = MaterialTheme.typography.headlineSmall)
 		Text(
 			stringResource(R.string.intro_what_is_app_desc_new),
-			style = MaterialTheme.typography.body1,
+			style = MaterialTheme.typography.bodyLarge,
 			textAlign = TextAlign.Center
 		)
 	}
@@ -284,10 +284,10 @@ fun IntroLicensePage(
 				verticalArrangement = Arrangement.Center,
 				horizontalAlignment = Alignment.CenterHorizontally
 			) {
-				Text(stringResource(R.string.license), style = MaterialTheme.typography.h5)
+				Text(stringResource(R.string.license), style = MaterialTheme.typography.headlineSmall)
 				Text(
 					stringResource(R.string.intro_license_desc_new),
-					style = MaterialTheme.typography.body1,
+					style = MaterialTheme.typography.bodyLarge,
 					textAlign = TextAlign.Center
 				)
 			}
@@ -303,7 +303,7 @@ fun IntroLicensePage(
 		ScrollStateBar(scrollState) {
 			Text(
 				LocalContext.current.readAsset("license-gplv3.txt"),
-				style = MaterialTheme.typography.body2,
+				style = MaterialTheme.typography.bodyMedium,
 				modifier = Modifier
 					.verticalScroll(scrollState)
 					.padding(16.dp)
@@ -337,10 +337,10 @@ fun IntroACRAPage(
 		verticalArrangement = Arrangement.Center,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
-		Text(stringResource(R.string.intro_acra), style = MaterialTheme.typography.h5)
+		Text(stringResource(R.string.intro_acra), style = MaterialTheme.typography.headlineSmall)
 		Text(
 			stringResource(R.string.intro_acra_desc),
-			style = MaterialTheme.typography.body1,
+			style = MaterialTheme.typography.bodyLarge,
 			textAlign = TextAlign.Center
 		)
 		Checkbox(isACRAEnabled, setACRAEnabled)
@@ -375,7 +375,7 @@ fun IntroPermissionPage() {
 		verticalArrangement = Arrangement.Center,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
-		Text(stringResource(R.string.intro_perm_title), style = MaterialTheme.typography.h5)
+		Text(stringResource(R.string.intro_perm_title), style = MaterialTheme.typography.headlineSmall)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			IntroPermissionRow(
 				android.Manifest.permission.POST_NOTIFICATIONS,
@@ -384,7 +384,7 @@ fun IntroPermissionPage() {
 		} else {
 			Text(
 				stringResource(R.string.intro_perm_none),
-				style = MaterialTheme.typography.body1,
+				style = MaterialTheme.typography.bodyLarge,
 				textAlign = TextAlign.Center
 			)
 		}
@@ -432,10 +432,10 @@ fun IntroEndPage() {
 		verticalArrangement = Arrangement.Center,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
-		Text(stringResource(R.string.intro_happy_end), style = MaterialTheme.typography.h5)
+		Text(stringResource(R.string.intro_happy_end), style = MaterialTheme.typography.headlineSmall)
 		Text(
 			stringResource(R.string.intro_happy_end_desc),
-			style = MaterialTheme.typography.body1,
+			style = MaterialTheme.typography.bodyLarge,
 			textAlign = TextAlign.Center
 		)
 	}
