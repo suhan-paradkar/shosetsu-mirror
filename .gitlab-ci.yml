@@ -58,6 +58,7 @@ cache:
   paths:
     - .gradle/wrapper
     - .gradle/caches
+    - android-home
 
 # Basic android and gradle stuff
 # Check linting
@@ -65,7 +66,7 @@ lint:
   interruptible: true
   stage: .pre
   script:
-    - ./gradlew -Pci --console=plain :app:lint -PbuildDir=lint
+    - ./gradlew -Pci --console=plain :android:lint -PbuildDir=lint
 
 # Make Project
 build:
