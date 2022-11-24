@@ -14,7 +14,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.material.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -793,7 +794,7 @@ fun NovelInfoContent(
 		) {
 			LazyColumnScrollbar(
 				listState = state,
-				thumbColor = MaterialTheme.colors.primary,
+				thumbColor = MaterialTheme.colorScheme.primary,
 				thumbSelectedColor = Color.Gray,
 			) {
 				LazyColumn(
@@ -978,7 +979,7 @@ fun NovelChapterContent(
 				modifier = Modifier
 					.fillMaxWidth()
 					.padding(bottom = 8.dp),
-				color = if (chapter.bookmarked) MaterialTheme.colors.primary else Color.Unspecified
+				color = if (chapter.bookmarked) MaterialTheme.colorScheme.primary else Color.Unspecified
 			)
 
 			Row(
@@ -1076,7 +1077,7 @@ fun NovelInfoCoverContent(
 	)
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NovelInfoHeaderContent(
 	novelInfo: NovelUI,
@@ -1155,7 +1156,7 @@ fun NovelInfoHeaderContent(
 						) {
 							Text(
 								novelInfo.title,
-								style = MaterialTheme.typography.h6,
+								style = MaterialTheme.typography.titleLarge,
 								modifier = Modifier
 									.padding(bottom = 8.dp)
 									.fillMaxWidth(),
@@ -1167,11 +1168,11 @@ fun NovelInfoHeaderContent(
 									if (novelInfo.artists.isEmpty() && novelInfo.artists.none { it.isNotEmpty() })
 										Text(
 											stringResource(string.novel_author),
-											style = MaterialTheme.typography.subtitle2
+											style = MaterialTheme.typography.titleSmall
 										)
 									Text(
 										novelInfo.displayAuthors,
-										style = MaterialTheme.typography.subtitle2
+										style = MaterialTheme.typography.titleSmall
 									)
 								}
 
@@ -1182,11 +1183,11 @@ fun NovelInfoHeaderContent(
 									if (novelInfo.authors.isEmpty() && novelInfo.authors.none { it.isNotEmpty() })
 										Text(
 											stringResource(string.artist_s),
-											style = MaterialTheme.typography.subtitle2
+											style = MaterialTheme.typography.titleSmall
 										)
 									Text(
 										novelInfo.displayArtists,
-										style = MaterialTheme.typography.subtitle2
+										style = MaterialTheme.typography.titleSmall
 									)
 								}
 
@@ -1198,15 +1199,15 @@ fun NovelInfoHeaderContent(
 										Novel.Status.PAUSED -> stringResource(string.paused)
 										Novel.Status.UNKNOWN -> stringResource(string.unknown)
 									},
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 								Text(
 									" • ",
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 								Text(
 									novelInfo.extName,
-									style = MaterialTheme.typography.subtitle2
+									style = MaterialTheme.typography.titleSmall
 								)
 							}
 						}
@@ -1247,9 +1248,9 @@ fun NovelInfoHeaderContent(
 								},
 								null,
 								tint = if (novelInfo.bookmarked)
-									MaterialTheme.colors.primary
+									MaterialTheme.colorScheme.primary
 								else
-									MaterialTheme.colors.onSurface,
+									MaterialTheme.colorScheme.onSurface,
 								modifier = Modifier.size(20.dp)
 							)
 							Spacer(Modifier.height(4.dp))
@@ -1261,11 +1262,11 @@ fun NovelInfoHeaderContent(
 										string.controller_novel_add_to_library
 									}
 								),
-								style = MaterialTheme.typography.body1,
+								style = MaterialTheme.typography.bodyLarge,
 								color = if (novelInfo.bookmarked)
-									MaterialTheme.colors.primary
+									MaterialTheme.colorScheme.primary
 								else
-									MaterialTheme.colors.onSurface,
+									MaterialTheme.colorScheme.onSurface,
 								fontSize = 12.sp,
 								textAlign = TextAlign.Center,
 							)
@@ -1284,12 +1285,12 @@ fun NovelInfoHeaderContent(
 								painterResource(drawable.open_in_browser),
 								stringResource(string.controller_novel_info_open_web),
 								modifier = Modifier.size(20.dp),
-								tint = MaterialTheme.colors.onSurface
+								tint = MaterialTheme.colorScheme.onSurface
 							)
 							Spacer(Modifier.height(4.dp))
 							Text(
 								stringResource(string.controller_novel_info_open_web_text),
-								color = MaterialTheme.colors.onSurface,
+								color = MaterialTheme.colorScheme.onSurface,
 								fontSize = 12.sp,
 								textAlign = TextAlign.Center,
 							)
@@ -1398,7 +1399,7 @@ fun ExpandedText(
 					else it
 				}
 			},
-			style = MaterialTheme.typography.body2,
+			style = MaterialTheme.typography.bodyMedium,
 			modifier = Modifier.padding(start = 8.dp, end = 8.dp)
 		)
 
@@ -1452,7 +1453,7 @@ private fun NovelGenre(
 		Text(
 			text,
 			modifier = Modifier.padding(8.dp),
-			style = MaterialTheme.typography.body2
+			style = MaterialTheme.typography.bodyMedium
 		)
 	}
 }
