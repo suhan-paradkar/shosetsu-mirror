@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -91,6 +91,7 @@ class MigrationController : ShosetsuController() {
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MigrationContent(viewModel: AMigrationViewModel) {
 	val novelList by viewModel.novels.collectAsState()
@@ -170,7 +171,7 @@ fun MigrationExtensionsContent(
 	}
 }
 
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 @Preview
 @Composable
 fun PreviewMigrationExtensionItemContent() {
@@ -193,7 +194,7 @@ fun PreviewMigrationExtensionItemContent() {
 	}
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MigrationExtensionItemContent(
 	item: MigrationExtensionUI,
@@ -204,7 +205,7 @@ fun MigrationExtensionItemContent(
 		shape = RoundedCornerShape(16.dp),
 		border =
 		if (item.isSelected) {
-			BorderStroke(2.dp, MaterialTheme.colors.primary)
+			BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
 		} else {
 			null
 		},
@@ -257,7 +258,7 @@ fun MigrationNovelsContent(list: ImmutableList<MigrationNovelUI>, onClick: (Migr
 	}
 }
 
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 @Composable
 @Preview
 fun PreviewMigrationNovelItemRowContent() {
@@ -287,7 +288,7 @@ fun PreviewMigrationNovelItemRowContent() {
 	}
 }
 
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 @Composable
 @Preview
 fun PreviewMigrationNovelItemContent() {
@@ -310,14 +311,14 @@ fun PreviewMigrationNovelItemContent() {
 	}
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MigrationNovelItemContent(item: MigrationNovelUI, onClick: (MigrationNovelUI) -> Unit) {
 	Card(
 		onClick = { onClick(item) },
 		border =
 		if (item.isSelected) {
-			BorderStroke(2.dp, MaterialTheme.colors.primary)
+			BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
 		} else {
 			null
 		},
