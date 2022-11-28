@@ -12,7 +12,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -106,6 +106,7 @@ class WebViewApp : AppCompatActivity(), DIAware {
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun WebViewScreen(
@@ -158,15 +159,18 @@ fun WebViewScreen(
 							Icon(Icons.Default.MoreVert, contentDescription = stringResource(R.string.more))
 						}
 						DropdownMenu(expanded = overflow, onDismissRequest = { overflow = false }) {
-							DropdownMenuItem(onClick = { navigator.reload(); overflow = false }) {
-								Text(text = stringResource(R.string.action_webview_refresh))
-							}
-							DropdownMenuItem(onClick = { onShare(state.content.getCurrentUrl()!!); overflow = false }) {
-								Text(text = stringResource(R.string.share))
-							}
-							DropdownMenuItem(onClick = { onOpenInBrowser(state.content.getCurrentUrl()!!); overflow = false }) {
-								Text(text = stringResource(R.string.open_in_browser))
-							}
+							DropdownMenuItem(onClick = { navigator.reload(); overflow = false },
+								text = { Text(text = stringResource(R.string.action_webview_refresh))
+								}
+							)
+							DropdownMenuItem(onClick = { onShare(state.content.getCurrentUrl()!!); overflow = false }, 
+								text = { Text(text = stringResource(R.string.share))
+								}
+							)
+							DropdownMenuItem(onClick = { onOpenInBrowser(state.content.getCurrentUrl()!!); overflow = false },
+								text = { Text(text = stringResource(R.string.open_in_browser))
+								}
+							)
 						}
 					}
 				)
