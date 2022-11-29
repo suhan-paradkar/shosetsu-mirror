@@ -7,7 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,10 +21,10 @@ import app.shosetsu.android.R
 import app.shosetsu.android.common.enums.NovelSortType
 import app.shosetsu.android.common.enums.NovelSortType.*
 import app.shosetsu.android.view.compose.ShosetsuCompose
+import app.shosetsu.android.view.compose.pagerTabIndicatorOffset
 import app.shosetsu.android.viewmodel.abstracted.ALibraryViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -231,7 +231,7 @@ class LibraryFilterMenuBuilder constructor(
 		}
 	}
 
-	@OptIn(ExperimentalMaterialApi::class)
+	@OptIn(ExperimentalMaterial3Api::class)
 	@Composable
 	private fun ColumnScope.FilterContent(
 		name: Int,

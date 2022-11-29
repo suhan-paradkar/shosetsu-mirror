@@ -13,12 +13,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +53,6 @@ import app.shosetsu.android.view.uimodels.model.LibraryUI
 import app.shosetsu.android.viewmodel.abstracted.ALibraryViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -425,7 +424,7 @@ fun LibraryPager(
 						Modifier.pagerTabIndicatorOffset(state, tabPositions)
 					)
 				},
-				backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.1F),
+				containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1F),
 				edgePadding = 0.dp,
 			) {
 				library.categories.forEachIndexed { index, category ->
@@ -614,7 +613,7 @@ fun Badge(modifier: Modifier, text: String, onClick: (() -> Unit)? = null) {
 	Box(
 		modifier = modifier then Modifier
 			.height(20.dp)
-			.background(MaterialTheme.colors.secondary, MaterialTheme.shapes.medium)
+			.background(MaterialTheme.colorScheme.tertiary, MaterialTheme.shapes.medium)
 			.clip(MaterialTheme.shapes.medium)
 			.let {
 				if (onClick != null) {
@@ -626,7 +625,7 @@ fun Badge(modifier: Modifier, text: String, onClick: (() -> Unit)? = null) {
 		Text(
 			text,
 			fontSize = 12.sp,
-			color = MaterialTheme.colors.onSecondary,
+			color = MaterialTheme.colorScheme.onSecondary,
 			modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp)
 		)
 	}
