@@ -51,10 +51,10 @@ packages:
   # (the key thing here is the url from where you are downloading these sdk tool for command line, so please do note this url pattern there and here as well)
   # after that unzipping those tools and
   # then running a series of SDK manager commands to install necessary android SDK packages that'll allow the app to build
-  - if ! [ -F "${ANDROID_HOME}/cmdline-tools.zip"] then; wget -q --output-document=$ANDROID_HOME/cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip; fi
+  - if ! [ -F "${ANDROID_HOME}/cmdline-tools.zip"] ; then wget -q --output-document=$ANDROID_HOME/cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip ; fi
   # move to the archive at ANDROID_HOME
   - pushd $ANDROID_HOME
-  - if ! [ -D "${ANDROID_HOME}/cmdline-tools"] then; unzip -d cmdline-tools cmdline-tools.zip; pushd cmdline-tools; mv cmdline-tools tools || true; popd; popd; fi
+  - if ! [ -D "${ANDROID_HOME}/cmdline-tools"] ; then unzip -d cmdline-tools cmdline-tools.zip ; pushd cmdline-tools ; mv cmdline-tools tools || true ; popd ; popd ; fi
 
   # Nothing fancy here, just checking sdkManager version
   - sdkmanager --version
