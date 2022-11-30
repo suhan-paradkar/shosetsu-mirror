@@ -44,6 +44,7 @@ packages:
   interruptible: true
   stage: .pre
   script:
+  - rm -rf $ANDROID_HOME
   # Create a new directory at specified location
   - install -d $ANDROID_HOME
   # Here we are installing androidSDK tools from official source,
